@@ -1,9 +1,9 @@
 // /api/generate.js
 // Vercel Serverless Function
 
-import Anthropic from '@anthropic-ai/sdk';
+const Anthropic = require('@anthropic-ai/sdk');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     const cleanUsername = username.replace('@', '').toLowerCase();
     console.log(`Processing application for: ${cleanUsername}`);
     
-    // Step 1: Take screenshot using working parameters from your old setup
+    // Step 1: Take screenshot using working parameters
     const siteshotKey = process.env.SITESHOT_API_KEY;
     const screenshotUrl = `https://api.site-shot.com/?url=https://twitter.com/${cleanUsername}&userkey=${siteshotKey}&width=1200&height=1600&format=png&fresh=true`;
     
@@ -88,10 +88,6 @@ If no profile image URL is found, respond with exactly "NONE".`
     }
 
     // Step 3: Use Anthropic to analyze and generate responses
-    const anthropic = new Anthropic({
-      apiKey: process.env.ANTHROPIC_API_KEY,
-    });
-
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1024,
@@ -163,9 +159,10 @@ Keep it playful and funny, not mean. Focus on crypto/trading humor.`
     // Generate random employee ID
     const employeeId = Math.floor(100000 + Math.random() * 900000).toString();
 
-    // Step 3: Return the complete data including full screenshot for client-side cropping
+    // Step 4: Return the complete data
     return res.status(200).json({
-      screenshot: screenshotDataUrl, // Full screenshot for client-side cropping
+      screenshot: screenshotDataUrl, // Full screenshot for debugging
+      profileImageUrl: profileImageUrl, // Extracted profile image URL
       name: applicationData.name || cleanUsername,
       bio: applicationData.bio || 'Twitter User',
       position: applicationData.position || 'Crew Member',
@@ -184,4 +181,4 @@ Keep it playful and funny, not mean. Focus on crypto/trading humor.`
       details: error.message 
     });
   }
-}
+};
