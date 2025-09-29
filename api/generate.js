@@ -1,5 +1,5 @@
 // /api/generate.js
-// Vercel Serverless Function
+// Vercel Serverless Function - Updated
 
 const Anthropic = require('@anthropic-ai/sdk');
 
@@ -141,23 +141,23 @@ If no profile image URL is found, respond with exactly "NONE".`
             },
             {
               type: 'text',
-              text: `This is a screenshot of a Twitter profile for @${cleanUsername}. Based on what you can see (their name, bio, tweets, etc.), generate a humorous McDonald's job application for them. The context is that crypto/memecoin traders are leaving "the trenches" to work at McDonald's.
+              text: `This is a screenshot of a Twitter profile for @${cleanUsername}. Create a humorous McDonald's job application for them. The humor should be clever and observational, not just crypto buzzwords. Look at their actual tweets, interests, and personality if visible.
 
-If this appears to be an error page or you cannot see the profile clearly, just use the username "@${cleanUsername}" and create a generic but funny crypto-themed McDonald's application.
+If this is an error page, use the username and create something funny but grounded.
 
-Please respond with ONLY a JSON object (no markdown, no extra text) with these fields:
+Respond with ONLY a JSON object (no markdown) with these fields:
 {
-  "name": "their display name from profile (or @${cleanUsername} if unclear)",
-  "bio": "their bio from profile (or make up a crypto trader bio if unclear - keep under 100 chars)",
-  "position": "a funny position like 'Fry Cook', 'Drive-Thru Specialist', 'Ice Cream Machine Technician', etc",
-  "whyMcdonalds": "1-2 sentences about why they want to work here (crypto/degen jokes)",
-  "experience": "1-2 sentences about their 'previous experience' (crypto trading humor)",
-  "skills": "comma-separated list of 3-5 funny skills",
-  "startDate": "when they can start (like 'Immediately', 'ASAP', 'Yesterday', etc)",
-  "comments": "1-2 sentence light roast from the 'hiring manager'"
+  "name": "their display name (or @${cleanUsername})",
+  "bio": "short bio from profile or make one (max 100 chars)",
+  "position": "a specific funny McDonald's position based on their profile (e.g., 'Overnight McFlurry Machine Operator', 'Senior Drive-Thru Coordinator', 'Ice Cream Machine Crisis Manager')",
+  "whyMcdonalds": "1-2 sentences. Be specific and clever, reference their actual interests or activity if you can see it. Don't just say generic crypto stuff. Make it feel personal and funny.",
+  "experience": "1-2 sentences about relevant 'previous experience' - tie it to what they actually post about. Be creative and specific, not generic.",
+  "skills": "4-5 specific, funny skills based on their profile. Avoid generic buzzwords. Think: 'Can operate under pressure of 200 unread Discord notifications', not 'multitasking'",
+  "startDate": "creative answer like 'Immediately', 'After my Twitter break', 'Once the group chat stops pinging', etc",
+  "comments": "1-2 sentences. The hiring manager's dry, witty observation. Be clever, not mean. Reference something specific if you can."
 }
 
-Keep it playful and funny, not mean. Focus on crypto/trading humor.`
+IMPORTANT: Be funny through specificity and cleverness, not through listing buzzwords or being generic. Read their actual profile if visible and reference real things about them.`
             }
           ],
         },
