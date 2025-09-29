@@ -551,13 +551,17 @@
                 console.log('Received data:', data);
                 console.log('Screenshot exists:', !!data.screenshot);
                 
-                // Crop PFP from screenshot (client-side)
-                const croppedPfp = await cropPfpFromScreenshot(data.screenshot);
+                // TEMPORARY: Show full screenshot to debug
+                // Remove this after we find correct crop coordinates
+                document.getElementById('appPfp').src = data.screenshot;
+                document.getElementById('badgePfp').src = data.screenshot;
                 
-                console.log('Cropped PFP:', croppedPfp.substring(0, 50));
+                // Crop PFP from screenshot (client-side)
+                // const croppedPfp = await cropPfpFromScreenshot(data.screenshot);
+                // console.log('Cropped PFP:', croppedPfp.substring(0, 50));
                 
                 // Populate application
-                document.getElementById('appPfp').src = croppedPfp;
+                // document.getElementById('appPfp').src = croppedPfp;
                 document.getElementById('appName').textContent = data.name;
                 document.getElementById('appBio').textContent = data.bio;
                 document.getElementById('position').textContent = data.position;
