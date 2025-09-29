@@ -52,21 +52,23 @@ export default async function handler(req, res) {
             },
             {
               type: 'text',
-              text: `This is a screenshot of a Twitter profile for @${username}. Based on what you can see (their name, bio, tweets, etc.), generate a humorous McDonald's job application for them. The context is that crypto/memecoin traders are leaving "the trenches" to work at McDonald's.
+              text: `This is a screenshot of a Twitter/X profile for @${username}. Based on what you can see (their name, bio, tweets, etc.), generate a humorous McDonald's job application for them. The context is that crypto/memecoin traders are leaving "the trenches" to work at McDonald's.
+
+If this appears to be an error page or you cannot see the profile clearly, just use the username "@${username}" and create a generic but funny crypto-themed McDonald's application.
 
 Please respond with ONLY a JSON object (no markdown, no extra text) with these fields:
 {
-  "name": "their display name from profile",
-  "bio": "their bio from profile (keep it short, under 100 chars)",
+  "name": "their display name from profile (or @${username} if unclear)",
+  "bio": "their bio from profile (or make up a crypto trader bio if unclear - keep under 100 chars)",
   "position": "a funny position like 'Fry Cook', 'Drive-Thru Specialist', 'Ice Cream Machine Technician', etc",
-  "whyMcdonalds": "1-2 sentences about why they want to work here (crypto/degen jokes welcome)",
-  "experience": "1-2 sentences about their 'previous experience' (reference their Twitter activity humorously)",
+  "whyMcdonalds": "1-2 sentences about why they want to work here (crypto/degen jokes)",
+  "experience": "1-2 sentences about their 'previous experience' (crypto trading humor)",
   "skills": "comma-separated list of 3-5 funny skills",
   "startDate": "when they can start (like 'Immediately', 'ASAP', 'Yesterday', etc)",
-  "comments": "1-2 sentence light roast from the 'hiring manager' about their profile/tweets"
+  "comments": "1-2 sentence light roast from the 'hiring manager'"
 }
 
-Keep it playful and funny, not mean. Focus on crypto/trading humor if their profile suggests that.`
+Keep it playful and funny, not mean. Focus on crypto/trading humor.`
             }
           ],
         },
