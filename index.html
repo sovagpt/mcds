@@ -462,8 +462,11 @@
 
                 const data = await response.json();
                 
+                // Crop PFP from screenshot (client-side)
+                const croppedPfp = await cropPfpFromScreenshot(data.screenshot);
+                
                 // Populate application
-                document.getElementById('appPfp').src = data.pfp;
+                document.getElementById('appPfp').src = croppedPfp;
                 document.getElementById('appName').textContent = data.name;
                 document.getElementById('appBio').textContent = data.bio;
                 document.getElementById('position').textContent = data.position;
@@ -474,7 +477,7 @@
                 document.getElementById('comments').textContent = data.comments;
 
                 // Populate badge
-                document.getElementById('badgePfp').src = data.pfp;
+                document.getElementById('badgePfp').src = croppedPfp;
                 document.getElementById('badgeName').textContent = data.name;
                 document.getElementById('employeeId').textContent = `ID: #${data.employeeId}`;
                 document.getElementById('since').textContent = `Member Since ${new Date().getFullYear()}`;
