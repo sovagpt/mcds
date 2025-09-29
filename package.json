@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.32.0",
-    "canvas": "^2.11.2"
+    "@anthropic-ai/sdk": "^0.32.0"
   }
 }
