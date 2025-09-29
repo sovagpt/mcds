@@ -572,7 +572,10 @@
                 document.getElementById('comments').textContent = data.comments;
 
                 // Populate badge
-                document.getElementById('badgePfp').src = croppedPfp;
+                // document.getElementById('badgePfp').src = croppedPfp;
+                document.getElementById('badgeName').textContent = data.name;
+                document.getElementById('employeeId').textContent = `ID: #${data.employeeId}`;
+                document.getElementById('since').textContent = `Member Since ${new Date().getFullYear()}`;
                 document.getElementById('badgeName').textContent = data.name;
                 document.getElementById('employeeId').textContent = `ID: #${data.employeeId}`;
                 document.getElementById('since').textContent = `Member Since ${new Date().getFullYear()}`;
