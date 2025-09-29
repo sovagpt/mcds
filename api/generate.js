@@ -42,7 +42,52 @@ export default async function handler(req, res) {
     
     console.log(`Screenshot captured: ${Math.round(screenshotBase64.length / 1024)}KB`);
 
-    // Step 2: Use Anthropic to analyze and generate responses
+    // Step 2: Extract profile image URL from screenshot
+    const anthropic = new Anthropic({
+      apiKey: process.env.ANTHROPIC_API_KEY,
+    });
+
+    let profileImageUrl = null;
+    
+    try {
+      console.log('Extracting profile image URL from screenshot...');
+      const imageExtractMessage = await anthropic.messages.create({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 200,
+        messages: [{
+          role: 'user',
+          content: [
+            {
+              type: 'image',
+              source: {
+                type: 'base64',
+                media_type: 'image/png',
+                data: screenshotBase64,
+              },
+            },
+            {
+              type: 'text',
+              text: `Look at this Twitter/X profile screenshot. Find the profile picture URL. Look for URLs containing "pbs.twimg.com" in the page.
+
+Respond with ONLY the direct image URL, nothing else. The URL should be a complete link to the actual image file (like https://pbs.twimg.com/profile_images/123456789/abcdef_400x400.jpg).
+
+If no profile image URL is found, respond with exactly "NONE".`
+            }
+          ]
+        }]
+      });
+      
+      const extractedUrl = imageExtractMessage.content[0].text.trim();
+      
+      if (extractedUrl !== 'NONE' && extractedUrl.startsWith('http') && extractedUrl.includes('pbs.twimg.com')) {
+        profileImageUrl = extractedUrl;
+        console.log(`Extracted profile image: ${profileImageUrl}`);
+      }
+    } catch (e) {
+      console.log('Failed to extract profile image:', e.message);
+    }
+
+    // Step 3: Use Anthropic to analyze and generate responses
     const anthropic = new Anthropic({
       apiKey: process.env.ANTHROPIC_API_KEY,
     });
