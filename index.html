@@ -549,19 +549,14 @@
                 const data = await response.json();
                 
                 console.log('Received data:', data);
-                console.log('Screenshot exists:', !!data.screenshot);
+                console.log('Profile image URL:', data.profileImageUrl);
                 
-                // TEMPORARY: Show full screenshot to debug
-                // Remove this after we find correct crop coordinates
-                document.getElementById('appPfp').src = data.screenshot;
-                document.getElementById('badgePfp').src = data.screenshot;
-                
-                // Crop PFP from screenshot (client-side)
-                // const croppedPfp = await cropPfpFromScreenshot(data.screenshot);
-                // console.log('Cropped PFP:', croppedPfp.substring(0, 50));
+                // Use extracted profile image URL or placeholder
+                const pfpUrl = data.profileImageUrl || createPlaceholderPfp();
                 
                 // Populate application
-                // document.getElementById('appPfp').src = croppedPfp;
+                document.getElementById('appPfp').src = pfpUrl;
+                document.getElementById('badgePfp').src = pfpUrl;
                 document.getElementById('appName').textContent = data.name;
                 document.getElementById('appBio').textContent = data.bio;
                 document.getElementById('position').textContent = data.position;
@@ -572,7 +567,6 @@
                 document.getElementById('comments').textContent = data.comments;
 
                 // Populate badge
-                // document.getElementById('badgePfp').src = croppedPfp;
                 document.getElementById('badgeName').textContent = data.name;
                 document.getElementById('employeeId').textContent = `ID: #${data.employeeId}`;
                 document.getElementById('since').textContent = `Member Since ${new Date().getFullYear()}`;
