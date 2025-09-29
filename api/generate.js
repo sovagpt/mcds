@@ -15,20 +15,32 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Step 1: Get Twitter profile screenshot using Siteshot
-    // Using x.com instead of twitter.com and adding more parameters to avoid blocks
-    const twitterUrl = `https://x.com/${username}`;
-    const userAgent = encodeURIComponent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-    const siteshotUrl = `https://api.site-shot.com/?url=${encodeURIComponent(twitterUrl)}&userkey=${process.env.SITESHOT_API_KEY}&width=1280&height=1280&response_type=json&delay_time=5000&format=png&user_agent=${userAgent}&no_cookie_popup=1`;
-
-    const siteshotResponse = await fetch(siteshotUrl);
+    const cleanUsername = username.replace('@', '').toLowerCase();
+    console.log(`Processing application for: ${cleanUsername}`);
     
-    if (!siteshotResponse.ok) {
-      throw new Error('Failed to capture Twitter profile');
+    // Step 1: Take screenshot using working parameters from your old setup
+    const siteshotKey = process.env.SITESHOT_API_KEY;
+    const screenshotUrl = `https://api.site-shot.com/?url=https://twitter.com/${cleanUsername}&userkey=${siteshotKey}&width=1200&height=1600&format=png&fresh=true`;
+    
+    console.log(`Requesting screenshot...`);
+    
+    const screenshotResponse = await fetch(screenshotUrl, {
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
+    });
+    
+    if (!screenshotResponse.ok) {
+      throw new Error(`Screenshot failed with status ${screenshotResponse.status}`);
     }
-
-    const siteshotData = await siteshotResponse.json();
-    const screenshotBase64 = siteshotData.image;
+    
+    // Convert to base64
+    const screenshotBuffer = await screenshotResponse.arrayBuffer();
+    const screenshotBase64 = Buffer.from(screenshotBuffer).toString('base64');
+    const screenshotDataUrl = `data:image/png;base64,${screenshotBase64}`;
+    
+    console.log(`Screenshot captured: ${Math.round(screenshotBase64.length / 1024)}KB`);
 
     // Step 2: Use Anthropic to analyze and generate responses
     const anthropic = new Anthropic({
@@ -47,18 +59,18 @@ export default async function handler(req, res) {
               source: {
                 type: 'base64',
                 media_type: 'image/png',
-                data: screenshotBase64.split(',')[1],
+                data: screenshotBase64,
               },
             },
             {
               type: 'text',
-              text: `This is a screenshot of a Twitter/X profile for @${username}. Based on what you can see (their name, bio, tweets, etc.), generate a humorous McDonald's job application for them. The context is that crypto/memecoin traders are leaving "the trenches" to work at McDonald's.
+              text: `This is a screenshot of a Twitter profile for @${cleanUsername}. Based on what you can see (their name, bio, tweets, etc.), generate a humorous McDonald's job application for them. The context is that crypto/memecoin traders are leaving "the trenches" to work at McDonald's.
 
-If this appears to be an error page or you cannot see the profile clearly, just use the username "@${username}" and create a generic but funny crypto-themed McDonald's application.
+If this appears to be an error page or you cannot see the profile clearly, just use the username "@${cleanUsername}" and create a generic but funny crypto-themed McDonald's application.
 
 Please respond with ONLY a JSON object (no markdown, no extra text) with these fields:
 {
-  "name": "their display name from profile (or @${username} if unclear)",
+  "name": "their display name from profile (or @${cleanUsername} if unclear)",
   "bio": "their bio from profile (or make up a crypto trader bio if unclear - keep under 100 chars)",
   "position": "a funny position like 'Fry Cook', 'Drive-Thru Specialist', 'Ice Cream Machine Technician', etc",
   "whyMcdonalds": "1-2 sentences about why they want to work here (crypto/degen jokes)",
@@ -92,7 +104,7 @@ Keep it playful and funny, not mean. Focus on crypto/trading humor.`
       
       // If AI couldn't parse the profile, create a generic funny application
       applicationData = {
-        name: `@${username}`,
+        name: `@${cleanUsername}`,
         bio: 'Crypto trader turned fast food professional',
         position: 'Fry Cook',
         whyMcdonalds: 'The charts went down, so I had to pivot. At least the fryers are always hot.',
@@ -108,8 +120,8 @@ Keep it playful and funny, not mean. Focus on crypto/trading humor.`
 
     // Step 3: Return the complete data including full screenshot for client-side cropping
     return res.status(200).json({
-      screenshot: screenshotBase64, // Full screenshot for client-side cropping
-      name: applicationData.name || username,
+      screenshot: screenshotDataUrl, // Full screenshot for client-side cropping
+      name: applicationData.name || cleanUsername,
       bio: applicationData.bio || 'Twitter User',
       position: applicationData.position || 'Crew Member',
       whyMcdonalds: applicationData.whyMcdonalds || 'Looking for a stable career path.',
