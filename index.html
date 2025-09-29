@@ -6,7 +6,7 @@
     <title>McDonald's Job Application</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Courier+Prime:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Speedee:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
         
         * {
             margin: 0;
@@ -15,82 +15,128 @@
         }
 
         body {
-            font-family: 'Courier Prime', monospace;
-            background: linear-gradient(135deg, #FFC72C 0%, #DA291C 100%);
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #FFBC0D 0%, #DA291C 50%, #FFBC0D 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
-            padding: 20px;
+            padding: 40px 20px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 40px;
-            color: white;
-            text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .logo-wrapper {
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: inline-block;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .golden-arches {
+            font-size: 80px;
+            color: #FFBC0D;
+            text-shadow: 3px 3px 0 #DA291C;
+            font-weight: bold;
+            font-family: 'Speedee', sans-serif;
+            letter-spacing: -5px;
         }
 
         h1 {
-            font-family: 'Bangers', cursive;
-            font-size: 4rem;
-            letter-spacing: 3px;
+            font-family: 'Speedee', sans-serif;
+            font-size: 3rem;
+            color: white;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.3);
             margin-bottom: 10px;
-            color: #FFC72C;
-            -webkit-text-stroke: 2px #DA291C;
+            letter-spacing: 2px;
         }
 
         .tagline {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.3rem;
             color: white;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .input-section {
             background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            margin-bottom: 40px;
-            border: 4px solid #DA291C;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            margin-bottom: 50px;
+            border: 5px solid #FFBC0D;
         }
 
         .input-group {
             display: flex;
-            gap: 10px;
+            gap: 15px;
             justify-content: center;
-            align-items: center;
+            align-items: stretch;
             flex-wrap: wrap;
         }
 
         input[type="text"] {
-            padding: 15px 20px;
-            font-size: 1.2rem;
-            border: 3px solid #DA291C;
-            border-radius: 10px;
-            min-width: 300px;
-            font-family: 'Courier Prime', monospace;
+            padding: 18px 25px;
+            font-size: 1.1rem;
+            border: 3px solid #e0e0e0;
+            border-radius: 15px;
+            min-width: 320px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #DA291C;
+            box-shadow: 0 0 0 4px rgba(218, 41, 28, 0.1);
         }
 
         button {
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            background: #DA291C;
+            padding: 18px 45px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #DA291C 0%, #b5190e 100%);
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
             cursor: pointer;
-            font-family: 'Bangers', cursive;
+            font-family: 'Speedee', sans-serif;
             letter-spacing: 1px;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(218, 41, 28, 0.4);
+            text-transform: uppercase;
         }
 
-        button:hover {
-            transform: scale(1.05);
-            background: #b52318;
+        button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(218, 41, 28, 0.5);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
         }
 
         button:disabled {
@@ -100,19 +146,17 @@
 
         .loading {
             text-align: center;
-            padding: 40px;
-            color: white;
-            font-size: 1.5rem;
+            padding: 60px;
         }
 
         .spinner {
-            border: 5px solid #FFC72C;
-            border-top: 5px solid #DA291C;
+            border: 6px solid #FFBC0D;
+            border-top: 6px solid #DA291C;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
+            width: 80px;
+            height: 80px;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 30px;
         }
 
         @keyframes spin {
@@ -120,8 +164,21 @@
             100% { transform: rotate(360deg); }
         }
 
+        .loading p {
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
         .results {
             display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .results.active {
@@ -130,74 +187,127 @@
 
         .application-wrapper {
             position: relative;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .application {
             background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 3px solid #333;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            border: 4px solid #FFBC0D;
             position: relative;
         }
 
         .app-header {
             display: flex;
-            align-items: flex-start;
-            gap: 20px;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #DA291C;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 4px solid #FFBC0D;
+        }
+
+        .pfp-container {
+            position: relative;
         }
 
         .pfp {
-            width: 120px;
-            height: 120px;
-            border: 4px solid #DA291C;
+            width: 140px;
+            height: 140px;
+            border: 5px solid #DA291C;
+            border-radius: 15px;
             object-fit: cover;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .pfp-badge {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            background: #FFBC0D;
+            color: #DA291C;
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .user-info {
+            flex: 1;
         }
 
         .user-info h2 {
-            font-family: 'Bangers', cursive;
+            font-family: 'Speedee', sans-serif;
             color: #DA291C;
-            font-size: 2rem;
-            margin-bottom: 5px;
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
 
         .user-info p {
             color: #666;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .app-title {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #FFBC0D 0%, #ffd54f 100%);
+            border-radius: 15px;
+            border: 3px solid #DA291C;
+        }
+
+        .app-title h3 {
+            font-family: 'Speedee', sans-serif;
+            color: #DA291C;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .form-section {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            border-left: 5px solid #DA291C;
         }
 
         .form-section label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 700;
+            margin-bottom: 10px;
             color: #DA291C;
             text-transform: uppercase;
             font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
         .form-section .value {
-            padding: 10px;
-            background: #f9f9f9;
-            border: 2px solid #ddd;
-            border-radius: 5px;
-            min-height: 40px;
+            padding: 15px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            min-height: 50px;
+            color: #333;
+            line-height: 1.6;
         }
 
         .stamp {
             position: absolute;
             top: 50%;
-            right: 10%;
+            right: 5%;
             transform: translate(0, -50%) rotate(-15deg);
             opacity: 0;
-            transition: opacity 0.3s;
+            z-index: 10;
         }
 
         .stamp.show {
@@ -220,14 +330,15 @@
         }
 
         .stamp-img {
-            width: 200px;
-            height: 200px;
+            width: 220px;
+            height: 220px;
+            filter: drop-shadow(0 4px 15px rgba(218, 41, 28, 0.4));
         }
 
         .badge-container {
             opacity: 0;
-            transition: opacity 0.5s;
-            margin-top: 40px;
+            transition: opacity 0.6s ease;
+            margin-top: 50px;
         }
 
         .badge-container.show {
@@ -235,68 +346,110 @@
         }
 
         .badge {
-            background: linear-gradient(135deg, #DA291C 0%, #b52318 100%);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 400px;
+            background: linear-gradient(135deg, #DA291C 0%, #b5190e 100%);
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 450px;
             margin: 0 auto;
-            border: 5px solid #FFC72C;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 6px solid #FFBC0D;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
             text-align: center;
             color: white;
             position: relative;
+            overflow: hidden;
         }
 
         .badge::before {
             content: '';
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 10px;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 3px dashed rgba(255, 188, 13, 0.5);
+            border-radius: 20px;
+            pointer-events: none;
         }
 
-        .badge-pfp {
-            width: 150px;
-            height: 150px;
-            border: 5px solid #FFC72C;
-            margin: 0 auto 20px;
-            display: block;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .badge-header {
+            background: #FFBC0D;
+            color: #DA291C;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .badge h3 {
-            font-family: 'Bangers', cursive;
-            font-size: 2rem;
-            margin-bottom: 5px;
-            color: #FFC72C;
-        }
-
-        .badge .title {
+        .badge-header h4 {
+            font-family: 'Speedee', sans-serif;
             font-size: 1.2rem;
-            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        .badge .employee-id {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-top: 10px;
+        .badge-pfp {
+            width: 160px;
+            height: 160px;
+            border: 6px solid #FFBC0D;
+            border-radius: 15px;
+            margin: 0 auto 25px;
+            display: block;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            object-fit: cover;
         }
 
-        .badge .since {
-            font-size: 0.8rem;
-            opacity: 0.8;
+        .badge h3 {
+            font-family: 'Speedee', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #FFBC0D;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+        }
+
+        .badge .title {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            background: rgba(255, 188, 13, 0.2);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .badge-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .badge-detail {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-detail-label {
+            font-size: 0.75rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .badge-detail-value {
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         .action-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 40px;
             flex-wrap: wrap;
         }
 
@@ -304,15 +457,30 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            padding: 15px 35px;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #FFBC0D 0%, #ffa500 100%) !important;
+            color: #DA291C !important;
+            box-shadow: 0 8px 20px rgba(255, 188, 13, 0.4) !important;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            box-shadow: 0 12px 30px rgba(255, 188, 13, 0.5) !important;
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
             
             .tagline {
                 font-size: 1rem;
+            }
+
+            .golden-arches {
+                font-size: 60px;
             }
 
             .app-header {
@@ -323,13 +491,31 @@
             input[type="text"] {
                 min-width: 100%;
             }
+
+            .application {
+                padding: 30px 20px;
+            }
+
+            .stamp {
+                width: 150px;
+                height: 150px;
+                right: 2%;
+            }
+
+            .stamp-img {
+                width: 150px;
+                height: 150px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🍔 McDONALD'S 🍟</h1>
+            <div class="logo-wrapper">
+                <div class="golden-arches">M</div>
+            </div>
+            <h1>McDONALD'S</h1>
             <p class="tagline">Leaving the trenches? We're hiring!</p>
         </header>
 
@@ -343,7 +529,7 @@
                         required
                     />
                     <button type="submit" id="submitBtn">
-                        APPLY NOW
+                        Apply Now
                     </button>
                 </div>
             </form>
@@ -357,8 +543,15 @@
         <div id="results" class="results">
             <div class="application-wrapper">
                 <div id="applicationCard" class="application">
+                    <div class="app-title">
+                        <h3>Employment Application</h3>
+                    </div>
+
                     <div class="app-header">
-                        <img id="appPfp" src="" alt="Profile" class="pfp" />
+                        <div class="pfp-container">
+                            <img id="appPfp" src="" alt="Profile" class="pfp" />
+                            <div class="pfp-badge">🍔</div>
+                        </div>
                         <div class="user-info">
                             <h2 id="appName">Name</h2>
                             <p id="appBio">Bio</p>
@@ -398,12 +591,12 @@
 
                 <div id="stamp" class="stamp">
                     <svg class="stamp-img" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="100" cy="100" r="90" fill="none" stroke="#DA291C" stroke-width="8" opacity="0.8"/>
-                        <circle cx="100" cy="100" r="75" fill="none" stroke="#DA291C" stroke-width="4" opacity="0.6"/>
-                        <text x="100" y="95" text-anchor="middle" font-family="Bangers" font-size="35" fill="#DA291C" transform="rotate(-15 100 100)">
+                        <circle cx="100" cy="100" r="95" fill="none" stroke="#DA291C" stroke-width="8" opacity="0.9"/>
+                        <circle cx="100" cy="100" r="80" fill="none" stroke="#DA291C" stroke-width="5" opacity="0.7"/>
+                        <text x="100" y="90" text-anchor="middle" font-family="Speedee, sans-serif" font-size="38" font-weight="bold" fill="#DA291C" transform="rotate(-15 100 100)">
                             APPROVED
                         </text>
-                        <text x="100" y="120" text-anchor="middle" font-family="Courier Prime" font-size="16" fill="#DA291C" transform="rotate(-15 100 100)">
+                        <text x="100" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="#DA291C" transform="rotate(-15 100 100)">
                             McDONALD'S
                         </text>
                     </svg>
@@ -412,11 +605,22 @@
 
             <div id="badgeContainer" class="badge-container">
                 <div id="badgeCard" class="badge">
+                    <div class="badge-header">
+                        <h4>Official Employee Badge</h4>
+                    </div>
                     <img id="badgePfp" src="" alt="Employee" class="badge-pfp" />
                     <h3 id="badgeName">Name</h3>
                     <div class="title">CREW MEMBER</div>
-                    <div class="employee-id" id="employeeId">ID: #000000</div>
-                    <div class="since" id="since">Member Since 2025</div>
+                    <div class="badge-details">
+                        <div class="badge-detail">
+                            <div class="badge-detail-label">Employee ID</div>
+                            <div class="badge-detail-value" id="employeeId">#000000</div>
+                        </div>
+                        <div class="badge-detail">
+                            <div class="badge-detail-label">Member Since</div>
+                            <div class="badge-detail-value" id="since">2025</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -424,7 +628,7 @@
                 <button onclick="downloadApplication()">
                     📥 Download Application
                 </button>
-                <button onclick="downloadBadge()">
+                <button onclick="downloadBadge()" class="btn-secondary">
                     📥 Download Badge
                 </button>
                 <button onclick="shareToTwitter()">
@@ -440,66 +644,6 @@
         const results = document.getElementById('results');
         const submitBtn = document.getElementById('submitBtn');
 
-        // Crop PFP from Twitter screenshot
-        async function cropPfpFromScreenshot(screenshotBase64) {
-            console.log('Starting crop, screenshot length:', screenshotBase64?.length);
-            
-            // If no screenshot, return placeholder immediately
-            if (!screenshotBase64) {
-                console.log('No screenshot provided, using placeholder');
-                return createPlaceholderPfp();
-            }
-            
-            return new Promise((resolve) => {
-                const img = new Image();
-                img.onload = () => {
-                    console.log('Image loaded:', img.width, 'x', img.height);
-                    try {
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        
-                        // Try different coordinates for X/Twitter PFP
-                        // These coordinates might need adjustment based on actual X layout
-                        const cropX = 24;
-                        const cropY = 180;
-                        const cropWidth = 140;
-                        const cropHeight = 140;
-                        
-                        canvas.width = cropWidth;
-                        canvas.height = cropHeight;
-                        
-                        ctx.drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, cropWidth, cropHeight);
-                        
-                        const croppedImage = canvas.toDataURL('image/png');
-                        
-                        // Check if image is mostly black/empty
-                        const imageData = ctx.getImageData(0, 0, cropWidth, cropHeight);
-                        const data = imageData.data;
-                        let totalBrightness = 0;
-                        for (let i = 0; i < data.length; i += 4) {
-                            totalBrightness += (data[i] + data[i+1] + data[i+2]) / 3;
-                        }
-                        const avgBrightness = totalBrightness / (data.length / 4);
-                        
-                        // If image is too dark (likely failed crop), use placeholder
-                        if (avgBrightness < 10) {
-                            resolve(createPlaceholderPfp());
-                        } else {
-                            resolve(croppedImage);
-                        }
-                    } catch (e) {
-                        console.error('Crop failed:', e);
-                        resolve(createPlaceholderPfp());
-                    }
-                };
-                img.onerror = () => {
-                    console.error('Image load failed');
-                    resolve(createPlaceholderPfp());
-                };
-                img.src = screenshotBase64;
-            });
-        }
-
         // Create a placeholder PFP with McDonald's colors
         function createPlaceholderPfp() {
             const canvas = document.createElement('canvas');
@@ -507,18 +651,15 @@
             canvas.height = 140;
             const ctx = canvas.getContext('2d');
             
-            // McDonald's red background
             ctx.fillStyle = '#DA291C';
             ctx.fillRect(0, 0, 140, 140);
             
-            // Yellow border
-            ctx.strokeStyle = '#FFC72C';
+            ctx.strokeStyle = '#FFBC0D';
             ctx.lineWidth = 8;
             ctx.strokeRect(4, 4, 132, 132);
             
-            // Draw M emoji
             ctx.font = 'bold 60px Arial';
-            ctx.fillStyle = '#FFC72C';
+            ctx.fillStyle = '#FFBC0D';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText('🍔', 70, 70);
@@ -532,7 +673,6 @@
             const username = document.getElementById('username').value.replace('@', '').trim();
             if (!username) return;
 
-            // Show loading
             loading.style.display = 'block';
             results.classList.remove('active');
             submitBtn.disabled = true;
@@ -551,10 +691,8 @@
                 console.log('Received data:', data);
                 console.log('Profile image URL:', data.profileImageUrl);
                 
-                // Use extracted profile image URL or placeholder
                 const pfpUrl = data.profileImageUrl || createPlaceholderPfp();
                 
-                // Populate application
                 document.getElementById('appPfp').src = pfpUrl;
                 document.getElementById('badgePfp').src = pfpUrl;
                 document.getElementById('appName').textContent = data.name;
@@ -566,24 +704,17 @@
                 document.getElementById('startDate').textContent = data.startDate;
                 document.getElementById('comments').textContent = data.comments;
 
-                // Populate badge
                 document.getElementById('badgeName').textContent = data.name;
-                document.getElementById('employeeId').textContent = `ID: #${data.employeeId}`;
-                document.getElementById('since').textContent = `Member Since ${new Date().getFullYear()}`;
-                document.getElementById('badgeName').textContent = data.name;
-                document.getElementById('employeeId').textContent = `ID: #${data.employeeId}`;
-                document.getElementById('since').textContent = `Member Since ${new Date().getFullYear()}`;
+                document.getElementById('employeeId').textContent = `#${data.employeeId}`;
+                document.getElementById('since').textContent = new Date().getFullYear();
 
-                // Show results
                 loading.style.display = 'none';
                 results.classList.add('active');
 
-                // Animate stamp
                 setTimeout(() => {
                     document.getElementById('stamp').classList.add('show');
                 }, 500);
 
-                // Show badge
                 setTimeout(() => {
                     document.getElementById('badgeContainer').classList.add('show');
                 }, 1500);
