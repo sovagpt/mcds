@@ -87,6 +87,42 @@ If no profile image URL is found, respond with exactly "NONE".`
       console.log('Failed to extract profile image:', e.message);
     }
 
+    // Step 2.5: Direct image fetching fallback (from your old code)
+    if (!profileImageUrl) {
+      console.log('Trying direct image fetching...');
+      
+      const imageUrls = [
+        `https://unavatar.io/twitter/${cleanUsername}?fallback=false&fresh=true`,
+        `https://unavatar.io/x/${cleanUsername}?fallback=false&fresh=true`,
+      ];
+
+      for (const imageUrl of imageUrls) {
+        try {
+          console.log(`Trying: ${imageUrl}`);
+          
+          const response = await fetch(imageUrl, {
+            method: 'GET',
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+              'Accept': 'image/webp,image/png,image/jpeg,image/*;q=0.8',
+              'Cache-Control': 'no-cache, no-store, must-revalidate',
+              'Pragma': 'no-cache',
+              'Expires': '0'
+            }
+          });
+          
+          if (response.ok && response.headers.get('content-type')?.startsWith('image/')) {
+            profileImageUrl = imageUrl;
+            console.log(`Successfully got image from: ${imageUrl}`);
+            break;
+          }
+        } catch (error) {
+          console.log(`Failed ${imageUrl}:`, error.message);
+          continue;
+        }
+      }
+    }
+
     // Step 3: Use Anthropic to analyze and generate responses
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
