@@ -21,6 +21,7 @@
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             padding: 40px 20px;
+            position: relative;
         }
 
         @keyframes gradientShift {
@@ -550,7 +551,6 @@
                     <div class="app-header">
                         <div class="pfp-container">
                             <img id="appPfp" src="" alt="Profile" class="pfp" />
-                            <div class="pfp-badge">🍔</div>
                         </div>
                         <div class="user-info">
                             <h2 id="appName">Name</h2>
@@ -626,13 +626,13 @@
 
             <div class="action-buttons">
                 <button onclick="downloadApplication()">
-                    📥 Download Application
+                    Download Application
                 </button>
                 <button onclick="downloadBadge()" class="btn-secondary">
-                    📥 Download Badge
+                    Download Badge
                 </button>
                 <button onclick="shareToTwitter()">
-                    🐦 Share to Twitter
+                    Share to Twitter
                 </button>
             </div>
         </div>
@@ -662,7 +662,7 @@
             ctx.fillStyle = '#FFBC0D';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText('🍔', 70, 70);
+            ctx.fillText('M', 70, 70);
             
             return canvas.toDataURL('image/png');
         }
