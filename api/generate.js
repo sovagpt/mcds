@@ -16,8 +16,10 @@ export default async function handler(req, res) {
 
   try {
     // Step 1: Get Twitter profile screenshot using Siteshot
-    const twitterUrl = `https://twitter.com/${username}`;
-    const siteshotUrl = `https://api.site-shot.com/?url=${encodeURIComponent(twitterUrl)}&userkey=${process.env.SITESHOT_API_KEY}&width=1280&height=1280&response_type=json&delay_time=3000&format=png`;
+    // Using x.com instead of twitter.com and adding more parameters to avoid blocks
+    const twitterUrl = `https://x.com/${username}`;
+    const userAgent = encodeURIComponent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    const siteshotUrl = `https://api.site-shot.com/?url=${encodeURIComponent(twitterUrl)}&userkey=${process.env.SITESHOT_API_KEY}&width=1280&height=1280&response_type=json&delay_time=5000&format=png&user_agent=${userAgent}&no_cookie_popup=1`;
 
     const siteshotResponse = await fetch(siteshotUrl);
     
@@ -85,7 +87,18 @@ Keep it playful and funny, not mean. Focus on crypto/trading humor if their prof
       }
     } catch (e) {
       console.error('Failed to parse AI response:', aiResponse);
-      throw new Error('Failed to parse AI response');
+      
+      // If AI couldn't parse the profile, create a generic funny application
+      applicationData = {
+        name: `@${username}`,
+        bio: 'Crypto trader turned fast food professional',
+        position: 'Fry Cook',
+        whyMcdonalds: 'The charts went down, so I had to pivot. At least the fryers are always hot.',
+        experience: 'Extensive experience monitoring volatile assets and making quick decisions under pressure. Familiar with working the night shift.',
+        skills: 'Multitasking, customer service, dealing with high-stress situations, accepting defeat gracefully',
+        startDate: 'Immediately',
+        comments: 'Applicant seems eager to leave their previous line of work. Shows promise.'
+      };
     }
 
     // Generate random employee ID
