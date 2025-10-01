@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McDonald's Job Application</title>
+    <title>McDonald's Employment Center</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Speedee:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
         
         * {
             margin: 0;
@@ -15,39 +15,157 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #FFBC0D 0%, #DA291C 50%, #FFBC0D 100%);
-            background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
+            font-family: 'VT323', monospace;
+            background: #FFC72C;
             min-height: 100vh;
-            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        /* Pixel/Retro Effects */
+        .pixel-border {
+            box-shadow: 
+                0 -4px 0 0 #000,
+                0 4px 0 0 #000,
+                -4px 0 0 0 #000,
+                4px 0 0 0 #000;
+        }
+
+        .pixel-corners {
             position: relative;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        .pixel-corners::before,
+        .pixel-corners::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #000;
         }
 
-        .container {
-            max-width: 900px;
+        .pixel-corners::before {
+            top: -4px;
+            left: -4px;
+        }
+
+        .pixel-corners::after {
+            top: -4px;
+            right: -4px;
+        }
+
+        /* Header Styles */
+        .header-top {
+            background: #DA291C;
+            padding: 8px 0;
+            border-bottom: 4px solid #000;
+        }
+
+        .header-top-content {
+            max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
         }
 
-        header {
+        .header-section {
+            background: #FFBC0D;
+            color: #000;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 4px solid #000;
+            font-family: 'Press Start 2P', monospace;
+            letter-spacing: 1px;
+        }
+
+        .header-main {
+            background: #DA291C;
+            border-bottom: 8px solid #000;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.2);
+        }
+
+        .header-main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px;
+        }
+
+        .logo {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 48px;
+            color: #FFBC0D;
+            font-weight: bold;
+            text-shadow: 4px 4px 0 #000;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: #FFBC0D;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            font-family: 'Press Start 2P', monospace;
+            padding: 12px 20px;
+            background: rgba(0,0,0,0.3);
+            border: 4px solid #FFBC0D;
+            transition: all 0.1s ease;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(0,0,0,0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #DA291C;
+            padding: 80px 20px;
             text-align: center;
-            margin-bottom: 50px;
+            border-bottom: 8px solid #000;
             position: relative;
+            overflow: hidden;
         }
 
-        .logo-wrapper {
-            background: white;
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            display: inline-block;
-            margin-bottom: 20px;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.1) 2px,
+                rgba(0,0,0,0.1) 4px
+            );
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 4rem;
+            color: #FFBC0D;
+            text-shadow: 4px 4px 0 #000;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
             animation: float 3s ease-in-out infinite;
         }
 
@@ -56,43 +174,34 @@
             50% { transform: translateY(-10px); }
         }
 
-        .golden-arches {
-            font-size: 80px;
+        .hero p {
             color: #FFBC0D;
-            text-shadow: 3px 3px 0 #DA291C;
-            font-weight: bold;
-            font-family: 'Speedee', sans-serif;
-            letter-spacing: -5px;
+            font-size: 1.8rem;
+            font-family: 'VT323', monospace;
+            text-shadow: 3px 3px 0 #000;
+            position: relative;
+            z-index: 1;
         }
 
-        h1 {
-            font-family: 'Speedee', sans-serif;
-            font-size: 3rem;
-            color: white;
-            text-shadow: 4px 4px 0 rgba(0,0,0,0.3);
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            color: white;
-            font-weight: 600;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            flex: 1;
         }
 
         .input-section {
             background: white;
             padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            border: 8px solid #000;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
             margin-bottom: 50px;
-            border: 5px solid #FFBC0D;
         }
 
         .input-group {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
             align-items: stretch;
             flex-wrap: wrap;
@@ -100,44 +209,43 @@
 
         input[type="text"] {
             padding: 18px 25px;
-            font-size: 1.1rem;
-            border: 3px solid #e0e0e0;
-            border-radius: 15px;
+            font-size: 1.3rem;
+            border: 4px solid #000;
             min-width: 320px;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.3s ease;
-            font-weight: 500;
+            font-family: 'VT323', monospace;
+            transition: all 0.1s ease;
+            background: #fff;
+            box-shadow: inset 4px 4px 0 rgba(0,0,0,0.1);
         }
 
         input[type="text"]:focus {
             outline: none;
-            border-color: #DA291C;
-            box-shadow: 0 0 0 4px rgba(218, 41, 28, 0.1);
+            background: #FFFACD;
+            box-shadow: inset 4px 4px 0 rgba(218, 41, 28, 0.2);
         }
 
         button {
             padding: 18px 45px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #DA291C 0%, #b5190e 100%);
-            color: white;
-            border: none;
-            border-radius: 15px;
+            background: #DA291C;
+            color: #FFBC0D;
+            border: 4px solid #000;
             cursor: pointer;
-            font-family: 'Speedee', sans-serif;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 20px rgba(218, 41, 28, 0.4);
+            font-family: 'Press Start 2P', monospace;
+            transition: all 0.1s ease;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
             text-transform: uppercase;
         }
 
         button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(218, 41, 28, 0.5);
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.4);
         }
 
         button:active:not(:disabled) {
-            transform: translateY(0);
+            transform: translate(6px, 6px);
+            box-shadow: none;
         }
 
         button:disabled {
@@ -166,20 +274,13 @@
         }
 
         .loading p {
-            color: white;
+            color: #292929;
             font-size: 1.4rem;
             font-weight: 600;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .results {
             display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .results.active {
@@ -194,9 +295,8 @@
         .application {
             background: white;
             padding: 50px;
-            border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
-            border: 4px solid #FFBC0D;
+            border: 8px solid #000;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
             position: relative;
         }
 
@@ -206,80 +306,53 @@
             gap: 30px;
             margin-bottom: 40px;
             padding-bottom: 30px;
-            border-bottom: 4px solid #FFBC0D;
-        }
-
-        .pfp-container {
-            position: relative;
+            border-bottom: 6px dashed #000;
         }
 
         .pfp {
             width: 140px;
             height: 140px;
-            border: 5px solid #DA291C;
-            border-radius: 15px;
+            border: 6px solid #000;
             object-fit: cover;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
-
-        .pfp-badge {
-            position: absolute;
-            bottom: -10px;
-            right: -10px;
-            background: #FFBC0D;
-            color: #DA291C;
-            font-size: 2rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 3px solid white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .user-info {
-            flex: 1;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+            image-rendering: pixelated;
         }
 
         .user-info h2 {
-            font-family: 'Speedee', sans-serif;
+            font-family: 'Press Start 2P', monospace;
             color: #DA291C;
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
         }
 
         .user-info p {
-            color: #666;
-            font-size: 1rem;
-            line-height: 1.5;
+            font-family: 'VT323', monospace;
+            font-size: 1.3rem;
+            color: #333;
         }
 
         .app-title {
             text-align: center;
             margin-bottom: 30px;
             padding: 20px;
-            background: linear-gradient(135deg, #FFBC0D 0%, #ffd54f 100%);
-            border-radius: 15px;
-            border: 3px solid #DA291C;
+            background: #FFBC0D;
+            border: 6px solid #000;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
         }
 
         .app-title h3 {
-            font-family: 'Speedee', sans-serif;
+            font-family: 'Press Start 2P', monospace;
             color: #DA291C;
-            font-size: 1.8rem;
+            font-size: 1.3rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .form-section {
             margin-bottom: 30px;
             padding: 20px;
             background: #f9f9f9;
-            border-radius: 12px;
-            border-left: 5px solid #DA291C;
+            border: 4px solid #000;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
         }
 
         .form-section label {
@@ -288,52 +361,19 @@
             margin-bottom: 10px;
             color: #DA291C;
             text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            font-family: 'Press Start 2P', monospace;
         }
 
         .form-section .value {
             padding: 15px;
             background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
+            border: 3px solid #000;
             min-height: 50px;
             color: #333;
-            line-height: 1.6;
-        }
-
-        .stamp {
-            position: absolute;
-            top: 50%;
-            right: 5%;
-            transform: translate(0, -50%) rotate(-15deg);
-            opacity: 0;
-            z-index: 10;
-        }
-
-        .stamp.show {
-            animation: stampSlam 0.6s ease-out forwards;
-        }
-
-        @keyframes stampSlam {
-            0% {
-                opacity: 0;
-                transform: translate(0, -200%) rotate(-15deg) scale(0.5);
-            }
-            70% {
-                opacity: 1;
-                transform: translate(0, -50%) rotate(-15deg) scale(1.1);
-            }
-            100% {
-                opacity: 1;
-                transform: translate(0, -50%) rotate(-15deg) scale(1);
-            }
-        }
-
-        .stamp-img {
-            width: 220px;
-            height: 220px;
-            filter: drop-shadow(0 4px 15px rgba(218, 41, 28, 0.4));
+            line-height: 1.8;
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
         }
 
         .badge-container {
@@ -347,17 +387,15 @@
         }
 
         .badge {
-            background: linear-gradient(135deg, #DA291C 0%, #b5190e 100%);
+            background: #DA291C;
             padding: 40px;
-            border-radius: 25px;
+            border: 8px solid #000;
             max-width: 450px;
             margin: 0 auto;
-            border: 6px solid #FFBC0D;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
             text-align: center;
             color: white;
             position: relative;
-            overflow: hidden;
         }
 
         .badge::before {
@@ -367,56 +405,50 @@
             left: 15px;
             right: 15px;
             bottom: 15px;
-            border: 3px dashed rgba(255, 188, 13, 0.5);
-            border-radius: 20px;
+            border: 4px dashed #FFBC0D;
             pointer-events: none;
         }
 
         .badge-header {
             background: #FFBC0D;
-            color: #DA291C;
+            color: #000;
             padding: 15px;
-            border-radius: 15px;
+            border: 4px solid #000;
             margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
         }
 
         .badge-header h4 {
-            font-family: 'Speedee', sans-serif;
-            font-size: 1.2rem;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
         .badge-pfp {
             width: 160px;
             height: 160px;
-            border: 6px solid #FFBC0D;
-            border-radius: 15px;
+            border: 6px solid #000;
             margin: 0 auto 25px;
             display: block;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.5);
             object-fit: cover;
+            image-rendering: pixelated;
         }
 
         .badge h3 {
-            font-family: 'Speedee', sans-serif;
-            font-size: 2rem;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.5rem;
             margin-bottom: 10px;
             color: #FFBC0D;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            letter-spacing: 1px;
         }
 
         .badge .title {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            font-family: 'VT323', monospace;
             font-weight: 700;
-            background: rgba(255, 188, 13, 0.2);
-            padding: 10px;
-            border-radius: 10px;
+            letter-spacing: 2px;
         }
 
         .badge-details {
@@ -427,22 +459,22 @@
         }
 
         .badge-detail {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.3);
             padding: 12px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
+            border: 3px solid #FFBC0D;
         }
 
         .badge-detail-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
+            font-family: 'Press Start 2P', monospace;
             opacity: 0.9;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         .badge-detail-value {
-            font-size: 1rem;
+            font-size: 1.2rem;
+            font-family: 'VT323', monospace;
             font-weight: 700;
         }
 
@@ -454,72 +486,260 @@
             flex-wrap: wrap;
         }
 
-        .action-buttons button {
+        /* Employee Wall */
+        .employee-wall {
+            margin-top: 80px;
+        }
+
+        .wall-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .wall-header h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #DA291C;
+            margin-bottom: 10px;
+        }
+
+        .wall-header p {
+            font-family: 'VT323', monospace;
+            color: #000;
+            font-size: 1.5rem;
+        }
+
+        .wall-search {
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        .wall-search input {
+            width: 100%;
+        }
+
+        .employee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .employee-card {
+            background: white;
+            border: 6px solid #000;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+            transition: transform 0.1s ease;
+            cursor: pointer;
+        }
+
+        .employee-card:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        .employee-card:active {
+            transform: translate(6px, 6px);
+            box-shadow: none;
+        }
+
+        .employee-card img {
+            width: 100px;
+            height: 100px;
+            border: 4px solid #000;
+            margin-bottom: 15px;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+
+        .employee-card h4 {
+            font-family: 'Press Start 2P', monospace;
+            color: #DA291C;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .employee-card p {
+            color: #333;
+            font-size: 1.1rem;
+            font-family: 'VT323', monospace;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background: #DA291C;
+            color: #FFBC0D;
+            padding: 30px 20px;
+            margin-top: 80px;
+            border-top: 8px solid #000;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-family: 'VT323', monospace;
+            font-size: 1.3rem;
+        }
+
+        .footer-content p {
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 15px 35px;
+            gap: 30px;
+            justify-content: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
         }
 
-        .btn-secondary {
-            background: linear-gradient(135deg, #FFBC0D 0%, #ffa500 100%) !important;
-            color: #DA291C !important;
-            box-shadow: 0 8px 20px rgba(255, 188, 13, 0.4) !important;
+        .footer-links a {
+            color: #FFBC0D;
+            text-decoration: none;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.8rem;
+            padding: 10px 20px;
+            border: 4px solid #000;
+            background: rgba(0,0,0,0.3);
+            transition: all 0.1s ease;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
         }
 
-        .btn-secondary:hover:not(:disabled) {
-            box-shadow: 0 12px 30px rgba(255, 188, 13, 0.5) !important;
+        .footer-links a:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+
+        .footer-bottom {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 4px dashed rgba(255, 188, 13, 0.5);
+            font-size: 1.1rem;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
+            .logo {
+                font-size: 32px;
             }
 
-            .golden-arches {
-                font-size: 60px;
+            .nav-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .nav-menu a {
+                font-size: 0.7rem;
+                padding: 10px 15px;
+            }
+
+            .header-section {
+                font-size: 0.5rem;
+                padding: 6px 10px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
             }
 
             .app-header {
                 flex-direction: column;
-                text-align: center;
             }
 
             input[type="text"] {
                 min-width: 100%;
             }
 
+            button {
+                font-size: 0.9rem;
+                padding: 15px 30px;
+            }
+
             .application {
                 padding: 30px 20px;
             }
 
-            .stamp {
-                width: 150px;
-                height: 150px;
-                right: 2%;
+            .user-info h2 {
+                font-size: 1rem;
             }
 
-            .stamp-img {
-                width: 150px;
-                height: 150px;
+            .app-title h3 {
+                font-size: 1rem;
+            }
+
+            .form-section label {
+                font-size: 0.7rem;
+            }
+
+            .badge h3 {
+                font-size: 1.2rem;
+            }
+
+            .badge-header h4 {
+                font-size: 0.7rem;
+            }
+
+            .wall-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .employee-card h4 {
+                font-size: 0.7rem;
+            }
+
+            .footer-links a {
+                font-size: 0.6rem;
+                padding: 8px 15px;
+            }
+
+            .footer-bottom {
+                font-size: 0.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo-wrapper">
-                <div class="golden-arches">M</div>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="header-top-content">
+                <div class="header-section">NOW HIRING</div>
+                <div class="header-section">LEAVING THE TRENCHES?</div>
+                <div class="header-section">JOIN THE TEAM</div>
             </div>
-            <h1>McDONALD'S</h1>
-            <p class="tagline">Leaving the trenches? We're hiring!</p>
-        </header>
+        </div>
+        <div class="header-main">
+            <div class="header-main-content">
+                <div class="logo">M</div>
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
+                        <li><a href="https://pump.fun" target="_blank">Pump.fun</a></li>
+                        <li><a href="#pfp">McDonald's PFP</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
 
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>McDONALDS.FUN</h1>
+        <p>Transform your Twitter profile into a McDonald's application!</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
         <div class="input-section">
             <form id="applicationForm">
                 <div class="input-group">
@@ -549,9 +769,7 @@
                     </div>
 
                     <div class="app-header">
-                        <div class="pfp-container">
-                            <img id="appPfp" src="" alt="Profile" class="pfp" />
-                        </div>
+                        <img id="appPfp" src="" alt="Profile" class="pfp" />
                         <div class="user-info">
                             <h2 id="appName">Name</h2>
                             <p id="appBio">Bio</p>
@@ -588,19 +806,6 @@
                         <div class="value" id="comments"></div>
                     </div>
                 </div>
-
-                <div id="stamp" class="stamp">
-                    <svg class="stamp-img" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="100" cy="100" r="95" fill="none" stroke="#DA291C" stroke-width="8" opacity="0.9"/>
-                        <circle cx="100" cy="100" r="80" fill="none" stroke="#DA291C" stroke-width="5" opacity="0.7"/>
-                        <text x="100" y="90" text-anchor="middle" font-family="Speedee, sans-serif" font-size="38" font-weight="bold" fill="#DA291C" transform="rotate(-15 100 100)">
-                            APPROVED
-                        </text>
-                        <text x="100" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="18" font-weight="bold" fill="#DA291C" transform="rotate(-15 100 100)">
-                            McDONALD'S
-                        </text>
-                    </svg>
-                </div>
             </div>
 
             <div id="badgeContainer" class="badge-container">
@@ -628,7 +833,7 @@
                 <button onclick="downloadApplication()">
                     Download Application
                 </button>
-                <button onclick="downloadBadge()" class="btn-secondary">
+                <button onclick="downloadBadge()">
                     Download Badge
                 </button>
                 <button onclick="shareToTwitter()">
@@ -636,15 +841,57 @@
                 </button>
             </div>
         </div>
+
+        <!-- Employee Wall -->
+        <div class="employee-wall">
+            <div class="wall-header">
+                <h2>EMPLOYEE WALL</h2>
+                <p>Meet our newest crew members!</p>
+            </div>
+
+            <div class="wall-search">
+                <input 
+                    type="text" 
+                    id="searchEmployee" 
+                    placeholder="Search employees by name..."
+                />
+            </div>
+
+            <div class="employee-grid" id="employeeGrid">
+                <!-- Employees will be dynamically added here -->
+            </div>
+        </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>🍔 LEAVING THE TRENCHES? JOIN THE CREW! 🍟</p>
+            <div class="footer-links">
+                <a href="https://twitter.com" target="_blank">TWITTER</a>
+                <a href="https://pump.fun" target="_blank">PUMP.FUN</a>
+                <a href="#home">HOME</a>
+            </div>
+            <div class="footer-bottom">
+                <p>Copyright © 2025 Mcdonalds.fun. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         const form = document.getElementById('applicationForm');
         const loading = document.getElementById('loading');
         const results = document.getElementById('results');
         const submitBtn = document.getElementById('submitBtn');
+        const employeeGrid = document.getElementById('employeeGrid');
+        const searchInput = document.getElementById('searchEmployee');
 
-        // Create a placeholder PFP with McDonald's colors
+        // Store employees in localStorage
+        let employees = JSON.parse(localStorage.getItem('mcdonalds_employees') || '[]');
+
+        // Display employees on load
+        displayEmployees();
+
         function createPlaceholderPfp() {
             const canvas = document.createElement('canvas');
             canvas.width = 140;
@@ -688,9 +935,6 @@
 
                 const data = await response.json();
                 
-                console.log('Received data:', data);
-                console.log('Profile image URL:', data.profileImageUrl);
-                
                 const pfpUrl = data.profileImageUrl || createPlaceholderPfp();
                 
                 document.getElementById('appPfp').src = pfpUrl;
@@ -703,21 +947,24 @@
                 document.getElementById('skills').textContent = data.skills;
                 document.getElementById('startDate').textContent = data.startDate;
                 document.getElementById('comments').textContent = data.comments;
-
                 document.getElementById('badgeName').textContent = data.name;
                 document.getElementById('employeeId').textContent = `#${data.employeeId}`;
                 document.getElementById('since').textContent = new Date().getFullYear();
+
+                // Add to employee wall
+                addEmployee({
+                    name: data.name,
+                    position: data.position,
+                    employeeId: data.employeeId,
+                    pfpUrl: pfpUrl
+                });
 
                 loading.style.display = 'none';
                 results.classList.add('active');
 
                 setTimeout(() => {
-                    document.getElementById('stamp').classList.add('show');
-                }, 500);
-
-                setTimeout(() => {
                     document.getElementById('badgeContainer').classList.add('show');
-                }, 1500);
+                }, 500);
 
             } catch (error) {
                 console.error('Error:', error);
@@ -726,6 +973,43 @@
             } finally {
                 submitBtn.disabled = false;
             }
+        });
+
+        function addEmployee(employee) {
+            // Check if employee already exists
+            const exists = employees.find(e => e.employeeId === employee.employeeId);
+            if (!exists) {
+                employees.unshift(employee);
+                // Keep only last 50 employees
+                if (employees.length > 50) {
+                    employees = employees.slice(0, 50);
+                }
+                localStorage.setItem('mcdonalds_employees', JSON.stringify(employees));
+                displayEmployees();
+            }
+        }
+
+        function displayEmployees(filter = '') {
+            const filtered = filter 
+                ? employees.filter(e => e.name.toLowerCase().includes(filter.toLowerCase()))
+                : employees;
+
+            employeeGrid.innerHTML = filtered.map(emp => `
+                <div class="employee-card">
+                    <img src="${emp.pfpUrl}" alt="${emp.name}" />
+                    <h4>${emp.name}</h4>
+                    <p>${emp.position}</p>
+                    <p style="font-size: 0.75rem; color: #999;">#${emp.employeeId}</p>
+                </div>
+            `).join('');
+
+            if (filtered.length === 0) {
+                employeeGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #666;">No employees found. Be the first to apply!</p>';
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            displayEmployees(e.target.value);
         });
 
         async function downloadApplication() {
