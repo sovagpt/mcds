@@ -21,9 +21,43 @@
             display: flex;
             flex-direction: column;
             image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
         }
 
-        /* Header */
+        /* Pixel/Retro Effects */
+        .pixel-border {
+            box-shadow: 
+                0 -4px 0 0 #000,
+                0 4px 0 0 #000,
+                -4px 0 0 0 #000,
+                4px 0 0 0 #000;
+        }
+
+        .pixel-corners {
+            position: relative;
+        }
+
+        .pixel-corners::before,
+        .pixel-corners::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #000;
+        }
+
+        .pixel-corners::before {
+            top: -4px;
+            left: -4px;
+        }
+
+        .pixel-corners::after {
+            top: -4px;
+            right: -4px;
+        }
+
+        /* Header Styles */
         .header-main {
             background: #DA291C;
             border-bottom: 8px solid #000;
@@ -105,6 +139,7 @@
             margin-bottom: 20px;
             position: relative;
             z-index: 1;
+            animation: float 3s ease-in-out infinite;
         }
 
         .hero-tagline {
@@ -116,7 +151,6 @@
             z-index: 1;
             margin-bottom: 10px;
             min-height: 60px;
-            transition: opacity 0.3s;
         }
 
         .hero-subtitle {
@@ -135,7 +169,7 @@
             25%, 75% { opacity: 0.5; }
         }
 
-        /* Container */
+        /* Main Content */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -143,7 +177,6 @@
             flex: 1;
         }
 
-        /* Input Section */
         .input-section {
             background: white;
             padding: 40px;
@@ -206,7 +239,6 @@
             cursor: not-allowed;
         }
 
-        /* Loading */
         .loading {
             text-align: center;
             padding: 60px;
@@ -233,7 +265,6 @@
             font-weight: 600;
         }
 
-        /* Results */
         .results {
             display: none;
         }
@@ -242,13 +273,17 @@
             display: block;
         }
 
-        /* Application */
+        .application-wrapper {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
         .application {
             background: white;
             padding: 50px;
             border: 8px solid #000;
             box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
-            margin-bottom: 50px;
+            position: relative;
         }
 
         .app-header {
@@ -327,11 +362,10 @@
             font-size: 1.2rem;
         }
 
-        /* Badge */
         .badge-container {
             opacity: 0;
             transition: opacity 0.6s ease;
-            margin-bottom: 40px;
+            margin-top: 50px;
         }
 
         .badge-container.show {
@@ -430,7 +464,6 @@
             font-weight: 700;
         }
 
-        /* Action Buttons */
         .action-buttons {
             display: flex;
             gap: 20px;
@@ -439,247 +472,103 @@
             flex-wrap: wrap;
         }
 
-        /* Testimonials Section */
-        .testimonials-section {
+        /* Employee Chat */
+        .employee-chat {
             margin-top: 80px;
-            margin-bottom: 80px;
-            overflow: hidden;
-        }
-
-        .testimonials-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .testimonials-header h2 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 2rem;
-            color: #DA291C;
-            margin-bottom: 10px;
-            text-shadow: 4px 4px 0 #000;
-        }
-
-        .testimonials-header p {
-            font-family: 'VT323', monospace;
-            font-size: 1.5rem;
-            color: #000;
-        }
-
-        .testimonials-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .testimonials-track {
-            display: flex;
-            gap: 30px;
-            animation: scroll 30s linear infinite;
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .testimonial-card {
-            flex: 0 0 350px;
-            background: white;
-            border: 6px solid #000;
-            padding: 30px;
-            box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
-        }
-
-        .testimonial-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 4px dashed #000;
-        }
-
-        .testimonial-img {
-            width: 60px;
-            height: 60px;
-            border: 4px solid #000;
-            object-fit: cover;
-            image-rendering: pixelated;
-        }
-
-        .testimonial-info h4 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.8rem;
-            color: #DA291C;
-            margin-bottom: 5px;
-        }
-
-        .testimonial-info p {
-            font-family: 'VT323', monospace;
-            font-size: 1.1rem;
-            color: #666;
-        }
-
-        .testimonial-text {
-            font-family: 'VT323', monospace;
-            font-size: 1.2rem;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Leaderboard Section */
-        .leaderboard-section {
-            margin-top: 80px;
-            margin-bottom: 80px;
             background: white;
             border: 8px solid #000;
             box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
-            padding: 40px;
+            padding: 30px;
+            margin-bottom: 80px;
         }
 
-        .leaderboard-header {
+        .chat-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 6px dashed #000;
         }
 
-        .leaderboard-header h2 {
+        .chat-header h2 {
             font-family: 'Press Start 2P', monospace;
             font-size: 2rem;
             color: #DA291C;
             margin-bottom: 10px;
         }
 
-        .leaderboard-header p {
+        .chat-header p {
             font-family: 'VT323', monospace;
             font-size: 1.5rem;
             color: #000;
         }
 
-        .leaderboard-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .leaderboard-item {
-            display: grid;
-            grid-template-columns: 80px 1fr auto;
-            align-items: center;
-            gap: 20px;
-            padding: 20px;
-            background: #f9f9f9;
+        .chat-box {
+            background: #f5f5f5;
             border: 4px solid #000;
-            box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
-        .leaderboard-item.top-3 {
-            background: #FFBC0D;
-        }
-
-        .leaderboard-rank {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 1.5rem;
-            color: #DA291C;
-            text-align: center;
-        }
-
-        .leaderboard-name {
-            font-family: 'VT323', monospace;
-            font-size: 1.4rem;
-            color: #333;
-            font-weight: 700;
-        }
-
-        .leaderboard-score {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 1rem;
-            color: #DA291C;
-            padding: 10px 20px;
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 12px;
             background: white;
             border: 3px solid #000;
+            animation: slideIn 0.3s ease;
         }
 
-        /* Employee Wall */
-        .employee-wall {
-            margin-top: 80px;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .wall-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .wall-header h2 {
+        .chat-message-author {
             font-family: 'Press Start 2P', monospace;
-            font-size: 2rem;
+            font-size: 0.8rem;
             color: #DA291C;
-            margin-bottom: 10px;
-            text-shadow: 4px 4px 0 #000;
-        }
-
-        .wall-header p {
-            font-family: 'VT323', monospace;
-            color: #000;
-            font-size: 1.5rem;
-        }
-
-        .wall-search {
-            max-width: 500px;
-            margin: 0 auto 40px;
-        }
-
-        .wall-search input {
-            width: 100%;
-        }
-
-        .employee-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .employee-card {
-            background: white;
-            border: 6px solid #000;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
-            transition: transform 0.1s ease;
-            cursor: pointer;
-        }
-
-        .employee-card:hover {
-            transform: translate(3px, 3px);
-            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
-        }
-
-        .employee-card img {
-            width: 100px;
-            height: 100px;
-            border: 4px solid #000;
-            margin-bottom: 15px;
-            object-fit: cover;
-            image-rendering: pixelated;
-        }
-
-        .employee-card h4 {
-            font-family: 'Press Start 2P', monospace;
-            color: #DA291C;
-            font-size: 0.9rem;
             margin-bottom: 8px;
         }
 
-        .employee-card p {
-            color: #333;
-            font-size: 1.1rem;
+        .chat-message-text {
             font-family: 'VT323', monospace;
-            font-weight: 600;
+            font-size: 1.2rem;
+            color: #333;
+            word-wrap: break-word;
+        }
+
+        .chat-message-time {
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .chat-input-container input {
+            flex: 1;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 4px solid #000;
+            font-family: 'VT323', monospace;
+            background: #fff;
+        }
+
+        .chat-input-container button {
+            padding: 15px 30px;
+            font-size: 1rem;
         }
 
         /* Earnings Divider */
@@ -776,6 +665,178 @@
             line-height: 1.8;
             text-align: center;
         }
+        .mcnomics-section {
+            margin-top: 80px;
+            background: white;
+            border: 8px solid #000;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+
+        .mcnomics-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 6px dashed #000;
+        }
+
+        .mcnomics-header h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #DA291C;
+            margin-bottom: 10px;
+        }
+
+        .mcnomics-header p {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 600px;
+            border: 4px solid #000;
+        }
+
+        .chart-container iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .employee-wall {
+            margin-top: 80px;
+        }
+
+        .wall-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .wall-header h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #DA291C;
+            margin-bottom: 10px;
+        }
+
+        .wall-header p {
+            font-family: 'VT323', monospace;
+            color: #000;
+            font-size: 1.5rem;
+        }
+
+        .wall-search {
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        .wall-search input {
+            width: 100%;
+        }
+
+        .employee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .employee-card {
+            background: white;
+            border: 6px solid #000;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+            transition: transform 0.1s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .employee-card:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+        }
+
+        .employee-card:active {
+            transform: translate(6px, 6px);
+            box-shadow: none;
+        }
+
+        .employee-card-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 8px solid #000;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.5);
+            padding: 40px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .employee-card-popup.active {
+            display: block;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 999;
+        }
+
+        .popup-overlay.active {
+            display: block;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.5rem;
+            color: #DA291C;
+            cursor: pointer;
+            background: #FFBC0D;
+            border: 4px solid #000;
+            padding: 10px 15px;
+        }
+
+        .popup-close:hover {
+            background: #ffa500;
+        }
+
+        .employee-card img {
+            width: 100px;
+            height: 100px;
+            border: 4px solid #000;
+            margin-bottom: 15px;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+
+        .employee-card h4 {
+            font-family: 'Press Start 2P', monospace;
+            color: #DA291C;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .employee-card p {
+            color: #333;
+            font-size: 1.1rem;
+            font-family: 'VT323', monospace;
+            font-weight: 600;
+        }
 
         /* Footer */
         footer {
@@ -827,8 +888,9 @@
             margin-top: 25px;
             padding-top: 20px;
             border-top: 4px dashed rgba(255, 188, 13, 0.5);
-            font-size: 0.7rem;
+            font-size: 1.1rem;
             font-family: 'Press Start 2P', monospace;
+            font-size: 0.7rem;
         }
 
         @media (max-width: 768px) {
@@ -849,6 +911,10 @@
                 font-size: 1.8rem;
             }
 
+            .hero p {
+                font-size: 1.2rem;
+            }
+
             .app-header {
                 flex-direction: column;
             }
@@ -857,12 +923,50 @@
                 min-width: 100%;
             }
 
+            button {
+                font-size: 0.9rem;
+                padding: 15px 30px;
+            }
+
             .application {
                 padding: 30px 20px;
             }
 
-            .testimonial-card {
-                flex: 0 0 280px;
+            .user-info h2 {
+                font-size: 1rem;
+            }
+
+            .app-title h3 {
+                font-size: 1rem;
+            }
+
+            .form-section label {
+                font-size: 0.7rem;
+            }
+
+            .badge h3 {
+                font-size: 1.2rem;
+            }
+
+            .badge-header h4 {
+                font-size: 0.7rem;
+            }
+
+            .wall-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .employee-card h4 {
+                font-size: 0.7rem;
+            }
+
+            .footer-links a {
+                font-size: 0.6rem;
+                padding: 8px 15px;
+            }
+
+            .footer-bottom {
+                font-size: 0.5rem;
             }
         }
     </style>
@@ -877,7 +981,8 @@
                     <ul class="nav-menu">
                         <li><a href="#home">Home</a></li>
                         <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
-                        <li><a href="#apply">Apply</a></li>
+                        <li><a href="https://pump.fun" target="_blank">Pump.fun</a></li>
+                        <li><a href="#pfp">McDonald's PFP</a></li>
                     </ul>
                 </nav>
             </div>
@@ -888,22 +993,25 @@
     <div class="hero">
         <h1>McDONALDS.FUN</h1>
         <div class="hero-tagline" id="heroTagline">Loading...</div>
-        <div class="hero-subtitle">▼ START YOUR APPLICATION BELOW ▼</div>
+        <div class="hero-subtitle">â–¼ START YOUR APPLICATION BELOW â–¼</div>
     </div>
 
     <!-- Main Content -->
     <div class="container">
-        <div class="input-section" id="apply">
-            <div class="input-group">
-                <input 
-                    type="text" 
-                    id="username" 
-                    placeholder="Enter your name"
-                />
-                <button onclick="generateApplication()">
-                    Apply Now
-                </button>
-            </div>
+        <div class="input-section">
+            <form id="applicationForm">
+                <div class="input-group">
+                    <input 
+                        type="text" 
+                        id="username" 
+                        placeholder="Enter Twitter @ (e.g., elonmusk)"
+                        required
+                    />
+                    <button type="submit" id="submitBtn">
+                        Apply Now
+                    </button>
+                </div>
+            </form>
         </div>
 
         <div id="loading" class="loading" style="display: none;">
@@ -912,47 +1020,49 @@
         </div>
 
         <div id="results" class="results">
-            <div id="applicationCard" class="application">
-                <div class="app-title">
-                    <h3>Employment Application</h3>
-                </div>
-
-                <div class="app-header">
-                    <img id="appPfp" src="" alt="Profile" class="pfp" />
-                    <div class="user-info">
-                        <h2 id="appName">Name</h2>
-                        <p id="appBio">Bio</p>
+            <div class="application-wrapper">
+                <div id="applicationCard" class="application">
+                    <div class="app-title">
+                        <h3>Employment Application</h3>
                     </div>
-                </div>
 
-                <div class="form-section">
-                    <label>Position Applied For:</label>
-                    <div class="value" id="position">Crew Member</div>
-                </div>
+                    <div class="app-header">
+                        <img id="appPfp" src="" alt="Profile" class="pfp" />
+                        <div class="user-info">
+                            <h2 id="appName">Name</h2>
+                            <p id="appBio">Bio</p>
+                        </div>
+                    </div>
 
-                <div class="form-section">
-                    <label>Why do you want to work at McDonald's?</label>
-                    <div class="value" id="whyMcdonalds"></div>
-                </div>
+                    <div class="form-section">
+                        <label>Position Applied For:</label>
+                        <div class="value" id="position">Crew Member</div>
+                    </div>
 
-                <div class="form-section">
-                    <label>Previous Experience:</label>
-                    <div class="value" id="experience"></div>
-                </div>
+                    <div class="form-section">
+                        <label>Why do you want to work at McDonald's?</label>
+                        <div class="value" id="whyMcdonalds"></div>
+                    </div>
 
-                <div class="form-section">
-                    <label>Special Skills:</label>
-                    <div class="value" id="skills"></div>
-                </div>
+                    <div class="form-section">
+                        <label>Previous Experience:</label>
+                        <div class="value" id="experience"></div>
+                    </div>
 
-                <div class="form-section">
-                    <label>Available to Start:</label>
-                    <div class="value" id="startDate">Immediately</div>
-                </div>
+                    <div class="form-section">
+                        <label>Special Skills:</label>
+                        <div class="value" id="skills"></div>
+                    </div>
 
-                <div class="form-section">
-                    <label>Manager's Additional Comments:</label>
-                    <div class="value" id="comments"></div>
+                    <div class="form-section">
+                        <label>Available to Start:</label>
+                        <div class="value" id="startDate">Immediately</div>
+                    </div>
+
+                    <div class="form-section">
+                        <label>Manager's Additional Comments:</label>
+                        <div class="value" id="comments"></div>
+                    </div>
                 </div>
             </div>
 
@@ -988,6 +1098,16 @@
                     Share to Twitter
                 </button>
             </div>
+
+            <!-- Referral Box -->
+            <div class="referral-box" id="referralBox" style="display: none;">
+                <h3>YOUR REFERRAL LINK</h3>
+                <p style="color: #FFBC0D; font-family: 'VT323', monospace; font-size: 1.3rem;">Share this link to earn points!</p>
+                <div class="referral-link-container">
+                    <input type="text" id="referralLink" readonly />
+                    <button onclick="copyReferralLink()">COPY</button>
+                </div>
+            </div>
         </div>
 
         <!-- Testimonials Section -->
@@ -998,10 +1118,13 @@
             </div>
 
             <div class="testimonials-wrapper">
+                <div class="testimonial-nav prev" onclick="prevTestimonial()">â—„</div>
+                <div class="testimonial-nav next" onclick="nextTestimonial()">â–º</div>
                 <div class="testimonials-track" id="testimonialsTrack">
-                    <!-- Testimonials will be dynamically added -->
+                    <!-- Testimonials will be dynamically added here -->
                 </div>
             </div>
+            <div class="testimonial-dots" id="testimonialDots"></div>
         </div>
 
         <!-- Leaderboard Section -->
@@ -1012,7 +1135,7 @@
             </div>
 
             <div class="leaderboard-list" id="leaderboardList">
-                <!-- Leaderboard will be dynamically added -->
+                <p style="text-align: center; font-family: 'VT323', monospace; font-size: 1.3rem;">Loading leaderboard...</p>
             </div>
         </div>
 
@@ -1028,12 +1151,33 @@
                     type="text" 
                     id="searchEmployee" 
                     placeholder="Search employees by name..."
-                    oninput="searchEmployees()"
                 />
             </div>
 
             <div class="employee-grid" id="employeeGrid">
-                <!-- Employees will be dynamically added -->
+                <!-- Employees will be dynamically added here -->
+            </div>
+        </div>
+
+        <!-- Employee Chat -->
+        <div class="employee-chat">
+            <div class="chat-header">
+                <h2>EMPLOYEES CHAT</h2>
+                <p>Talk with fellow crew members!</p>
+            </div>
+
+            <div class="chat-box" id="chatBox">
+                <!-- Messages will appear here -->
+            </div>
+
+            <div class="chat-input-container">
+                <input 
+                    type="text" 
+                    id="chatInput" 
+                    placeholder="Type your message..."
+                    maxlength="200"
+                />
+                <button onclick="sendMessage()">SEND</button>
             </div>
         </div>
 
@@ -1051,8 +1195,8 @@
                     <div class="earnings-stat-value" id="employeesCount">0</div>
                 </div>
                 <div class="earnings-stat">
-                    <div class="earnings-stat-label">TRENCHES ESCAPED</div>
-                    <div class="earnings-stat-value" id="trenchesCount">0</div>
+                    <div class="earnings-stat-label">TRENCHOORS ESCAPED</div>
+                    <div class="earnings-stat-value" id="trenchoorsCount">0</div>
                 </div>
                 <div class="earnings-stat">
                     <div class="earnings-stat-label">ACTIVE CREW</div>
@@ -1070,26 +1214,74 @@
                 </p>
             </div>
         </div>
+
+        <!-- McNomics Section -->
+        <div class="mcnomics-section">
+            <div class="mcnomics-header">
+                <h2>McNOMICS</h2>
+                <p>Track the value of your employment!</p>
+            </div>
+
+            <div class="chart-container">
+                <iframe 
+                    src="https://birdeye.so/tv-widget/pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn?chain=solana&viewMode=pair&chartInterval=1&chartType=Candle&chartTimezone=Europe%2FLondon&chartLeftToolbar=show&theme=dark&cssCustomProperties=--tv-color-platform-background%3A%23ffc72c&cssCustomProperties=--tv-color-pane-background%3A%23ffc72c&chartOverrides=paneProperties.backgroundGradientStartColor%3Argba%2848%2C+48%2C+48%2C+1%29&chartOverrides=paneProperties.backgroundType%3Asolid" 
+                    frameborder="0" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay" onclick="closeEmployeePopup()"></div>
+    <div class="employee-card-popup" id="employeePopup">
+        <div class="popup-close" onclick="closeEmployeePopup()">âœ•</div>
+        <div id="popupContent"></div>
     </div>
 
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>🍔 LEAVING THE TRENCHES? JOIN THE CREW! 🍟</p>
+            <p>ðŸ” LEAVING THE TRENCHES? JOIN THE CREW! ðŸŸ</p>
             <div class="footer-links">
                 <a href="https://twitter.com" target="_blank">TWITTER</a>
-                <a href="#apply">APPLY NOW</a>
+                <a href="https://pump.fun" target="_blank">PUMP.FUN</a>
                 <a href="#home">HOME</a>
             </div>
             <div class="footer-bottom">
-                <p>Copyright © 2025 Mcdonalds.fun. All rights reserved.</p>
+                <p>Copyright Â© 2025 Mcdonalds.fun. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <script>
-        // Data storage
-        let employees = JSON.parse(localStorage.getItem('mcdonalds_employees') || '[]');
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBL_Abt3EEibFA-67ypLx_QwdIv9lY3xds",
+            authDomain: "polymarket-675a5.firebaseapp.com",
+            databaseURL: "https://polymarket-675a5-default-rtdb.firebaseio.com",
+            projectId: "polymarket-675a5",
+            storageBucket: "polymarket-675a5.firebasestorage.app",
+            messagingSenderId: "763899221788",
+            appId: "1:763899221788:web:3b6a2e86950e88c8b40cd9",
+            measurementId: "G-6QN30DZS8Z"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const messagesRef = database.ref('messages');
+
+        const form = document.getElementById('applicationForm');
+        const loading = document.getElementById('loading');
+        const results = document.getElementById('results');
+        const submitBtn = document.getElementById('submitBtn');
+        const employeeGrid = document.getElementById('employeeGrid');
+        const searchInput = document.getElementById('searchEmployee');
+        const chatBox = document.getElementById('chatBox');
+        const chatInput = document.getElementById('chatInput');
 
         // Rotating hero taglines
         const taglines = [
@@ -1113,11 +1305,15 @@
             }, 300);
         }
         
-        // Initialize taglines
+        // Initialize and rotate taglines
         document.getElementById('heroTagline').textContent = taglines[0];
+        document.getElementById('heroTagline').style.transition = 'opacity 0.3s';
         setInterval(rotateTagline, 4000);
 
-        // Testimonial quotes
+        // Store employees in localStorage
+        let employees = JSON.parse(localStorage.getItem('mcdonalds_employees') || '[]');
+
+        // Hardcoded testimonial quotes
         const testimonialQuotes = [
             "Best decision of my life. Went from watching charts 24/7 to actually making consistent money.",
             "Finally left the trenches. My mental health has never been better and I can actually afford rent.",
@@ -1131,24 +1327,227 @@
             "Left the degen life behind. Now I'm a professional burger architect."
         ];
 
-        // Sample positions
-        const positions = [
-            "Crew Member",
-            "Fry Cook",
-            "Drive-Thru Specialist",
-            "Cashier",
-            "Assistant Manager"
-        ];
+        // Display employees on load
+        displayEmployees();
 
-        // Initialize page
-        window.addEventListener('DOMContentLoaded', () => {
-            loadTestimonials();
-            loadLeaderboard();
-            displayEmployees();
-            updateEarnings();
+        // Load chat messages
+        loadChatMessages();
+
+        // Animate earnings numbers on page load
+        animateEarnings();
+
+        // Load leaderboard
+        loadLeaderboard();
+
+        // Load testimonials
+        loadTestimonials();
+
+        // Get referral code from URL or generate new one
+        const urlParams = new URLSearchParams(window.location.search);
+        const referredBy = urlParams.get('ref');
+
+        function loadTestimonials() {
+            const carousel = document.getElementById('testimonialsCarousel');
+            
+            // Get random employees or use last 10
+            const testimonialEmployees = employees.slice(-10).reverse();
+            
+            if (testimonialEmployees.length === 0) {
+                // Show placeholder if no employees yet
+                carousel.innerHTML = `
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3EðŸ”%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
+                            <div class="testimonial-info">
+                                <h4>BE THE FIRST</h4>
+                                <p>Future Employee</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-text">
+                            Apply now and be the first employee featured in our testimonials! Leave the trenches behind and join the crew.
+                        </div>
+                    </div>
+                `.repeat(3);
+                return;
+            }
+
+            // Create testimonials from actual employees
+            const testimonials = testimonialEmployees.map(emp => {
+                const randomQuote = testimonialQuotes[Math.floor(Math.random() * testimonialQuotes.length)];
+                return `
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="${emp.pfpUrl}" class="testimonial-img" alt="${emp.name}" />
+                            <div class="testimonial-info">
+                                <h4>${escapeHtml(emp.name.toUpperCase())}</h4>
+                                <p>${escapeHtml(emp.position)}</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-text">
+                            "${randomQuote}"
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Duplicate for infinite scroll effect
+            carousel.innerHTML = testimonials + testimonials;
+        }
+
+        function loadLeaderboard() {
+            fetch('/api/leaderboard')
+                .then(res => res.json())
+                .then(data => {
+                    displayLeaderboard(data.leaderboard || []);
+                })
+                .catch(err => {
+                    console.error('Failed to load leaderboard:', err);
+                    document.getElementById('leaderboardList').innerHTML = 
+                        '<p style="text-align: center; font-family: \'VT323\', monospace; font-size: 1.3rem;">No recruiters yet. Be the first!</p>';
+                });
+        }
+
+        function displayLeaderboard(leaderboard) {
+            const list = document.getElementById('leaderboardList');
+            if (leaderboard.length === 0) {
+                list.innerHTML = '<p style="text-align: center; font-family: \'VT323\', monospace; font-size: 1.3rem;">No recruiters yet. Be the first!</p>';
+                return;
+            }
+
+            list.innerHTML = leaderboard.map((user, index) => `
+                <div class="leaderboard-item ${index < 3 ? 'top-3' : ''}">
+                    <div class="leaderboard-rank">#${index + 1}</div>
+                    <div class="leaderboard-name">${escapeHtml(user.name)}</div>
+                    <div class="leaderboard-score">${user.referrals} REFS</div>
+                </div>
+            `).join('');
+        }
+
+        function closeEmployeePopup() {
+            document.getElementById('popupOverlay').classList.remove('active');
+            document.getElementById('employeePopup').classList.remove('active');
+        }
+
+        function showEmployeeApplication(employee) {
+            const popup = document.getElementById('employeePopup');
+            const overlay = document.getElementById('popupOverlay');
+            const content = document.getElementById('popupContent');
+
+            content.innerHTML = `
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="${employee.pfpUrl}" style="width: 120px; height: 120px; border: 6px solid #000; object-fit: cover; margin-bottom: 15px;" />
+                    <h2 style="font-family: 'Press Start 2P', monospace; color: #DA291C; font-size: 1.3rem; margin-bottom: 10px;">${escapeHtml(employee.name)}</h2>
+                    <p style="font-family: 'VT323', monospace; font-size: 1.3rem; color: #666;">${escapeHtml(employee.position)}</p>
+                    <p style="font-family: 'VT323', monospace; font-size: 1.1rem; color: #999; margin-top: 5px;">Employee #${employee.employeeId}</p>
+                </div>
+            `;
+
+            overlay.classList.add('active');
+            popup.classList.add('active');
+        }
+
+        function animateEarnings() {
+            const employeeCount = employees.length;
+            const applicationsCount = employeeCount + 32;
+            
+            // Set targets based on real data
+            const targets = {
+                applicationsCount: applicationsCount,
+                employeesCount: employeeCount,
+                trenchoorsCount: employeeCount,
+                activeCrewCount: employeeCount
+            };
+
+            Object.keys(targets).forEach(id => {
+                const element = document.getElementById(id);
+                const target = targets[id];
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        element.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        element.textContent = target;
+                    }
+                };
+
+                updateCounter();
+            });
+        }
+
+        // Update earnings when new employee is added
+        function updateEarnings() {
+            const employeeCount = employees.length;
+            document.getElementById('applicationsCount').textContent = employeeCount + 32;
+            document.getElementById('employeesCount').textContent = employeeCount;
+            document.getElementById('trenchoorsCount').textContent = employeeCount;
+            document.getElementById('activeCrewCount').textContent = employeeCount;
+        }
+
+        function loadChatMessages() {
+            messagesRef.limitToLast(50).on('child_added', (snapshot) => {
+                const message = snapshot.val();
+                displayChatMessage(message);
+            });
+        }
+
+        function displayChatMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message';
+            
+            const time = new Date(message.timestamp).toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="chat-message-author">${escapeHtml(message.author)}</div>
+                <div class="chat-message-text">${escapeHtml(message.text)}</div>
+                <div class="chat-message-time">${time}</div>
+            `;
+            
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            // Generate or retrieve employee ID
+            let employeeId = localStorage.getItem('mcdonalds_employee_id');
+            if (!employeeId) {
+                employeeId = 'employee-' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('mcdonalds_employee_id', employeeId);
+            }
+            
+            messagesRef.push({
+                author: employeeId,
+                text: text,
+                timestamp: Date.now()
+            });
+
+            chatInput.value = '';
+        }
+
+        // Allow Enter key to send message
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
         });
 
-        function createPlaceholderPfp(name) {
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function createPlaceholderPfp() {
             const canvas = document.createElement('canvas');
             canvas.width = 140;
             canvas.height = 140;
@@ -1165,75 +1564,39 @@
             ctx.fillStyle = '#FFBC0D';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            const initial = name ? name.charAt(0).toUpperCase() : 'M';
-            ctx.fillText(initial, 70, 70);
+            ctx.fillText('M', 70, 70);
             
             return canvas.toDataURL('image/png');
         }
 
-        function generateApplication() {
-            const nameInput = document.getElementById('username').value.trim();
-            if (!nameInput) {
-                alert('Please enter your name!');
-                return;
-            }
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.replace('@', '').trim();
+            if (!username) return;
 
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('results').classList.remove('active');
+            loading.style.display = 'block';
+            results.classList.remove('active');
+            submitBtn.disabled = true;
 
-            // Simulate API call delay
-            setTimeout(() => {
-                const employeeId = Math.floor(100000 + Math.random() * 900000);
-                const position = positions[Math.floor(Math.random() * positions.length)];
-                const pfpUrl = createPlaceholderPfp(nameInput);
+            try {
+                const response = await fetch('/api/generate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username })
+                });
 
-                const responses = {
-                    whyMcdonalds: [
-                        "I'm tired of losing money in the trenches and need a stable income.",
-                        "The consistency of a paycheck sounds way better than volatile altcoins.",
-                        "I want to flip burgers instead of watching my portfolio flip red.",
-                        "McDonald's has better returns than my trading portfolio.",
-                        "I need health insurance and a break from degen life."
-                    ],
-                    experience: [
-                        "Expert at handling high-pressure situations from watching my portfolio crash.",
-                        "Strong multitasking skills from monitoring 47 different crypto charts simultaneously.",
-                        "Proven ability to work night shifts thanks to overseas market trading.",
-                        "Experienced in customer service from explaining my losses to family members.",
-                        "Fast learner - had to be to keep up with all the rug pulls."
-                    ],
-                    skills: [
-                        "Diamond hands (perfect for carrying hot trays), chart reading (great for monitoring timers).",
-                        "Quick reflexes from panic selling, strong emotional resilience from bear markets.",
-                        "Excellent pattern recognition from technical analysis, works well under pressure.",
-                        "Expert at risk management (learned the hard way), exceptional crisis handling.",
-                        "Speed and accuracy from day trading, team coordination from Discord servers."
-                    ],
-                    comments: [
-                        "Applicant shows genuine desire to leave degen life behind. APPROVED!",
-                        "Finally someone who understands the value of stable employment. Welcome aboard!",
-                        "We appreciate the honesty. This is exactly the kind of reformed crypto bro we need.",
-                        "Perfect candidate. Has hit rock bottom and ready to rebuild. HIRED!",
-                        "Demonstrates real-world understanding of risk vs reward. Excellent addition to the team!"
-                    ]
-                };
+                if (!response.ok) throw new Error('Failed to generate application');
 
-                const data = {
-                    name: nameInput,
-                    bio: "Former crypto degen seeking stable employment and mental peace",
-                    position: position,
-                    whyMcdonalds: responses.whyMcdonalds[Math.floor(Math.random() * responses.whyMcdonalds.length)],
-                    experience: responses.experience[Math.floor(Math.random() * responses.experience.length)],
-                    skills: responses.skills[Math.floor(Math.random() * responses.skills.length)],
-                    startDate: "Immediately",
-                    comments: responses.comments[Math.floor(Math.random() * responses.comments.length)],
-                    employeeId: employeeId,
-                    pfpUrl: pfpUrl
-                };
-
-                // Fill in application
-                document.getElementById('appPfp').src = data.pfpUrl;
-                document.getElementById('badgePfp').src = data.pfpUrl;
+                const data = await response.json();
+                
+                const pfpUrl = data.profileImageUrl || createPlaceholderPfp();
+                
+                // Store username for chat
+                localStorage.setItem('mcdonalds_username', data.name);
+                
+                document.getElementById('appPfp').src = pfpUrl;
+                document.getElementById('badgePfp').src = pfpUrl;
                 document.getElementById('appName').textContent = data.name;
                 document.getElementById('appBio').textContent = data.bio;
                 document.getElementById('position').textContent = data.position;
@@ -1246,141 +1609,103 @@
                 document.getElementById('employeeId').textContent = `#${data.employeeId}`;
                 document.getElementById('since').textContent = new Date().getFullYear();
 
-                // Add to employees
+                // Add to employee wall
                 addEmployee({
                     name: data.name,
                     position: data.position,
                     employeeId: data.employeeId,
-                    pfpUrl: data.pfpUrl
+                    pfpUrl: pfpUrl
                 });
 
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('results').classList.add('active');
+                // Update earnings display
+                updateEarnings();
+
+                // Refresh testimonials
+                loadTestimonials();
+
+                loading.style.display = 'none';
+                results.classList.add('active');
+
+                // Generate and show referral link
+                // generateReferralLink(data.name, data.employeeId);
 
                 setTimeout(() => {
                     document.getElementById('badgeContainer').classList.add('show');
                 }, 500);
 
-                // Clear input
-                document.getElementById('username').value = '';
-            }, 2000);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Failed to generate application. Please try again.');
+                loading.style.display = 'none';
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+
+        async function generateReferralLink(name, employeeId) {
+            try {
+                const response = await fetch('/api/generate-referral', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, employeeId, referredBy })
+                });
+
+                const data = await response.json();
+                const referralLink = `${window.location.origin}?ref=${data.referralCode}`;
+                
+                document.getElementById('referralLink').value = referralLink;
+                document.getElementById('referralBox').style.display = 'block';
+                
+                // Store referral code
+                localStorage.setItem('mcdonalds_referral_code', data.referralCode);
+            } catch (error) {
+                console.error('Failed to generate referral link:', error);
+            }
+        }
+
+        function copyReferralLink() {
+            const input = document.getElementById('referralLink');
+            input.select();
+            document.execCommand('copy');
+            alert('Referral link copied! Share it to earn points!');
         }
 
         function addEmployee(employee) {
+            // Check if employee already exists
             const exists = employees.find(e => e.employeeId === employee.employeeId);
             if (!exists) {
                 employees.unshift(employee);
+                // Keep only last 50 employees
                 if (employees.length > 50) {
                     employees = employees.slice(0, 50);
                 }
                 localStorage.setItem('mcdonalds_employees', JSON.stringify(employees));
                 displayEmployees();
-                updateEarnings();
-                loadTestimonials();
             }
         }
 
         function displayEmployees(filter = '') {
-            const grid = document.getElementById('employeeGrid');
             const filtered = filter 
                 ? employees.filter(e => e.name.toLowerCase().includes(filter.toLowerCase()))
                 : employees;
 
+            employeeGrid.innerHTML = filtered.map(emp => `
+                <div class="employee-card" onclick='showEmployeeApplication(${JSON.stringify(emp).replace(/'/g, "&#39;")})'>
+                    <img src="${emp.pfpUrl}" alt="${emp.name}" />
+                    <h4>${emp.name}</h4>
+                    <p>${emp.position}</p>
+                    <p style="font-size: 0.75rem; color: #999;">#${emp.employeeId}</p>
+                </div>
+            `).join('');
+
             if (filtered.length === 0) {
-                grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #666; font-family: VT323, monospace; font-size: 1.3rem;">No employees yet. Be the first to apply!</p>';
-                return;
+                employeeGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #666;">No employees found. Be the first to apply!</p>';
             }
-
-            grid.innerHTML = filtered.map(emp => `
-                <div class="employee-card">
-                    <img src="${emp.pfpUrl}" alt="${escapeHtml(emp.name)}" />
-                    <h4>${escapeHtml(emp.name)}</h4>
-                    <p>${escapeHtml(emp.position)}</p>
-                    <p style="font-size: 0.9rem; color: #999;">#${emp.employeeId}</p>
-                </div>
-            `).join('');
         }
 
-        function searchEmployees() {
-            const searchValue = document.getElementById('searchEmployee').value;
-            displayEmployees(searchValue);
-        }
-
-        function loadTestimonials() {
-            const track = document.getElementById('testimonialsTrack');
-            
-            if (employees.length === 0) {
-                // Show placeholder testimonials
-                const placeholders = Array(6).fill(null).map((_, i) => `
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <img src="${createPlaceholderPfp('E')}" class="testimonial-img" alt="Employee" />
-                            <div class="testimonial-info">
-                                <h4>FUTURE EMPLOYEE</h4>
-                                <p>Crew Member</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-text">
-                            "${testimonialQuotes[i % testimonialQuotes.length]}"
-                        </div>
-                    </div>
-                `).join('');
-                
-                track.innerHTML = placeholders + placeholders;
-                return;
-            }
-
-            const testimonials = employees.slice(0, 10).map(emp => {
-                const quote = testimonialQuotes[Math.floor(Math.random() * testimonialQuotes.length)];
-                return `
-                    <div class="testimonial-card">
-                        <div class="testimonial-header">
-                            <img src="${emp.pfpUrl}" class="testimonial-img" alt="${escapeHtml(emp.name)}" />
-                            <div class="testimonial-info">
-                                <h4>${escapeHtml(emp.name.toUpperCase())}</h4>
-                                <p>${escapeHtml(emp.position)}</p>
-                            </div>
-                        </div>
-                        <div class="testimonial-text">
-                            "${quote}"
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            track.innerHTML = testimonials + testimonials;
-        }
-
-        function loadLeaderboard() {
-            const list = document.getElementById('leaderboardList');
-            
-            if (employees.length === 0) {
-                list.innerHTML = '<p style="text-align: center; font-family: VT323, monospace; font-size: 1.3rem; color: #666;">No recruiters yet. Be the first!</p>';
-                return;
-            }
-
-            // Create mock leaderboard from employees
-            const leaderboard = employees.slice(0, 10).map((emp, index) => ({
-                name: emp.name,
-                referrals: Math.floor(Math.random() * 50) + 1
-            })).sort((a, b) => b.referrals - a.referrals);
-
-            list.innerHTML = leaderboard.map((user, index) => `
-                <div class="leaderboard-item ${index < 3 ? 'top-3' : ''}">
-                    <div class="leaderboard-rank">#${index + 1}</div>
-                    <div class="leaderboard-name">${escapeHtml(user.name)}</div>
-                    <div class="leaderboard-score">${user.referrals} REFS</div>
-                </div>
-            `).join('');
-        }
-
-        function updateEarnings() {
-            const count = employees.length;
-            document.getElementById('applicationsCount').textContent = count + 32;
-            document.getElementById('employeesCount').textContent = count;
-            document.getElementById('trenchesCount').textContent = count;
-            document.getElementById('activeCrewCount').textContent = count;
-        }
+        searchInput.addEventListener('input', (e) => {
+            displayEmployees(e.target.value);
+        });
 
         async function downloadApplication() {
             const element = document.getElementById('applicationCard');
@@ -1410,14 +1735,8 @@
 
         function shareToTwitter() {
             const text = encodeURIComponent("I'm leaving the trenches and working for mcdonalds.fun - generate yours today!");
-            const url = encodeURIComponent(window.location.href);
+            const url = encodeURIComponent('https://mcdonalds.fun');
             window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
         }
     </script>
 </body>
