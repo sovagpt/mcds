@@ -103,7 +103,6 @@ If no profile image URL is found, respond with exactly "NONE".`
     }
 
     // Step 2.5: If URL extraction failed, crop PFP directly from screenshot
-    // Step 2.5: If URL extraction failed, crop PFP directly from screenshot
 if (!profileImageUrl && screenshotBase64) {
   console.log('URL extraction failed, cropping PFP from screenshot...');
   
@@ -111,13 +110,13 @@ if (!profileImageUrl && screenshotBase64) {
     const sharp = require('sharp');
     const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
     
-    // Corrected coordinates to actually capture the circular profile picture
+    // Move significantly up and left to capture the profile picture
     const croppedBuffer = await sharp(screenshotBuffer)
       .extract({ 
-        left: 147, 
-        top: 145, 
-        width: 115, 
-        height: 115 
+        left: 135, 
+        top: 138, 
+        width: 120, 
+        height: 120 
       })
       .resize(140, 140)
       .toBuffer();
@@ -262,6 +261,7 @@ IMPORTANT: Be funny through specificity and cleverness, not through listing buzz
     });
   }
 };
+
 
 
 
