@@ -90,22 +90,30 @@ If no profile image URL is found, respond with exactly "NONE".`
 
     // Step 2.5: If URL extraction failed, crop PFP directly from screenshot
     if (!profileImageUrl && screenshotBase64) {
-      console.log('URL extraction failed, cropping PFP from screenshot coordinates...');
-      
-      try {
-        // Twitter profile pictures are typically at these coordinates
-        // For a 1200x1600 screenshot, the PFP is around x:24, y:290, size:140x140
-        const cropCoords = { x: 24, y: 290, width: 140, height: 140 };
-        
-        // Create a data URL with cropped section - we'll send back the full screenshot
-        // and let the client know to use specific crop coordinates
-        profileImageUrl = 'CROP_FROM_SCREENSHOT';
-        console.log('Will crop from screenshot on client side');
-      } catch (e) {
-        console.log('Screenshot crop setup failed:', e.message);
-      }
-    }
-
+  console.log('URL extraction failed, cropping PFP from screenshot...');
+  
+  try {
+    const sharp = require('sharp');
+    const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
+    
+    // Twitter profile pictures are typically at these coordinates
+    // For a 1200x1600 screenshot
+    const croppedBuffer = await sharp(screenshotBuffer)
+      .extract({ 
+        left: 24, 
+        top: 290, 
+        width: 140, 
+        height: 140 
+      })
+      .toBuffer();
+    
+    const croppedBase64 = croppedBuffer.toString('base64');
+    profileImageUrl = `data:image/png;base64,${croppedBase64}`;
+    console.log('Successfully cropped PFP from screenshot');
+  } catch (e) {
+    console.log('Screenshot cropping failed:', e.message);
+  }
+}
     // Step 2.6: Direct image fetching fallback (from your old code)
     if (!profileImageUrl) {
       console.log('Trying direct image fetching...');
@@ -237,3 +245,4 @@ IMPORTANT: Be funny through specificity and cleverness, not through listing buzz
     });
   }
 };
+
