@@ -466,6 +466,7 @@
             border: 8px solid #000;
             box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
             padding: 30px;
+            margin-bottom: 80px;
         }
 
         .chat-header {
@@ -555,6 +556,47 @@
         .chat-input-container button {
             padding: 15px 30px;
             font-size: 1rem;
+        }
+
+        /* McNomics Section */
+        .mcnomics-section {
+            margin-top: 80px;
+            background: white;
+            border: 8px solid #000;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+
+        .mcnomics-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 6px dashed #000;
+        }
+
+        .mcnomics-header h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #DA291C;
+            margin-bottom: 10px;
+        }
+
+        .mcnomics-header p {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .chart-container {
+            width: 100%;
+            height: 600px;
+            border: 4px solid #000;
+        }
+
+        .chart-container iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
         .employee-wall {
             margin-top: 80px;
@@ -898,6 +940,26 @@
             </div>
         </div>
 
+        <!-- Employee Wall -->
+        <div class="employee-wall">
+            <div class="wall-header">
+                <h2>EMPLOYEE WALL</h2>
+                <p>Meet our newest crew members!</p>
+            </div>
+
+            <div class="wall-search">
+                <input 
+                    type="text" 
+                    id="searchEmployee" 
+                    placeholder="Search employees by name..."
+                />
+            </div>
+
+            <div class="employee-grid" id="employeeGrid">
+                <!-- Employees will be dynamically added here -->
+            </div>
+        </div>
+
         <!-- Employee Chat -->
         <div class="employee-chat">
             <div class="chat-header">
@@ -920,23 +982,19 @@
             </div>
         </div>
 
-        <!-- Employee Wall -->
-        <div class="employee-wall">
-            <div class="wall-header">
-                <h2>EMPLOYEE WALL</h2>
-                <p>Meet our newest crew members!</p>
+        <!-- McNomics Section -->
+        <div class="mcnomics-section">
+            <div class="mcnomics-header">
+                <h2>McNOMICS</h2>
+                <p>Track the value of your employment!</p>
             </div>
 
-            <div class="wall-search">
-                <input 
-                    type="text" 
-                    id="searchEmployee" 
-                    placeholder="Search employees by name..."
-                />
-            </div>
-
-            <div class="employee-grid" id="employeeGrid">
-                <!-- Employees will be dynamically added here -->
+            <div class="chart-container">
+                <iframe 
+                    src="https://birdeye.so/tv-widget/pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn?chain=solana&viewMode=pair&chartInterval=1&chartType=Candle&chartTimezone=Europe%2FLondon&chartLeftToolbar=show&theme=dark&cssCustomProperties=--tv-color-platform-background%3A%23ffc72c&cssCustomProperties=--tv-color-pane-background%3A%23ffc72c&chartOverrides=paneProperties.backgroundGradientStartColor%3Argba%2848%2C+48%2C+48%2C+1%29&chartOverrides=paneProperties.backgroundType%3Asolid" 
+                    frameborder="0" 
+                    allowfullscreen>
+                </iframe>
             </div>
         </div>
     </div>
@@ -959,17 +1017,17 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <script>
-        // Firebase Configuration - YOU NEED TO ADD YOUR FIREBASE CONFIG HERE
+        // Firebase Configuration
         const firebaseConfig = {
-  apiKey: "AIzaSyBL_Abt3EEibFA-67ypLx_QwdIv9lY3xds",
-  authDomain: "polymarket-675a5.firebaseapp.com",
-  databaseURL: "https://polymarket-675a5-default-rtdb.firebaseio.com",
-  projectId: "polymarket-675a5",
-  storageBucket: "polymarket-675a5.firebasestorage.app",
-  messagingSenderId: "763899221788",
-  appId: "1:763899221788:web:3b6a2e86950e88c8b40cd9",
-  measurementId: "G-6QN30DZS8Z"
-};
+            apiKey: "AIzaSyBL_Abt3EEibFA-67ypLx_QwdIv9lY3xds",
+            authDomain: "polymarket-675a5.firebaseapp.com",
+            databaseURL: "https://polymarket-675a5-default-rtdb.firebaseio.com",
+            projectId: "polymarket-675a5",
+            storageBucket: "polymarket-675a5.firebasestorage.app",
+            messagingSenderId: "763899221788",
+            appId: "1:763899221788:web:3b6a2e86950e88c8b40cd9",
+            measurementId: "G-6QN30DZS8Z"
+        };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -1024,10 +1082,15 @@
             const text = chatInput.value.trim();
             if (!text) return;
 
-            const author = localStorage.getItem('mcdonalds_username') || 'Anonymous Crew Member';
+            // Generate or retrieve employee ID
+            let employeeId = localStorage.getItem('mcdonalds_employee_id');
+            if (!employeeId) {
+                employeeId = 'employee-' + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem('mcdonalds_employee_id', employeeId);
+            }
             
             messagesRef.push({
-                author: author,
+                author: employeeId,
                 text: text,
                 timestamp: Date.now()
             });
