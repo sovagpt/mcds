@@ -115,8 +115,8 @@ if (!profileImageUrl && screenshotBase64) {
   .extract({ 
     left: 187, 
     top: 200, 
-    width: 100,  // Smaller = more zoom
-    height: 100  // Smaller = more zoom
+    width: 90,  // Smaller = more zoom
+    height: 90  // Smaller = more zoom
   })
   .resize(140, 140)  // This stretches the 100x100 to 140x140
   .toBuffer();
@@ -261,6 +261,7 @@ IMPORTANT: Be funny through specificity and cleverness, not through listing buzz
     });
   }
 };
+
 
 
 
