@@ -1117,45 +1117,8 @@
                 <p>Hear from our satisfied crew members!</p>
             </div>
 
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🍔%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
-                        <div class="testimonial-info">
-                            <h4>CRYPTOBRO47</h4>
-                            <p>Former Day Trader</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-text">
-                        "Best decision of my life. Went from watching charts 24/7 to actually making consistent money. The ice cream machine is more reliable than my old portfolio."
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🍟%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
-                        <div class="testimonial-info">
-                            <h4>NGMI_NANCY</h4>
-                            <p>Ex-NFT Flipper</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-text">
-                        "Finally left the trenches. Now I flip burgers instead of JPEGs. My mental health has never been better and I can actually afford rent."
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-header">
-                        <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🥤%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
-                        <div class="testimonial-info">
-                            <h4>DEGEN_DAVE</h4>
-                            <p>Recovering Aper</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-text">
-                        "I used to ape into rugs, now I clean them. McDonald's saved me. 10/10 would recommend to anyone still holding bags."
-                    </div>
-                </div>
+            <div class="testimonials-carousel" id="testimonialsCarousel">
+                <!-- Testimonials will be dynamically added here -->
             </div>
         </div>
 
@@ -1357,9 +1320,74 @@
         // Load leaderboard
         loadLeaderboard();
 
+        // Load testimonials
+        loadTestimonials();
+
         // Get referral code from URL or generate new one
         const urlParams = new URLSearchParams(window.location.search);
         const referredBy = urlParams.get('ref');
+
+        // Hardcoded testimonial quotes
+        const testimonialQuotes = [
+            "Best decision of my life. Went from watching charts 24/7 to actually making consistent money.",
+            "Finally left the trenches. My mental health has never been better and I can actually afford rent.",
+            "I used to ape into rugs, now I clean them. McDonald's saved me. 10/10 would recommend.",
+            "The ice cream machine is more reliable than my old portfolio. Should've joined sooner.",
+            "Went from diamond hands to holding a spatula. Best career change I ever made.",
+            "From trading shitcoins to serving Big Macs. At least the job security is real.",
+            "No more rug pulls, just french fries. Living the dream tbh.",
+            "I make more flipping burgers than I ever made flipping NFTs. No cap.",
+            "The only thing pumping now is the McFlurry machine. And I'm okay with that.",
+            "Left the degen life behind. Now I'm a professional burger architect."
+        ];
+
+        function loadTestimonials() {
+            const carousel = document.getElementById('testimonialsCarousel');
+            
+            // Get random employees or use last 10
+            const testimonialEmployees = employees.slice(-10).reverse();
+            
+            if (testimonialEmployees.length === 0) {
+                // Show placeholder if no employees yet
+                carousel.innerHTML = `
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🍔%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
+                            <div class="testimonial-info">
+                                <h4>BE THE FIRST</h4>
+                                <p>Future Employee</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-text">
+                            Apply now and be the first employee featured in our testimonials! Leave the trenches behind and join the crew.
+                        </div>
+                    </div>
+                `.repeat(3);
+                return;
+            }
+
+            // Create testimonials from actual employees
+            const testimonials = testimonialEmployees.map(emp => {
+                const randomQuote = testimonialQuotes[Math.floor(Math.random() * testimonialQuotes.length)];
+                return `
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <img src="${emp.pfpUrl}" class="testimonial-img" alt="${emp.name}" />
+                            <div class="testimonial-info">
+                                <h4>${escapeHtml(emp.name.toUpperCase())}</h4>
+                                <p>${escapeHtml(emp.position)}</p>
+                            </div>
+                        </div>
+                        <div class="testimonial-text">
+                            "${randomQuote}"
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Duplicate for infinite scroll effect
+            carousel.innerHTML = testimonials + testimonials;
+        }
 
         function loadLeaderboard() {
             fetch('/api/leaderboard')
@@ -1586,6 +1614,9 @@
 
                 // Update earnings display
                 updateEarnings();
+
+                // Refresh testimonials
+                loadTestimonials();
 
                 loading.style.display = 'none';
                 results.classList.add('active');
