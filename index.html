@@ -1896,6 +1896,7 @@
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         const messagesRef = database.ref('messages');
+        const employeesRef = database.ref('employees');
 
         const form = document.getElementById('applicationForm');
         const loading = document.getElementById('loading');
@@ -1930,8 +1931,19 @@
         document.getElementById('heroTagline').textContent = taglines[0];
         setInterval(rotateTagline, 4000);
 
-        let employees = JSON.parse(localStorage.getItem('mcdonalds_employees') || '[]');
+        let employees = [];
 
+// Load employees from Firebase
+employeesRef.limitToLast(50).on('child_added', (snapshot) => {
+    const employee = snapshot.val();
+    employee.firebaseKey = snapshot.key;
+    if (!employees.find(e => e.employeeId === employee.employeeId)) {
+        employees.push(employee);
+        displayEmployees();
+        updateEarnings();
+        loadTestimonials();
+    }
+});
         const testimonialQuotes = [
             "Best decision of my life. Went from watching charts 24/7 to actually making consistent money.",
             "Finally left the trenches. My mental health has never been better and I can actually afford rent.",
@@ -2261,16 +2273,12 @@
         }
 
         function addEmployee(employee) {
-            const exists = employees.find(e => e.employeeId === employee.employeeId);
-            if (!exists) {
-                employees.unshift(employee);
-                if (employees.length > 50) {
-                    employees = employees.slice(0, 50);
-                }
-                localStorage.setItem('mcdonalds_employees', JSON.stringify(employees));
-                displayEmployees();
-            }
-        }
+    const exists = employees.find(e => e.employeeId === employee.employeeId);
+    if (!exists) {
+        employeesRef.push(employee);
+        // The Firebase listener will automatically update the display
+    }
+}
 
         function displayEmployees(filter = '') {
             const filtered = filter 
