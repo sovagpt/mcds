@@ -136,24 +136,37 @@
             font-size: 4rem;
             color: #FFBC0D;
             text-shadow: 4px 4px 0 #000;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             position: relative;
             z-index: 1;
             animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .hero p {
+        .hero-tagline {
             color: #FFBC0D;
             font-size: 1.8rem;
             font-family: 'VT323', monospace;
             text-shadow: 3px 3px 0 #000;
             position: relative;
             z-index: 1;
+            margin-bottom: 10px;
+            min-height: 60px;
+        }
+
+        .hero-subtitle {
+            color: #fff;
+            font-size: 1.3rem;
+            font-family: 'Press Start 2P', monospace;
+            text-shadow: 2px 2px 0 #000;
+            position: relative;
+            z-index: 1;
+            margin-top: 20px;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50%, 100% { opacity: 1; }
+            25%, 75% { opacity: 0.5; }
         }
 
         /* Main Content */
@@ -737,6 +750,7 @@
             box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
             transition: transform 0.1s ease;
             cursor: pointer;
+            position: relative;
         }
 
         .employee-card:hover {
@@ -747,6 +761,58 @@
         .employee-card:active {
             transform: translate(6px, 6px);
             box-shadow: none;
+        }
+
+        .employee-card-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 8px solid #000;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.5);
+            padding: 40px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .employee-card-popup.active {
+            display: block;
+        }
+
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 999;
+        }
+
+        .popup-overlay.active {
+            display: block;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.5rem;
+            color: #DA291C;
+            cursor: pointer;
+            background: #FFBC0D;
+            border: 4px solid #000;
+            padding: 10px 15px;
+        }
+
+        .popup-close:hover {
+            background: #ffa500;
         }
 
         .employee-card img {
@@ -926,7 +992,8 @@
     <!-- Hero Section -->
     <div class="hero">
         <h1>McDONALDS.FUN</h1>
-        <p>Transform your Twitter profile into a McDonald's application!</p>
+        <div class="hero-tagline" id="heroTagline">Loading...</div>
+        <div class="hero-subtitle">▼ START YOUR APPLICATION BELOW ▼</div>
     </div>
 
     <!-- Main Content -->
@@ -1031,6 +1098,77 @@
                     Share to Twitter
                 </button>
             </div>
+
+            <!-- Referral Box -->
+            <div class="referral-box" id="referralBox" style="display: none;">
+                <h3>YOUR REFERRAL LINK</h3>
+                <p style="color: #FFBC0D; font-family: 'VT323', monospace; font-size: 1.3rem;">Share this link to earn points!</p>
+                <div class="referral-link-container">
+                    <input type="text" id="referralLink" readonly />
+                    <button onclick="copyReferralLink()">COPY</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <div class="testimonials-section">
+            <div class="testimonials-header">
+                <h2>EMPLOYEE REVIEWS</h2>
+                <p>Hear from our satisfied crew members!</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🍔%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
+                        <div class="testimonial-info">
+                            <h4>CRYPTOBRO47</h4>
+                            <p>Former Day Trader</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "Best decision of my life. Went from watching charts 24/7 to actually making consistent money. The ice cream machine is more reliable than my old portfolio."
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🍟%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
+                        <div class="testimonial-info">
+                            <h4>NGMI_NANCY</h4>
+                            <p>Ex-NFT Flipper</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "Finally left the trenches. Now I flip burgers instead of JPEGs. My mental health has never been better and I can actually afford rent."
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🥤%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
+                        <div class="testimonial-info">
+                            <h4>DEGEN_DAVE</h4>
+                            <p>Recovering Aper</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-text">
+                        "I used to ape into rugs, now I clean them. McDonald's saved me. 10/10 would recommend to anyone still holding bags."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leaderboard Section -->
+        <div class="leaderboard-section">
+            <div class="leaderboard-header">
+                <h2>EMPLOYEE OF THE MONTH</h2>
+                <p>Top recruiters earn legendary status!</p>
+            </div>
+
+            <div class="leaderboard-list" id="leaderboardList">
+                <p style="text-align: center; font-family: 'VT323', monospace; font-size: 1.3rem;">Loading leaderboard...</p>
+            </div>
         </div>
 
         <!-- Employee Wall -->
@@ -1126,6 +1264,13 @@
         </div>
     </div>
 
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay" onclick="closeEmployeePopup()"></div>
+    <div class="employee-card-popup" id="employeePopup">
+        <div class="popup-close" onclick="closeEmployeePopup()">✕</div>
+        <div id="popupContent"></div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-content">
@@ -1170,6 +1315,33 @@
         const chatBox = document.getElementById('chatBox');
         const chatInput = document.getElementById('chatInput');
 
+        // Rotating hero taglines
+        const taglines = [
+            "From trenches to tendies, one burger at a time!",
+            "We're not just hiring, we're saving lives!",
+            "Your bags are heavy, but our trays are heavier!",
+            "Diamond hands? Try holding a McFlurry machine!",
+            "Chart watching skills transfer to fry timers!",
+            "Leave the volatility, embrace the stability!"
+        ];
+        
+        let taglineIndex = 0;
+        
+        function rotateTagline() {
+            const taglineEl = document.getElementById('heroTagline');
+            taglineEl.style.opacity = '0';
+            setTimeout(() => {
+                taglineEl.textContent = taglines[taglineIndex];
+                taglineEl.style.opacity = '1';
+                taglineIndex = (taglineIndex + 1) % taglines.length;
+            }, 300);
+        }
+        
+        // Initialize and rotate taglines
+        document.getElementById('heroTagline').textContent = taglines[0];
+        document.getElementById('heroTagline').style.transition = 'opacity 0.3s';
+        setInterval(rotateTagline, 4000);
+
         // Store employees in localStorage
         let employees = JSON.parse(localStorage.getItem('mcdonalds_employees') || '[]');
 
@@ -1181,6 +1353,65 @@
 
         // Animate earnings numbers on page load
         animateEarnings();
+
+        // Load leaderboard
+        loadLeaderboard();
+
+        // Get referral code from URL or generate new one
+        const urlParams = new URLSearchParams(window.location.search);
+        const referredBy = urlParams.get('ref');
+
+        function loadLeaderboard() {
+            fetch('/api/leaderboard')
+                .then(res => res.json())
+                .then(data => {
+                    displayLeaderboard(data.leaderboard || []);
+                })
+                .catch(err => {
+                    console.error('Failed to load leaderboard:', err);
+                    document.getElementById('leaderboardList').innerHTML = 
+                        '<p style="text-align: center; font-family: \'VT323\', monospace; font-size: 1.3rem;">No recruiters yet. Be the first!</p>';
+                });
+        }
+
+        function displayLeaderboard(leaderboard) {
+            const list = document.getElementById('leaderboardList');
+            if (leaderboard.length === 0) {
+                list.innerHTML = '<p style="text-align: center; font-family: \'VT323\', monospace; font-size: 1.3rem;">No recruiters yet. Be the first!</p>';
+                return;
+            }
+
+            list.innerHTML = leaderboard.map((user, index) => `
+                <div class="leaderboard-item ${index < 3 ? 'top-3' : ''}">
+                    <div class="leaderboard-rank">#${index + 1}</div>
+                    <div class="leaderboard-name">${escapeHtml(user.name)}</div>
+                    <div class="leaderboard-score">${user.referrals} REFS</div>
+                </div>
+            `).join('');
+        }
+
+        function closeEmployeePopup() {
+            document.getElementById('popupOverlay').classList.remove('active');
+            document.getElementById('employeePopup').classList.remove('active');
+        }
+
+        function showEmployeeApplication(employee) {
+            const popup = document.getElementById('employeePopup');
+            const overlay = document.getElementById('popupOverlay');
+            const content = document.getElementById('popupContent');
+
+            content.innerHTML = `
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="${employee.pfpUrl}" style="width: 120px; height: 120px; border: 6px solid #000; object-fit: cover; margin-bottom: 15px;" />
+                    <h2 style="font-family: 'Press Start 2P', monospace; color: #DA291C; font-size: 1.3rem; margin-bottom: 10px;">${escapeHtml(employee.name)}</h2>
+                    <p style="font-family: 'VT323', monospace; font-size: 1.3rem; color: #666;">${escapeHtml(employee.position)}</p>
+                    <p style="font-family: 'VT323', monospace; font-size: 1.1rem; color: #999; margin-top: 5px;">Employee #${employee.employeeId}</p>
+                </div>
+            `;
+
+            overlay.classList.add('active');
+            popup.classList.add('active');
+        }
 
         function animateEarnings() {
             const employeeCount = employees.length;
@@ -1359,6 +1590,9 @@
                 loading.style.display = 'none';
                 results.classList.add('active');
 
+                // Generate and show referral link
+                generateReferralLink(data.name, data.employeeId);
+
                 setTimeout(() => {
                     document.getElementById('badgeContainer').classList.add('show');
                 }, 500);
@@ -1371,6 +1605,34 @@
                 submitBtn.disabled = false;
             }
         });
+
+        async function generateReferralLink(name, employeeId) {
+            try {
+                const response = await fetch('/api/generate-referral', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, employeeId, referredBy })
+                });
+
+                const data = await response.json();
+                const referralLink = `${window.location.origin}?ref=${data.referralCode}`;
+                
+                document.getElementById('referralLink').value = referralLink;
+                document.getElementById('referralBox').style.display = 'block';
+                
+                // Store referral code
+                localStorage.setItem('mcdonalds_referral_code', data.referralCode);
+            } catch (error) {
+                console.error('Failed to generate referral link:', error);
+            }
+        }
+
+        function copyReferralLink() {
+            const input = document.getElementById('referralLink');
+            input.select();
+            document.execCommand('copy');
+            alert('Referral link copied! Share it to earn points!');
+        }
 
         function addEmployee(employee) {
             // Check if employee already exists
@@ -1392,7 +1654,7 @@
                 : employees;
 
             employeeGrid.innerHTML = filtered.map(emp => `
-                <div class="employee-card">
+                <div class="employee-card" onclick='showEmployeeApplication(${JSON.stringify(emp).replace(/'/g, "&#39;")})'>
                     <img src="${emp.pfpUrl}" alt="${emp.name}" />
                     <h4>${emp.name}</h4>
                     <p>${emp.position}</p>
