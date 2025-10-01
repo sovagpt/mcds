@@ -112,14 +112,14 @@ if (!profileImageUrl && screenshotBase64) {
     
     // Move significantly up and left to capture the profile picture
     const croppedBuffer = await sharp(screenshotBuffer)
-      .extract({ 
-        left: 180, 
-        top: 190, 
-        width: 120, 
-        height: 120 
-      })
-      .resize(140, 140)
-      .toBuffer();
+  .extract({ 
+    left: 180, 
+    top: 190, 
+    width: 100,  // Smaller = more zoom
+    height: 100  // Smaller = more zoom
+  })
+  .resize(140, 140)  // This stretches the 100x100 to 140x140
+  .toBuffer();
     
     const croppedBase64 = croppedBuffer.toString('base64');
     profileImageUrl = `data:image/png;base64,${croppedBase64}`;
@@ -261,6 +261,7 @@ IMPORTANT: Be funny through specificity and cleverness, not through listing buzz
     });
   }
 };
+
 
 
 
