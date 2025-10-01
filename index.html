@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>McDonald's Employment Center</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <audio id="bgMusic" loop>
+    <source src="https://github.com/sovagpt/mcds/raw/main/beep.mp3" type="audio/mpeg">
+</audio>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
         
@@ -2581,6 +2584,28 @@ async function downloadPfp() {
         URL.revokeObjectURL(url);
     });
 }
+
+        // Background music handler
+let musicStarted = false;
+const bgMusic = document.getElementById('bgMusic');
+
+function startMusic() {
+    if (!musicStarted) {
+        bgMusic.play().catch(err => {
+            console.log('Audio play failed:', err);
+        });
+        musicStarted = true;
+        // Remove listeners after music starts
+        document.removeEventListener('click', startMusic);
+        document.removeEventListener('touchstart', startMusic);
+        document.removeEventListener('keydown', startMusic);
+    }
+}
+
+// Add listeners for first user interaction
+document.addEventListener('click', startMusic);
+document.addEventListener('touchstart', startMusic);
+document.addEventListener('keydown', startMusic);
     </script>
 </body>
 </html>
