@@ -104,31 +104,32 @@ If no profile image URL is found, respond with exactly "NONE".`
 
     // Step 2.5: If URL extraction failed, crop PFP directly from screenshot
     if (!profileImageUrl && screenshotBase64) {
-      console.log('URL extraction failed, cropping PFP from screenshot...');
-      
-      try {
-        const sharp = require('sharp');
-        const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
-        
-        // Hardcoded coordinates for Twitter profile picture (1200x1600 screenshot)
-        const croppedBuffer = await sharp(screenshotBuffer)
-          .extract({ 
-            left: 132, 
-            top: 138, 
-            width: 112, 
-            height: 112 
-          })
-          .resize(140, 140) // Standardize size
-          .toBuffer();
-        
-        const croppedBase64 = croppedBuffer.toString('base64');
-        profileImageUrl = `data:image/png;base64,${croppedBase64}`;
-        console.log('Successfully cropped PFP from screenshot');
-      } catch (e) {
-        console.log('Screenshot cropping failed:', e.message);
-        console.error(e);
-      }
-    }
+  console.log('URL extraction failed, cropping PFP from screenshot...');
+  
+  try {
+    const sharp = require('sharp');
+    const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
+    
+    // Updated coordinates for Twitter profile picture (1200x1600 screenshot)
+    // Profile pic is typically lower, overlapping the banner
+    const croppedBuffer = await sharp(screenshotBuffer)
+      .extract({ 
+        left: 132, 
+        top: 170, 
+        width: 133, 
+        height: 133 
+      })
+      .resize(140, 140) // Standardize size
+      .toBuffer();
+    
+    const croppedBase64 = croppedBuffer.toString('base64');
+    profileImageUrl = `data:image/png;base64,${croppedBase64}`;
+    console.log('Successfully cropped PFP from screenshot');
+  } catch (e) {
+    console.log('Screenshot cropping failed:', e.message);
+    console.error(e);
+  }
+}
 
     // Step 2.6: Direct image fetching fallback (from your old code)
     if (!profileImageUrl) {
@@ -261,3 +262,4 @@ IMPORTANT: Be funny through specificity and cleverness, not through listing buzz
     });
   }
 };
+
