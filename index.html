@@ -106,70 +106,116 @@
         }
 
         .hero {
-            background: #DA291C;
-            padding: 80px 20px;
-            text-align: center;
-            border-bottom: 8px solid #000;
-            position: relative;
-            overflow: hidden;
-        }
+    background: #000;
+    padding: 60px 20px;
+    text-align: left;
+    border-bottom: 8px solid #FFBC0D;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0,0,0,0.1) 2px,
-                rgba(0,0,0,0.1) 4px
-            );
-            pointer-events: none;
-        }
+/* Terminal scanlines */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 188, 13, 0.03) 2px,
+        rgba(255, 188, 13, 0.03) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+}
 
-        .hero h1 {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 4rem;
-            color: #FFBC0D;
-            text-shadow: 4px 4px 0 #000;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            animation: float 3s ease-in-out infinite;
-        }
+/* Terminal window header */
+.hero::after {
+    content: '● ● ● McDONALDS EMPLOYMENT TERMINAL v2.5';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #DA291C;
+    color: #FFBC0D;
+    padding: 12px 20px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    border-bottom: 4px solid #FFBC0D;
+    z-index: 2;
+}
 
-        .hero-tagline {
-            color: #FFBC0D;
-            font-size: 1.8rem;
-            font-family: 'VT323', monospace;
-            text-shadow: 3px 3px 0 #000;
-            position: relative;
-            z-index: 1;
-            margin-bottom: 10px;
-            min-height: 60px;
-            transition: opacity 0.3s;
-        }
+.hero h1 {
+    font-family: 'Courier New', monospace;
+    font-size: 2.5rem;
+    color: #FFBC0D;
+    text-shadow: 0 0 10px rgba(255, 188, 13, 0.8);
+    margin-bottom: 20px;
+    margin-top: 60px;
+    position: relative;
+    z-index: 2;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
 
-        .hero-subtitle {
-            color: #fff;
-            font-size: 1.3rem;
-            font-family: 'Press Start 2P', monospace;
-            text-shadow: 2px 2px 0 #000;
-            position: relative;
-            z-index: 1;
-            margin-top: 20px;
-            animation: blink 2s infinite;
-        }
+.hero h1::before {
+    content: '> ';
+    color: #DA291C;
+    animation: blink 1s infinite;
+}
 
-        @keyframes blink {
-            0%, 50%, 100% { opacity: 1; }
-            25%, 75% { opacity: 0.5; }
-        }
+.hero-tagline {
+    color: #fff;
+    font-size: 1.4rem;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    position: relative;
+    z-index: 2;
+    margin-bottom: 15px;
+    min-height: auto;
+    transition: opacity 0.3s;
+    text-align: left;
+    padding-left: 30px;
+}
 
+.hero-tagline::before {
+    content: '$ ';
+    color: #FFBC0D;
+    position: absolute;
+    left: 0;
+}
+
+.hero-subtitle {
+    color: #DA291C;
+    font-size: 1rem;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px rgba(218, 41, 28, 0.8);
+    position: relative;
+    z-index: 2;
+    margin-top: 30px;
+    animation: blink 2s infinite;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 30px;
+}
+
+.hero-subtitle::before {
+    content: '[!] ';
+    color: #FFBC0D;
+    position: absolute;
+    left: 0;
+    animation: none;
+}
+
+@keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+}
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -1574,10 +1620,10 @@
     </header>
 
     <div class="hero">
-        <h1>McDONALDS.FUN</h1>
-        <div class="hero-tagline" id="heroTagline">Loading...</div>
-        <div class="hero-subtitle">▼ ENTER TWITTER/X @ TO START YOUR APPLICATION BELOW ▼</div>
-    </div>
+    <h1>McDONALDS.FUN</h1>
+    <div class="hero-tagline" id="heroTagline">INITIALIZING EMPLOYMENT SYSTEM...</div>
+    <div class="hero-subtitle">PRESS ANY KEY TO BEGIN APPLICATION</div>
+</div>
 
     <div class="container">
         <div class="input-section">
@@ -1907,25 +1953,46 @@
         const chatInput = document.getElementById('chatInput');
 
         const taglines = [
-            "From trenches to success, one burger at a time!",
-            "We're not just hiring, we're saving lives!",
-            "Your bags are heavy, but our trays are heavier!",
-            "Diamond hands? Try holding a McFlurry machine!",
-            "Chart watching skills transfer to fry timers!",
-            "Leave the volatility, embrace the stability!"
-        ];
-        
-        let taglineIndex = 0;
-        
-        function rotateTagline() {
-            const taglineEl = document.getElementById('heroTagline');
-            taglineEl.style.opacity = '0';
-            setTimeout(() => {
-                taglineEl.textContent = taglines[taglineIndex];
-                taglineEl.style.opacity = '1';
-                taglineIndex = (taglineIndex + 1) % taglines.length;
-            }, 300);
+    "SCANNING FOR QUALIFIED CANDIDATES...",
+    "PROCESSING EMPLOYMENT APPLICATIONS...",
+    "ANALYZING DEGEN-TO-EMPLOYEE CONVERSION RATE...",
+    "STABLE INCOME MODULE: ACTIVATED",
+    "TRENCHES ESCAPE PROTOCOL: ENABLED",
+    "MCFLURRY MACHINE STATUS: OPERATIONAL"
+];
+
+let taglineIndex = 0;
+
+function rotateTagline() {
+    const taglineEl = document.getElementById('heroTagline');
+    taglineEl.style.opacity = '0';
+    setTimeout(() => {
+        taglineEl.textContent = taglines[taglineIndex];
+        taglineEl.style.opacity = '1';
+        taglineIndex = (taglineIndex + 1) % taglines.length;
+    }, 300);
+}
+
+document.getElementById('heroTagline').textContent = taglines[0];
+setInterval(rotateTagline, 4000);
+
+// Terminal typing effect for hero
+const heroTitle = document.querySelector('.hero h1');
+if (heroTitle) {
+    const originalText = heroTitle.textContent;
+    heroTitle.textContent = '';
+    let charIndex = 0;
+    
+    function typeWriter() {
+        if (charIndex < originalText.length) {
+            heroTitle.textContent += originalText.charAt(charIndex);
+            charIndex++;
+            setTimeout(typeWriter, 100);
         }
+    }
+    
+    setTimeout(typeWriter, 500);
+}
         
         document.getElementById('heroTagline').textContent = taglines[0];
         setInterval(rotateTagline, 4000);
