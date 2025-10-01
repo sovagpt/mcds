@@ -558,7 +558,100 @@
             font-size: 1rem;
         }
 
-        /* McNomics Section */
+        /* Earnings Divider */
+        .earnings-divider {
+            margin: 80px 0;
+            padding: 60px 40px;
+        }
+
+        .earnings-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #DA291C;
+            margin-bottom: 40px;
+            text-align: center;
+            text-shadow: 4px 4px 0 #000;
+        }
+
+        .earnings-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .earnings-stat {
+            background: #DA291C;
+            border: 8px solid #000;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .earnings-stat::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 4px dashed #FFBC0D;
+            pointer-events: none;
+        }
+
+        .earnings-stat-label {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.75rem;
+            color: #FFBC0D;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .earnings-stat-value {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 3rem;
+            color: #fff;
+            font-weight: bold;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+        }
+
+        .earnings-message {
+            background: #DA291C;
+            border: 8px solid #000;
+            padding: 40px;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .earnings-message::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 4px dashed #FFBC0D;
+            pointer-events: none;
+        }
+
+        .earnings-message h3 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.5rem;
+            color: #FFBC0D;
+            margin-bottom: 25px;
+            text-align: center;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+        }
+
+        .earnings-message p {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: #fff;
+            line-height: 1.8;
+            text-align: center;
+        }
         .mcnomics-section {
             margin-top: 80px;
             background: white;
@@ -982,6 +1075,40 @@
             </div>
         </div>
 
+        <!-- Earnings Divider -->
+        <div class="earnings-divider">
+            <div class="earnings-title">TODAY'S EARNINGS REPORT</div>
+            
+            <div class="earnings-stats">
+                <div class="earnings-stat">
+                    <div class="earnings-stat-label">APPLICATIONS</div>
+                    <div class="earnings-stat-value" id="applicationsCount">0</div>
+                </div>
+                <div class="earnings-stat">
+                    <div class="earnings-stat-label">EMPLOYEES HIRED</div>
+                    <div class="earnings-stat-value" id="employeesCount">0</div>
+                </div>
+                <div class="earnings-stat">
+                    <div class="earnings-stat-label">TRENCHOORS ESCAPED</div>
+                    <div class="earnings-stat-value" id="trenchoorsCount">0</div>
+                </div>
+                <div class="earnings-stat">
+                    <div class="earnings-stat-label">ACTIVE CREW</div>
+                    <div class="earnings-stat-value" id="activeCrewCount">0</div>
+                </div>
+            </div>
+
+            <div class="earnings-message">
+                <h3>THE TRENCHES ARE DEAD</h3>
+                <p>
+                    Stop staring at red candles and start flipping burgers. McDonald's is hiring TODAY and we're the greatest employer in the game. 
+                    Your degen skills? We want them. Chart reading? Perfect for monitoring fry timers. Diamond hands? Great for holding hot trays. 
+                    Late night trading sessions? We've got the night shift covered. Join the crew and put your hard-earned skills to work where they actually matter. 
+                    Benefits include: stable income, free meals, and no more watching your portfolio bleed. Apply now and leave the trenches behind forever.
+                </p>
+            </div>
+        </div>
+
         <!-- McNomics Section -->
         <div class="mcnomics-section">
             <div class="mcnomics-header">
@@ -1051,6 +1178,51 @@
 
         // Load chat messages
         loadChatMessages();
+
+        // Animate earnings numbers on page load
+        animateEarnings();
+
+        function animateEarnings() {
+            const employeeCount = employees.length;
+            const applicationsCount = employeeCount + 32;
+            
+            // Set targets based on real data
+            const targets = {
+                applicationsCount: applicationsCount,
+                employeesCount: employeeCount,
+                trenchoorsCount: employeeCount,
+                activeCrewCount: employeeCount
+            };
+
+            Object.keys(targets).forEach(id => {
+                const element = document.getElementById(id);
+                const target = targets[id];
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        element.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        element.textContent = target;
+                    }
+                };
+
+                updateCounter();
+            });
+        }
+
+        // Update earnings when new employee is added
+        function updateEarnings() {
+            const employeeCount = employees.length;
+            document.getElementById('applicationsCount').textContent = employeeCount + 32;
+            document.getElementById('employeesCount').textContent = employeeCount;
+            document.getElementById('trenchoorsCount').textContent = employeeCount;
+            document.getElementById('activeCrewCount').textContent = employeeCount;
+        }
 
         function loadChatMessages() {
             messagesRef.limitToLast(50).on('child_added', (snapshot) => {
@@ -1180,6 +1352,9 @@
                     employeeId: data.employeeId,
                     pfpUrl: pfpUrl
                 });
+
+                // Update earnings display
+                updateEarnings();
 
                 loading.style.display = 'none';
                 results.classList.add('active');
