@@ -1232,15 +1232,17 @@
     position: relative;
     overflow: hidden;
     box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+    display: block;
 }
         
         .pfp-canvas {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+}
 
         .pfp-layer {
             position: absolute;
@@ -1768,10 +1770,11 @@
                     <div class="pfp-controls">
                         <h3>CUSTOMIZE LAYERS</h3>
                         <div class="pfp-layer-controls">
-                            <button class="pfp-layer-btn active" onclick="toggleLayer('hat')">TOGGLE HAT</button>
-                            <button class="pfp-layer-btn active" onclick="toggleLayer('shirt')">TOGGLE SHIRT</button>
-                            <button class="pfp-layer-btn" onclick="resetLayers()">RESET ALL</button>
-                        </div>
+    <button class="pfp-layer-btn active" onclick="toggleLayer('hat')">TOGGLE HAT</button>
+    <button class="pfp-layer-btn active" onclick="toggleLayer('shirt')">TOGGLE SHIRT</button>
+    <button class="pfp-layer-btn" onclick="flipHat()">FLIP HAT</button>
+    <button class="pfp-layer-btn" onclick="resetLayers()">RESET ALL</button>
+</div>
                     </div>
 
                     <button class="pfp-download-btn" onclick="downloadPfp()">
@@ -2361,7 +2364,7 @@ function initializeCanvas(photoUrl) {
     pfpLayers.photo = createLayer('photo', photoUrl, 100, 50, 300, 300);
     canvas.appendChild(pfpLayers.photo);
     
-    pfpLayers.shirt = createLayer('shirt', 'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68dd61c49bed1221ed5b779f_Layer%202.png', 75, 200, 250, 250);
+    pfpLayers.shirt = createLayer('shirt', 'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68dd61c49bed1221ed5b779f_Layer%202.png', 100, 220, 200, 200);
     canvas.appendChild(pfpLayers.shirt);
     
     pfpLayers.hat = createLayer('hat', 'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68dd61c4b992854c1ac43978_Layer%202%20copy.png', 120, 0, 260, 260);
@@ -2477,6 +2480,18 @@ function toggleLayer(layerName) {
     });
 }
 
+        function flipHat() {
+    const hat = pfpLayers.hat;
+    if (!hat) return;
+    
+    const currentTransform = hat.style.transform || '';
+    if (currentTransform.includes('scaleX(-1)')) {
+        hat.style.transform = currentTransform.replace('scaleX(-1)', 'scaleX(1)');
+    } else {
+        hat.style.transform = currentTransform + ' scaleX(-1)';
+    }
+}
+
 function resetLayers() {
     if (pfpLayers.photo) {
         pfpLayers.photo.style.left = '100px';
@@ -2485,10 +2500,10 @@ function resetLayers() {
         pfpLayers.photo.style.height = '300px';
     }
     if (pfpLayers.shirt) {
-    pfpLayers.shirt.style.left = '75px';
-    pfpLayers.shirt.style.top = '200px';
-    pfpLayers.shirt.style.width = '250px';
-    pfpLayers.shirt.style.height = '250px';
+    pfpLayers.shirt.style.left = '100px';
+    pfpLayers.shirt.style.top = '220px';
+    pfpLayers.shirt.style.width = '200px';
+    pfpLayers.shirt.style.height = '200px';
     pfpLayers.shirt.style.display = 'block';
     layerStates.shirt = true;
 }
