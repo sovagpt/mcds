@@ -2638,19 +2638,19 @@ function resetLayers() {
 
 async function downloadPfp() {
     const canvasContainer = document.getElementById('canvasContainer');
-    const containerWidth = canvasContainer.offsetWidth;
-    const containerHeight = canvasContainer.offsetHeight;
+    const pfpCanvas = document.getElementById('pfpCanvas');
+    
+    // Get the actual visible dimensions
+    const visibleWidth = pfpCanvas.offsetWidth;
+    const visibleHeight = pfpCanvas.offsetHeight;
     
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    
-    // Set canvas to square dimensions to avoid gaps
-    const size = Math.min(containerWidth, containerHeight);
-    canvas.width = size;
-    canvas.height = size;
+    canvas.width = visibleWidth;
+    canvas.height = visibleHeight;
     
     // Draw background
-    const bgStyle = document.getElementById('pfpCanvas').style.background;
+    const bgStyle = pfpCanvas.style.background;
     const bgImage = new Image();
     bgImage.crossOrigin = 'anonymous';
     const urlMatch = bgStyle.match(/url\(['"]?([^'"]+)['"]?\)/);
@@ -2659,16 +2659,13 @@ async function downloadPfp() {
         await new Promise(resolve => {
             bgImage.onload = resolve;
         });
-        ctx.drawImage(bgImage, 0, 0, size, size);
+        ctx.drawImage(bgImage, 0, 0, visibleWidth, visibleHeight);
     } else {
         ctx.fillStyle = bgStyle;
-        ctx.fillRect(0, 0, size, size);
+        ctx.fillRect(0, 0, visibleWidth, visibleHeight);
     }
     
-    // Calculate scale factor
-    const scale = size / containerWidth;
-    
-    // Draw layers in order with proper scaling
+    // Draw layers in order - use exact positions as they appear
     const layerOrder = ['photo', 'shirt', 'hat'];
     
     for (const layerName of layerOrder) {
@@ -2676,21 +2673,24 @@ async function downloadPfp() {
         if (!layer || layer.style.display === 'none') continue;
         
         const img = layer.querySelector('img');
-        const x = parseInt(layer.style.left) * scale;
-        const y = parseInt(layer.style.top) * scale;
-        const width = parseInt(layer.style.width) * scale;
-        const height = parseInt(layer.style.height) * scale;
+        const x = parseInt(layer.style.left);
+        const y = parseInt(layer.style.top);
+        const width = parseInt(layer.style.width);
+        const height = parseInt(layer.style.height);
         
-        if (img.complete) {
-            ctx.drawImage(img, x, y, width, height);
+        // Save context for potential transform
+        ctx.save();
+        
+        // Handle flipped hat
+        if (layerName === 'hat' && layer.style.transform.includes('scaleX(-1)')) {
+            ctx.translate(x + width, y);
+            ctx.scale(-1, 1);
+            ctx.drawImage(img, 0, 0, width, height);
         } else {
-            await new Promise(resolve => {
-                img.onload = () => {
-                    ctx.drawImage(img, x, y, width, height);
-                    resolve();
-                };
-            });
+            ctx.drawImage(img, x, y, width, height);
         }
+        
+        ctx.restore();
     }
     
     canvas.toBlob((blob) => {
