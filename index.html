@@ -1117,9 +1117,14 @@
                 <p>Hear from our satisfied crew members!</p>
             </div>
 
-            <div class="testimonials-carousel" id="testimonialsCarousel">
-                <!-- Testimonials will be dynamically added here -->
+            <div class="testimonials-wrapper">
+                <div class="testimonial-nav prev" onclick="prevTestimonial()">◄</div>
+                <div class="testimonial-nav next" onclick="nextTestimonial()">►</div>
+                <div class="testimonials-track" id="testimonialsTrack">
+                    <!-- Testimonials will be dynamically added here -->
+                </div>
             </div>
+            <div class="testimonial-dots" id="testimonialDots"></div>
         </div>
 
         <!-- Leaderboard Section -->
