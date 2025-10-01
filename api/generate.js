@@ -110,13 +110,13 @@ If no profile image URL is found, respond with exactly "NONE".`
     const sharp = require('sharp');
     const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
     
-    // Adjusted coordinates to capture the full circular profile picture
+    // Adjusted coordinates - moved left and zoomed in more
     const croppedBuffer = await sharp(screenshotBuffer)
       .extract({ 
-        left: 132, 
-        top: 155, 
-        width: 133, 
-        height: 133 
+        left: 145, 
+        top: 165, 
+        width: 110, 
+        height: 110 
       })
       .resize(140, 140)
       .toBuffer();
@@ -261,6 +261,7 @@ IMPORTANT: Be funny through specificity and cleverness, not through listing buzz
     });
   }
 };
+
 
 
 
