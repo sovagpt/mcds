@@ -1308,6 +1308,20 @@
         // Store employees in localStorage
         let employees = JSON.parse(localStorage.getItem('mcdonalds_employees') || '[]');
 
+        // Hardcoded testimonial quotes
+        const testimonialQuotes = [
+            "Best decision of my life. Went from watching charts 24/7 to actually making consistent money.",
+            "Finally left the trenches. My mental health has never been better and I can actually afford rent.",
+            "I used to ape into rugs, now I clean them. McDonald's saved me. 10/10 would recommend.",
+            "The ice cream machine is more reliable than my old portfolio. Should've joined sooner.",
+            "Went from diamond hands to holding a spatula. Best career change I ever made.",
+            "From trading shitcoins to serving Big Macs. At least the job security is real.",
+            "No more rug pulls, just french fries. Living the dream tbh.",
+            "I make more flipping burgers than I ever made flipping NFTs. No cap.",
+            "The only thing pumping now is the McFlurry machine. And I'm okay with that.",
+            "Left the degen life behind. Now I'm a professional burger architect."
+        ];
+
         // Display employees on load
         displayEmployees();
 
@@ -1326,20 +1340,6 @@
         // Get referral code from URL or generate new one
         const urlParams = new URLSearchParams(window.location.search);
         const referredBy = urlParams.get('ref');
-
-        // Hardcoded testimonial quotes
-        const testimonialQuotes = [
-            "Best decision of my life. Went from watching charts 24/7 to actually making consistent money.",
-            "Finally left the trenches. My mental health has never been better and I can actually afford rent.",
-            "I used to ape into rugs, now I clean them. McDonald's saved me. 10/10 would recommend.",
-            "The ice cream machine is more reliable than my old portfolio. Should've joined sooner.",
-            "Went from diamond hands to holding a spatula. Best career change I ever made.",
-            "From trading shitcoins to serving Big Macs. At least the job security is real.",
-            "No more rug pulls, just french fries. Living the dream tbh.",
-            "I make more flipping burgers than I ever made flipping NFTs. No cap.",
-            "The only thing pumping now is the McFlurry machine. And I'm okay with that.",
-            "Left the degen life behind. Now I'm a professional burger architect."
-        ];
 
         function loadTestimonials() {
             const carousel = document.getElementById('testimonialsCarousel');
