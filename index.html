@@ -25,7 +25,6 @@
             image-rendering: crisp-edges;
         }
 
-        /* Pixel/Retro Effects */
         .pixel-border {
             box-shadow: 
                 0 -4px 0 0 #000,
@@ -57,7 +56,6 @@
             right: -4px;
         }
 
-        /* Header Styles */
         .header-main {
             background: #DA291C;
             border-bottom: 8px solid #000;
@@ -104,7 +102,6 @@
             background: rgba(0,0,0,0.5);
         }
 
-        /* Hero Section */
         .hero {
             background: #DA291C;
             padding: 80px 20px;
@@ -151,6 +148,7 @@
             z-index: 1;
             margin-bottom: 10px;
             min-height: 60px;
+            transition: opacity 0.3s;
         }
 
         .hero-subtitle {
@@ -169,7 +167,6 @@
             25%, 75% { opacity: 0.5; }
         }
 
-        /* Main Content */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -472,7 +469,215 @@
             flex-wrap: wrap;
         }
 
-        /* Employee Chat */
+        /* Testimonials Section */
+        .testimonials-section {
+            margin-top: 80px;
+            background: white;
+            border: 8px solid #000;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 6px dashed #000;
+        }
+
+        .testimonials-header h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #DA291C;
+            margin-bottom: 10px;
+        }
+
+        .testimonials-header p {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .testimonials-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            min-width: 350px;
+            background: #f9f9f9;
+            border: 6px solid #000;
+            padding: 25px;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 4px dashed #DA291C;
+        }
+
+        .testimonial-img {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #000;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+
+        .testimonial-info h4 {
+            font-family: 'Press Start 2P', monospace;
+            color: #DA291C;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-info p {
+            font-family: 'VT323', monospace;
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .testimonial-text {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .testimonial-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #DA291C;
+            color: #FFBC0D;
+            border: 4px solid #000;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.5rem;
+            z-index: 10;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+        }
+
+        .testimonial-nav:hover {
+            background: #c41e17;
+        }
+
+        .testimonial-nav.prev {
+            left: 10px;
+        }
+
+        .testimonial-nav.next {
+            right: 10px;
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            background: #ccc;
+            border: 3px solid #000;
+            cursor: pointer;
+        }
+
+        .testimonial-dot.active {
+            background: #DA291C;
+        }
+
+        /* Leaderboard Section */
+        .leaderboard-section {
+            margin-top: 80px;
+            background: white;
+            border: 8px solid #000;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            padding: 40px 30px;
+        }
+
+        .leaderboard-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 6px dashed #000;
+        }
+
+        .leaderboard-header h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #DA291C;
+            margin-bottom: 10px;
+        }
+
+        .leaderboard-header p {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .leaderboard-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border: 4px solid #000;
+            margin-bottom: 15px;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+
+        .leaderboard-item.top-3 {
+            background: #FFBC0D;
+            border-width: 6px;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+        }
+
+        .leaderboard-rank {
+            font-family: 'Press Start 2P', monospace;
+            color: #DA291C;
+            font-size: 1.5rem;
+            min-width: 60px;
+        }
+
+        .leaderboard-name {
+            flex: 1;
+            font-family: 'VT323', monospace;
+            font-size: 1.4rem;
+            color: #333;
+        }
+
+        .leaderboard-score {
+            font-family: 'Press Start 2P', monospace;
+            color: #DA291C;
+            font-size: 1.2rem;
+        }
+
         .employee-chat {
             margin-top: 80px;
             background: white;
@@ -571,7 +776,6 @@
             font-size: 1rem;
         }
 
-        /* Earnings Divider */
         .earnings-divider {
             margin: 80px 0;
             padding: 60px 40px;
@@ -665,6 +869,7 @@
             line-height: 1.8;
             text-align: center;
         }
+
         .mcnomics-section {
             margin-top: 80px;
             background: white;
@@ -704,6 +909,7 @@
             height: 100%;
             display: block;
         }
+
         .employee-wall {
             margin-top: 80px;
         }
@@ -838,7 +1044,35 @@
             font-weight: 600;
         }
 
-        /* Footer */
+        .referral-box {
+            margin-top: 40px;
+            background: white;
+            border: 8px solid #000;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .referral-box h3 {
+            font-family: 'Press Start 2P', monospace;
+            color: #DA291C;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        .referral-link-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .referral-link-container input {
+            flex: 1;
+            min-width: 300px;
+        }
+
         footer {
             background: #DA291C;
             color: #FFBC0D;
@@ -972,7 +1206,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="header-main">
             <div class="header-main-content">
@@ -989,14 +1222,12 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <div class="hero">
         <h1>McDONALDS.FUN</h1>
         <div class="hero-tagline" id="heroTagline">Loading...</div>
-        <div class="hero-subtitle">â–¼ START YOUR APPLICATION BELOW â–¼</div>
+        <div class="hero-subtitle">▼ START YOUR APPLICATION BELOW ▼</div>
     </div>
 
-    <!-- Main Content -->
     <div class="container">
         <div class="input-section">
             <form id="applicationForm">
@@ -1099,7 +1330,6 @@
                 </button>
             </div>
 
-            <!-- Referral Box -->
             <div class="referral-box" id="referralBox" style="display: none;">
                 <h3>YOUR REFERRAL LINK</h3>
                 <p style="color: #FFBC0D; font-family: 'VT323', monospace; font-size: 1.3rem;">Share this link to earn points!</p>
@@ -1110,7 +1340,6 @@
             </div>
         </div>
 
-        <!-- Testimonials Section -->
         <div class="testimonials-section">
             <div class="testimonials-header">
                 <h2>EMPLOYEE REVIEWS</h2>
@@ -1118,16 +1347,14 @@
             </div>
 
             <div class="testimonials-wrapper">
-                <div class="testimonial-nav prev" onclick="prevTestimonial()">â—„</div>
-                <div class="testimonial-nav next" onclick="nextTestimonial()">â–º</div>
+                <div class="testimonial-nav prev" onclick="prevTestimonial()">◄</div>
+                <div class="testimonial-nav next" onclick="nextTestimonial()">►</div>
                 <div class="testimonials-track" id="testimonialsTrack">
-                    <!-- Testimonials will be dynamically added here -->
                 </div>
             </div>
             <div class="testimonial-dots" id="testimonialDots"></div>
         </div>
 
-        <!-- Leaderboard Section -->
         <div class="leaderboard-section">
             <div class="leaderboard-header">
                 <h2>EMPLOYEE OF THE MONTH</h2>
@@ -1139,7 +1366,6 @@
             </div>
         </div>
 
-        <!-- Employee Wall -->
         <div class="employee-wall">
             <div class="wall-header">
                 <h2>EMPLOYEE WALL</h2>
@@ -1155,11 +1381,9 @@
             </div>
 
             <div class="employee-grid" id="employeeGrid">
-                <!-- Employees will be dynamically added here -->
             </div>
         </div>
 
-        <!-- Employee Chat -->
         <div class="employee-chat">
             <div class="chat-header">
                 <h2>EMPLOYEES CHAT</h2>
@@ -1167,7 +1391,6 @@
             </div>
 
             <div class="chat-box" id="chatBox">
-                <!-- Messages will appear here -->
             </div>
 
             <div class="chat-input-container">
@@ -1181,7 +1404,6 @@
             </div>
         </div>
 
-        <!-- Earnings Divider -->
         <div class="earnings-divider">
             <div class="earnings-title">TODAY'S EARNINGS REPORT</div>
             
@@ -1215,7 +1437,6 @@
             </div>
         </div>
 
-        <!-- McNomics Section -->
         <div class="mcnomics-section">
             <div class="mcnomics-header">
                 <h2>McNOMICS</h2>
@@ -1232,32 +1453,28 @@
         </div>
     </div>
 
-    <!-- Popup Overlay -->
     <div class="popup-overlay" id="popupOverlay" onclick="closeEmployeePopup()"></div>
     <div class="employee-card-popup" id="employeePopup">
-        <div class="popup-close" onclick="closeEmployeePopup()">âœ•</div>
+        <div class="popup-close" onclick="closeEmployeePopup()">✕</div>
         <div id="popupContent"></div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <p>ðŸ” LEAVING THE TRENCHES? JOIN THE CREW! ðŸŸ</p>
+            <p>🍔 LEAVING THE TRENCHES? JOIN THE CREW! 🟟</p>
             <div class="footer-links">
                 <a href="https://twitter.com" target="_blank">TWITTER</a>
                 <a href="https://pump.fun" target="_blank">PUMP.FUN</a>
                 <a href="#home">HOME</a>
             </div>
             <div class="footer-bottom">
-                <p>Copyright Â© 2025 Mcdonalds.fun. All rights reserved.</p>
+                <p>Copyright © 2025 Mcdonalds.fun. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <script>
-        // Firebase Configuration
         const firebaseConfig = {
             apiKey: "AIzaSyBL_Abt3EEibFA-67ypLx_QwdIv9lY3xds",
             authDomain: "polymarket-675a5.firebaseapp.com",
@@ -1269,7 +1486,6 @@
             measurementId: "G-6QN30DZS8Z"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         const messagesRef = database.ref('messages');
@@ -1283,7 +1499,6 @@
         const chatBox = document.getElementById('chatBox');
         const chatInput = document.getElementById('chatInput');
 
-        // Rotating hero taglines
         const taglines = [
             "From trenches to tendies, one burger at a time!",
             "We're not just hiring, we're saving lives!",
@@ -1305,15 +1520,11 @@
             }, 300);
         }
         
-        // Initialize and rotate taglines
         document.getElementById('heroTagline').textContent = taglines[0];
-        document.getElementById('heroTagline').style.transition = 'opacity 0.3s';
         setInterval(rotateTagline, 4000);
 
-        // Store employees in localStorage
         let employees = JSON.parse(localStorage.getItem('mcdonalds_employees') || '[]');
 
-        // Hardcoded testimonial quotes
         const testimonialQuotes = [
             "Best decision of my life. Went from watching charts 24/7 to actually making consistent money.",
             "Finally left the trenches. My mental health has never been better and I can actually afford rent.",
@@ -1327,37 +1538,25 @@
             "Left the degen life behind. Now I'm a professional burger architect."
         ];
 
-        // Display employees on load
         displayEmployees();
-
-        // Load chat messages
         loadChatMessages();
-
-        // Animate earnings numbers on page load
         animateEarnings();
-
-        // Load leaderboard
         loadLeaderboard();
-
-        // Load testimonials
         loadTestimonials();
 
-        // Get referral code from URL or generate new one
         const urlParams = new URLSearchParams(window.location.search);
         const referredBy = urlParams.get('ref');
 
         function loadTestimonials() {
-            const carousel = document.getElementById('testimonialsCarousel');
+            const track = document.getElementById('testimonialsTrack');
             
-            // Get random employees or use last 10
             const testimonialEmployees = employees.slice(-10).reverse();
             
             if (testimonialEmployees.length === 0) {
-                // Show placeholder if no employees yet
-                carousel.innerHTML = `
+                track.innerHTML = `
                     <div class="testimonial-card">
                         <div class="testimonial-header">
-                            <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3EðŸ”%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
+                            <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🍔%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
                             <div class="testimonial-info">
                                 <h4>BE THE FIRST</h4>
                                 <p>Future Employee</p>
@@ -1371,13 +1570,12 @@
                 return;
             }
 
-            // Create testimonials from actual employees
             const testimonials = testimonialEmployees.map(emp => {
                 const randomQuote = testimonialQuotes[Math.floor(Math.random() * testimonialQuotes.length)];
                 return `
                     <div class="testimonial-card">
                         <div class="testimonial-header">
-                            <img src="${emp.pfpUrl}" class="testimonial-img" alt="${emp.name}" />
+                            <img src="${emp.pfpUrl}" class="testimonial-img" alt="${escapeHtml(emp.name)}" />
                             <div class="testimonial-info">
                                 <h4>${escapeHtml(emp.name.toUpperCase())}</h4>
                                 <p>${escapeHtml(emp.position)}</p>
@@ -1390,8 +1588,7 @@
                 `;
             }).join('');
 
-            // Duplicate for infinite scroll effect
-            carousel.innerHTML = testimonials + testimonials;
+            track.innerHTML = testimonials;
         }
 
         function loadLeaderboard() {
@@ -1450,7 +1647,6 @@
             const employeeCount = employees.length;
             const applicationsCount = employeeCount + 32;
             
-            // Set targets based on real data
             const targets = {
                 applicationsCount: applicationsCount,
                 employeesCount: employeeCount,
@@ -1479,7 +1675,6 @@
             });
         }
 
-        // Update earnings when new employee is added
         function updateEarnings() {
             const employeeCount = employees.length;
             document.getElementById('applicationsCount').textContent = employeeCount + 32;
@@ -1518,7 +1713,6 @@
             const text = chatInput.value.trim();
             if (!text) return;
 
-            // Generate or retrieve employee ID
             let employeeId = localStorage.getItem('mcdonalds_employee_id');
             if (!employeeId) {
                 employeeId = 'employee-' + Math.random().toString(36).substr(2, 9);
@@ -1534,7 +1728,6 @@
             chatInput.value = '';
         }
 
-        // Allow Enter key to send message
         chatInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 sendMessage();
@@ -1568,7 +1761,6 @@
             
             return canvas.toDataURL('image/png');
         }
-
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -1592,7 +1784,6 @@
                 
                 const pfpUrl = data.profileImageUrl || createPlaceholderPfp();
                 
-                // Store username for chat
                 localStorage.setItem('mcdonalds_username', data.name);
                 
                 document.getElementById('appPfp').src = pfpUrl;
@@ -1609,7 +1800,6 @@
                 document.getElementById('employeeId').textContent = `#${data.employeeId}`;
                 document.getElementById('since').textContent = new Date().getFullYear();
 
-                // Add to employee wall
                 addEmployee({
                     name: data.name,
                     position: data.position,
@@ -1617,17 +1807,11 @@
                     pfpUrl: pfpUrl
                 });
 
-                // Update earnings display
                 updateEarnings();
-
-                // Refresh testimonials
                 loadTestimonials();
 
                 loading.style.display = 'none';
                 results.classList.add('active');
-
-                // Generate and show referral link
-                // generateReferralLink(data.name, data.employeeId);
 
                 setTimeout(() => {
                     document.getElementById('badgeContainer').classList.add('show');
@@ -1656,7 +1840,6 @@
                 document.getElementById('referralLink').value = referralLink;
                 document.getElementById('referralBox').style.display = 'block';
                 
-                // Store referral code
                 localStorage.setItem('mcdonalds_referral_code', data.referralCode);
             } catch (error) {
                 console.error('Failed to generate referral link:', error);
@@ -1671,11 +1854,9 @@
         }
 
         function addEmployee(employee) {
-            // Check if employee already exists
             const exists = employees.find(e => e.employeeId === employee.employeeId);
             if (!exists) {
                 employees.unshift(employee);
-                // Keep only last 50 employees
                 if (employees.length > 50) {
                     employees = employees.slice(0, 50);
                 }
@@ -1737,6 +1918,25 @@
             const text = encodeURIComponent("I'm leaving the trenches and working for mcdonalds.fun - generate yours today!");
             const url = encodeURIComponent('https://mcdonalds.fun');
             window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+        }
+
+        let currentTestimonial = 0;
+        function nextTestimonial() {
+            const track = document.getElementById('testimonialsTrack');
+            const cards = track.children;
+            if (cards.length > 0) {
+                currentTestimonial = (currentTestimonial + 1) % cards.length;
+                track.style.transform = `translateX(-${currentTestimonial * 380}px)`;
+            }
+        }
+
+        function prevTestimonial() {
+            const track = document.getElementById('testimonialsTrack');
+            const cards = track.children;
+            if (cards.length > 0) {
+                currentTestimonial = currentTestimonial === 0 ? cards.length - 1 : currentTestimonial - 1;
+                track.style.transform = `translateX(-${currentTestimonial * 380}px)`;
+            }
         }
     </script>
 </body>
