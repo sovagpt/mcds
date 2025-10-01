@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.0",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.0",
+    "firebase-admin": "^12.0.0"
   }
 }
