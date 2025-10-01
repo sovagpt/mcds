@@ -1203,8 +1203,7 @@
                 font-size: 0.5rem;
             }
 
-            /* PFP Creator Modal */
-.pfp-modal {
+            .pfp-modal {
     display: none;
     position: fixed;
     top: 0;
@@ -1727,6 +1726,67 @@
             </div>
         </div>
     </footer>
+
+    <div class="popup-overlay" id="popupOverlay" onclick="closeEmployeePopup()"></div>
+    <div class="employee-card-popup" id="employeePopup">
+        <div class="popup-close" onclick="closeEmployeePopup()">✕</div>
+        <div id="popupContent"></div>
+    </div>
+
+    <!-- PFP Creator Modal -->
+    <div class="pfp-modal" id="pfpModal">
+        <div class="pfp-modal-content">
+            <div class="pfp-modal-header">
+                <h2>CREATE YOUR MCDONALD'S PFP</h2>
+                <div class="pfp-close" onclick="closePfpModal()">✕</div>
+            </div>
+            <div class="pfp-modal-body">
+                <div class="pfp-upload-section" id="uploadSection">
+                    <div class="pfp-upload-btn">
+                        <input type="file" id="pfpUpload" accept="image/*" onchange="handlePfpUpload(event)">
+                        <label for="pfpUpload" class="pfp-upload-label">
+                            UPLOAD YOUR PFP
+                        </label>
+                    </div>
+                    <p style="font-family: 'VT323', monospace; font-size: 1.2rem; margin-top: 15px; color: #000;">
+                        Upload an image to get started!
+                    </p>
+                </div>
+
+                <div id="loadingSection" class="pfp-loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Removing background...</p>
+                </div>
+
+                <div id="editorSection" style="display: none;">
+                    <div class="pfp-canvas-container" id="canvasContainer">
+                        <div id="pfpCanvas" class="pfp-canvas">
+                        </div>
+                    </div>
+
+                    <div class="pfp-controls">
+                        <h3>CHOOSE BACKGROUND</h3>
+                        <div class="pfp-backgrounds" id="backgroundOptions">
+                        </div>
+                    </div>
+
+                    <div class="pfp-controls">
+                        <h3>CUSTOMIZE LAYERS</h3>
+                        <div class="pfp-layer-controls">
+                            <button class="pfp-layer-btn active" onclick="toggleLayer('hat')">TOGGLE HAT</button>
+                            <button class="pfp-layer-btn active" onclick="toggleLayer('shirt')">TOGGLE SHIRT</button>
+                            <button class="pfp-layer-btn" onclick="resetLayers()">RESET ALL</button>
+                        </div>
+                    </div>
+
+                    <button class="pfp-download-btn" onclick="downloadPfp()">
+                        DOWNLOAD PFP
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <script>
@@ -2483,60 +2543,5 @@ async function downloadPfp() {
     });
 }
     </script>
-    <!-- PFP Creator Modal -->
-<div class="pfp-modal" id="pfpModal">
-    <div class="pfp-modal-content">
-        <div class="pfp-modal-header">
-            <h2>CREATE YOUR MCDONALD'S PFP</h2>
-            <div class="pfp-close" onclick="closePfpModal()">✕</div>
-        </div>
-        <div class="pfp-modal-body">
-            <div class="pfp-upload-section" id="uploadSection">
-                <div class="pfp-upload-btn">
-                    <input type="file" id="pfpUpload" accept="image/*" onchange="handlePfpUpload(event)">
-                    <label for="pfpUpload" class="pfp-upload-label">
-                        UPLOAD YOUR PFP
-                    </label>
-                </div>
-                <p style="font-family: 'VT323', monospace; font-size: 1.2rem; margin-top: 15px; color: #000;">
-                    Upload an image to get started!
-                </p>
-            </div>
-
-            <div id="loadingSection" class="pfp-loading" style="display: none;">
-                <div class="spinner"></div>
-                <p>Removing background...</p>
-            </div>
-
-            <div id="editorSection" style="display: none;">
-                <div class="pfp-canvas-container" id="canvasContainer">
-                    <div id="pfpCanvas" class="pfp-canvas">
-                        <!-- Layers will be added here dynamically -->
-                    </div>
-                </div>
-
-                <div class="pfp-controls">
-                    <h3>CHOOSE BACKGROUND</h3>
-                    <div class="pfp-backgrounds" id="backgroundOptions">
-                        <!-- Backgrounds will be generated here -->
-                    </div>
-                </div>
-
-                <div class="pfp-controls">
-                    <h3>CUSTOMIZE LAYERS</h3>
-                    <div class="pfp-layer-controls">
-                        <button class="pfp-layer-btn active" onclick="toggleLayer('hat')">TOGGLE HAT</button>
-                        <button class="pfp-layer-btn active" onclick="toggleLayer('shirt')">TOGGLE SHIRT</button>
-                        <button class="pfp-layer-btn" onclick="resetLayers()">RESET ALL</button>
-                    </div>
-                </div>
-
-                <button class="pfp-download-btn" onclick="downloadPfp()">
-                    DOWNLOAD PFP
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>
