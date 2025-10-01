@@ -1146,13 +1146,15 @@
         }
 
         .pfp-modal-content {
-            background: #FFC72C;
-            border: 8px solid #000;
-            max-width: 900px;
-            width: 100%;
-            box-shadow: 12px 12px 0 rgba(0,0,0,0.5);
-            position: relative;
-        }
+    background: #FFC72C;
+    border: 8px solid #000;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 12px 12px 0 rgba(0,0,0,0.5);
+    position: relative;
+}
 
         .pfp-modal-header {
             background: #DA291C;
@@ -1221,17 +1223,17 @@
         }
 
         .pfp-canvas-container {
-            background: white;
-            border: 8px solid #000;
-            width: 100%;
-            max-width: 500px;
-            height: 500px;
-            margin: 0 auto 30px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
-        }
-
+    background: white;
+    border: 8px solid #000;
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    margin: 0 auto 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+}
+        
         .pfp-canvas {
             width: 100%;
             height: 100%;
@@ -2251,9 +2253,13 @@
 const REMOVEBG_API_KEY = 'j2UGSY9jXh4nAe1g7XaeNqEo';
 
 const backgrounds = [
-    '#DA291C', '#FFBC0D', '#FFC72C', '#27ae60',
-    '#3498db', '#9b59b6', '#e74c3c', '#f39c12',
-    '#2c3e50', '#1abc9c'
+    'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddac640a297fdcacc1c6e8_643643.png',
+    'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddac6422d5b3270457e3b0_54532.png',
+    'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddac64d358c7d5a9a031bd_654654.png',
+    'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddac64a18594d3ad18e3e8_53223.png',
+    'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddac644c624986561ad643_532.png',
+    'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddac653f6338a40102c81c_64363.png',
+    'https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddac65d0016aee97130181_634563.png'
 ];
 
 let pfpLayers = {
@@ -2292,18 +2298,21 @@ function resetPfpCreator() {
 
 function generateBackgroundOptions() {
     const container = document.getElementById('backgroundOptions');
-    container.innerHTML = backgrounds.map((color, index) => `
+    container.innerHTML = backgrounds.map((imageUrl, index) => `
         <div class="pfp-bg-option ${index === 0 ? 'active' : ''}" 
-             style="background: ${color}"
-             onclick="changeBackground('${color}', this)">
+             style="background: url('${imageUrl}') center/cover"
+             onclick="changeBackground('${imageUrl}', this)">
         </div>
     `).join('');
 }
 
-function changeBackground(color, element) {
+function changeBackground(imageUrl, element) {
     document.querySelectorAll('.pfp-bg-option').forEach(el => el.classList.remove('active'));
     element.classList.add('active');
-    document.getElementById('pfpCanvas').style.background = color;
+    const canvas = document.getElementById('pfpCanvas');
+    canvas.style.background = `url('${imageUrl}') center/cover`;
+    canvas.style.backgroundSize = 'cover';
+    canvas.style.backgroundPosition = 'center';
 }
 
 async function handlePfpUpload(event) {
@@ -2345,7 +2354,9 @@ async function handlePfpUpload(event) {
 
 function initializeCanvas(photoUrl) {
     const canvas = document.getElementById('pfpCanvas');
-    canvas.style.background = backgrounds[0];
+    canvas.style.background = `url('${backgrounds[0]}') center/cover`;
+canvas.style.backgroundSize = 'cover';
+canvas.style.backgroundPosition = 'center';
     
     pfpLayers.photo = createLayer('photo', photoUrl, 100, 50, 300, 300);
     canvas.appendChild(pfpLayers.photo);
@@ -2501,8 +2512,20 @@ async function downloadPfp() {
     canvas.width = 500;
     canvas.height = 500;
     
-    ctx.fillStyle = document.getElementById('pfpCanvas').style.background;
+    const bgStyle = document.getElementById('pfpCanvas').style.background;
+const bgImage = new Image();
+bgImage.crossOrigin = 'anonymous';
+const urlMatch = bgStyle.match(/url\(['"]?([^'"]+)['"]?\)/);
+if (urlMatch) {
+    bgImage.src = urlMatch[1];
+    await new Promise(resolve => {
+        bgImage.onload = resolve;
+    });
+    ctx.drawImage(bgImage, 0, 0, 500, 500);
+} else {
+    ctx.fillStyle = bgStyle;
     ctx.fillRect(0, 0, 500, 500);
+}
     
     const layerOrder = ['photo', 'shirt', 'hat'];
     
