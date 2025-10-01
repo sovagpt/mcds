@@ -58,33 +58,6 @@
         }
 
         /* Header Styles */
-        .header-top {
-            background: #DA291C;
-            padding: 8px 0;
-            border-bottom: 4px solid #000;
-        }
-
-        .header-top-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .header-section {
-            background: #FFBC0D;
-            color: #000;
-            padding: 8px 16px;
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border: 4px solid #000;
-            font-family: 'Press Start 2P', monospace;
-            letter-spacing: 1px;
-        }
-
         .header-main {
             background: #DA291C;
             border-bottom: 8px solid #000;
@@ -97,12 +70,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 20px;
+            padding: 15px 40px;
         }
 
         .logo {
             font-family: 'Press Start 2P', monospace;
-            font-size: 48px;
+            font-size: 36px;
             color: #FFBC0D;
             font-weight: bold;
             text-shadow: 4px 4px 0 #000;
@@ -110,7 +83,7 @@
 
         .nav-menu {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             list-style: none;
         }
 
@@ -118,10 +91,10 @@
             color: #FFBC0D;
             text-decoration: none;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
             text-transform: uppercase;
             font-family: 'Press Start 2P', monospace;
-            padding: 12px 20px;
+            padding: 10px 18px;
             background: rgba(0,0,0,0.3);
             border: 4px solid #FFBC0D;
             transition: all 0.1s ease;
@@ -486,7 +459,103 @@
             flex-wrap: wrap;
         }
 
-        /* Employee Wall */
+        /* Employee Chat */
+        .employee-chat {
+            margin-top: 80px;
+            background: white;
+            border: 8px solid #000;
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+            padding: 30px;
+        }
+
+        .chat-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 6px dashed #000;
+        }
+
+        .chat-header h2 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 2rem;
+            color: #DA291C;
+            margin-bottom: 10px;
+        }
+
+        .chat-header p {
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: #000;
+        }
+
+        .chat-box {
+            background: #f5f5f5;
+            border: 4px solid #000;
+            height: 400px;
+            overflow-y: auto;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: white;
+            border: 3px solid #000;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-message-author {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.8rem;
+            color: #DA291C;
+            margin-bottom: 8px;
+        }
+
+        .chat-message-text {
+            font-family: 'VT323', monospace;
+            font-size: 1.2rem;
+            color: #333;
+            word-wrap: break-word;
+        }
+
+        .chat-message-time {
+            font-family: 'VT323', monospace;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 15px;
+        }
+
+        .chat-input-container input {
+            flex: 1;
+            padding: 15px;
+            font-size: 1.2rem;
+            border: 4px solid #000;
+            font-family: 'VT323', monospace;
+            background: #fff;
+        }
+
+        .chat-input-container button {
+            padding: 15px 30px;
+            font-size: 1rem;
+        }
         .employee-wall {
             margin-top: 80px;
         }
@@ -625,22 +694,16 @@
 
         @media (max-width: 768px) {
             .logo {
-                font-size: 32px;
+                font-size: 28px;
             }
 
             .nav-menu {
-                flex-direction: column;
                 gap: 10px;
             }
 
             .nav-menu a {
-                font-size: 0.7rem;
-                padding: 10px 15px;
-            }
-
-            .header-section {
-                font-size: 0.5rem;
-                padding: 6px 10px;
+                font-size: 0.6rem;
+                padding: 8px 12px;
             }
 
             .hero h1 {
@@ -710,13 +773,6 @@
 <body>
     <!-- Header -->
     <header>
-        <div class="header-top">
-            <div class="header-top-content">
-                <div class="header-section">NOW HIRING</div>
-                <div class="header-section">LEAVING THE TRENCHES?</div>
-                <div class="header-section">JOIN THE TEAM</div>
-            </div>
-        </div>
         <div class="header-main">
             <div class="header-main-content">
                 <div class="logo">M</div>
@@ -842,6 +898,28 @@
             </div>
         </div>
 
+        <!-- Employee Chat -->
+        <div class="employee-chat">
+            <div class="chat-header">
+                <h2>EMPLOYEES CHAT</h2>
+                <p>Talk with fellow crew members!</p>
+            </div>
+
+            <div class="chat-box" id="chatBox">
+                <!-- Messages will appear here -->
+            </div>
+
+            <div class="chat-input-container">
+                <input 
+                    type="text" 
+                    id="chatInput" 
+                    placeholder="Type your message..."
+                    maxlength="200"
+                />
+                <button onclick="sendMessage()">SEND</button>
+            </div>
+        </div>
+
         <!-- Employee Wall -->
         <div class="employee-wall">
             <div class="wall-header">
@@ -878,19 +956,97 @@
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
     <script>
+        // Firebase Configuration - YOU NEED TO ADD YOUR FIREBASE CONFIG HERE
+        const firebaseConfig = {
+  apiKey: "AIzaSyBL_Abt3EEibFA-67ypLx_QwdIv9lY3xds",
+  authDomain: "polymarket-675a5.firebaseapp.com",
+  databaseURL: "https://polymarket-675a5-default-rtdb.firebaseio.com",
+  projectId: "polymarket-675a5",
+  storageBucket: "polymarket-675a5.firebasestorage.app",
+  messagingSenderId: "763899221788",
+  appId: "1:763899221788:web:3b6a2e86950e88c8b40cd9",
+  measurementId: "G-6QN30DZS8Z"
+};
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const messagesRef = database.ref('messages');
+
         const form = document.getElementById('applicationForm');
         const loading = document.getElementById('loading');
         const results = document.getElementById('results');
         const submitBtn = document.getElementById('submitBtn');
         const employeeGrid = document.getElementById('employeeGrid');
         const searchInput = document.getElementById('searchEmployee');
+        const chatBox = document.getElementById('chatBox');
+        const chatInput = document.getElementById('chatInput');
 
         // Store employees in localStorage
         let employees = JSON.parse(localStorage.getItem('mcdonalds_employees') || '[]');
 
         // Display employees on load
         displayEmployees();
+
+        // Load chat messages
+        loadChatMessages();
+
+        function loadChatMessages() {
+            messagesRef.limitToLast(50).on('child_added', (snapshot) => {
+                const message = snapshot.val();
+                displayChatMessage(message);
+            });
+        }
+
+        function displayChatMessage(message) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message';
+            
+            const time = new Date(message.timestamp).toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            messageDiv.innerHTML = `
+                <div class="chat-message-author">${escapeHtml(message.author)}</div>
+                <div class="chat-message-text">${escapeHtml(message.text)}</div>
+                <div class="chat-message-time">${time}</div>
+            `;
+            
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            const author = localStorage.getItem('mcdonalds_username') || 'Anonymous Crew Member';
+            
+            messagesRef.push({
+                author: author,
+                text: text,
+                timestamp: Date.now()
+            });
+
+            chatInput.value = '';
+        }
+
+        // Allow Enter key to send message
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
         function createPlaceholderPfp() {
             const canvas = document.createElement('canvas');
@@ -936,6 +1092,9 @@
                 const data = await response.json();
                 
                 const pfpUrl = data.profileImageUrl || createPlaceholderPfp();
+                
+                // Store username for chat
+                localStorage.setItem('mcdonalds_username', data.name);
                 
                 document.getElementById('appPfp').src = pfpUrl;
                 document.getElementById('badgePfp').src = pfpUrl;
