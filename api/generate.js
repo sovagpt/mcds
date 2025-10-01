@@ -104,67 +104,26 @@ If no profile image URL is found, respond with exactly "NONE".`
 
     // Step 2.5: If URL extraction failed, crop PFP directly from screenshot
     if (!profileImageUrl && screenshotBase64) {
-      console.log('URL extraction failed, asking Claude to find PFP coordinates...');
+      console.log('URL extraction failed, cropping PFP from screenshot...');
       
       try {
-        // Ask Claude to identify the profile picture coordinates
-        const coordsMessage = await anthropic.messages.create({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 200,
-          messages: [{
-            role: 'user',
-            content: [
-              {
-                type: 'image',
-                source: {
-                  type: 'base64',
-                  media_type: 'image/png',
-                  data: screenshotBase64,
-                },
-              },
-              {
-                type: 'text',
-                text: `Look at this Twitter/X profile screenshot. Find the profile picture (the circular or square avatar image, usually in the top left area).
-
-Tell me the approximate pixel coordinates where I should crop to extract just the profile picture.
-
-Respond with ONLY a JSON object in this exact format (no markdown, no extra text):
-{"x": 50, "y": 100, "width": 200, "height": 200}
-
-The coordinates should capture the profile picture cleanly. If you can't find it, respond with:
-{"x": 0, "y": 0, "width": 0, "height": 0}`
-              }
-            ]
-          }]
-        });
+        const sharp = require('sharp');
+        const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
         
-        const coordsText = coordsMessage.content[0].text.trim();
-        console.log('Claude response for coordinates:', coordsText);
+        // Hardcoded coordinates for Twitter profile picture (1200x1600 screenshot)
+        const croppedBuffer = await sharp(screenshotBuffer)
+          .extract({ 
+            left: 132, 
+            top: 138, 
+            width: 112, 
+            height: 112 
+          })
+          .resize(140, 140) // Standardize size
+          .toBuffer();
         
-        const coords = JSON.parse(coordsText);
-        
-        if (coords.width > 0 && coords.height > 0) {
-          const sharp = require('sharp');
-          const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
-          
-          console.log(`Attempting to crop at: x=${coords.x}, y=${coords.y}, ${coords.width}x${coords.height}`);
-          
-          const croppedBuffer = await sharp(screenshotBuffer)
-            .extract({ 
-              left: coords.x, 
-              top: coords.y, 
-              width: coords.width, 
-              height: coords.height 
-            })
-            .resize(140, 140) // Standardize size
-            .toBuffer();
-          
-          const croppedBase64 = croppedBuffer.toString('base64');
-          profileImageUrl = `data:image/png;base64,${croppedBase64}`;
-          console.log('Successfully cropped PFP using Claude-identified coordinates');
-        } else {
-          console.log('Claude could not identify PFP coordinates');
-        }
+        const croppedBase64 = croppedBuffer.toString('base64');
+        profileImageUrl = `data:image/png;base64,${croppedBase64}`;
+        console.log('Successfully cropped PFP from screenshot');
       } catch (e) {
         console.log('Screenshot cropping failed:', e.message);
         console.error(e);
