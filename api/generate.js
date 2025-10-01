@@ -110,15 +110,15 @@ If no profile image URL is found, respond with exactly "NONE".`
     const sharp = require('sharp');
     const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
     
-    // Fine-tuned coordinates for Twitter profile picture (1200x1600 screenshot)
+    // Adjusted coordinates to capture the full circular profile picture
     const croppedBuffer = await sharp(screenshotBuffer)
       .extract({ 
         left: 132, 
-        top: 185, 
+        top: 155, 
         width: 133, 
         height: 133 
       })
-      .resize(140, 140) // Standardize size
+      .resize(140, 140)
       .toBuffer();
     
     const croppedBase64 = croppedBuffer.toString('base64');
@@ -261,5 +261,6 @@ IMPORTANT: Be funny through specificity and cleverness, not through listing buzz
     });
   }
 };
+
 
 
