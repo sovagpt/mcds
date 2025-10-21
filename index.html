@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McDonalds.fun</title>
+    <title>麦当劳.乐趣</title>
     <link rel="icon" type="image/png" href="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddc26ee35cb8a9c45de446_f03c194bd4d181b%20(1).png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <audio id="bgMusic" loop>
@@ -1587,9 +1587,9 @@
     </header>
 
     <div class="hero">
-        <h1>McDONALDS.FUN</h1>
-        <div class="hero-tagline" id="heroTagline">Loading...</div>
-        <div class="hero-subtitle">▼ ENTER TWITTER/X @ TO START YOUR APPLICATION BELOW ▼</div>
+        <h1>麦当劳.乐趣</h1>
+        <div class="hero-tagline" id="heroTagline">加载中...</div>
+        <div class="hero-subtitle">▼ 输入推特/X账号开始您的申请 ▼</div>
     </div>
 
     <div class="container">
@@ -1603,7 +1603,7 @@
                         required
                     />
                     <button type="submit" id="submitBtn">
-                        Apply Now
+                        立即申请
                     </button>
                 </div>
             </form>
@@ -1611,51 +1611,51 @@
 
         <div id="loading" class="loading" style="display: none;">
             <div class="spinner"></div>
-            <p>Reviewing your qualifications...</p>
+            <p>正在审查您的资格...</p>
         </div>
 
         <div id="results" class="results">
             <div class="application-wrapper">
                 <div id="applicationCard" class="application">
                     <div class="app-title">
-                        <h3>Employment Application</h3>
+                        <h3>就业申请</h3>
                     </div>
 
                     <div class="app-header">
                         <img id="appPfp" src="" alt="Profile" class="pfp" />
                         <div class="user-info">
-                            <h2 id="appName">Name</h2>
-                            <p id="appBio">Bio</p>
+                            <h2 id="appName">姓名</h2>
+                            <p id="appBio">生物</p>
                         </div>
                     </div>
 
                     <div class="form-section">
-                        <label>Position Applied For:</label>
-                        <div class="value" id="position">Crew Member</div>
+                        <label>申请职位：</label>
+                        <div class="value" id="position">船员</div>
                     </div>
 
                     <div class="form-section">
-                        <label>Why do you want to work at McDonald's?</label>
+                        <label>你为什么想在麦当劳工作？</label>
                         <div class="value" id="whyMcdonalds"></div>
                     </div>
 
                     <div class="form-section">
-                        <label>Previous Experience:</label>
+                        <label>以往经验：</label>
                         <div class="value" id="experience"></div>
                     </div>
 
                     <div class="form-section">
-                        <label>Special Skills:</label>
+                        <label>特殊技能：</label>
                         <div class="value" id="skills"></div>
                     </div>
 
                     <div class="form-section">
-                        <label>Available to Start:</label>
-                        <div class="value" id="startDate">Immediately</div>
+                        <label>可以开始：</label>
+                        <div class="value" id="startDate">立即地</div>
                     </div>
 
                     <div class="form-section">
-                        <label>Manager's Additional Comments:</label>
+                        <label>经理的补充意见:</label>
                         <div class="value" id="comments"></div>
                     </div>
                 </div>
@@ -1664,18 +1664,18 @@
             <div id="badgeContainer" class="badge-container">
                 <div id="badgeCard" class="badge">
                     <div class="badge-header">
-                        <h4>Official Employee Badge</h4>
+                        <h4>正式员工徽章</h4>
                     </div>
                     <img id="badgePfp" src="" alt="Employee" class="badge-pfp" />
-                    <h3 id="badgeName">Name</h3>
-                    <div class="title">CREW MEMBER</div>
+                    <h3 id="badgeName">姓名</h3>
+                    <div class="title">机组人员</div>
                     <div class="badge-details">
                         <div class="badge-detail">
-                            <div class="badge-detail-label">Employee ID</div>
+                            <div class="badge-detail-label">员工编号</div>
                             <div class="badge-detail-value" id="employeeId">#000000</div>
                         </div>
                         <div class="badge-detail">
-                            <div class="badge-detail-label">Member Since</div>
+                            <div class="badge-detail-label">会员自</div>
                             <div class="badge-detail-value" id="since">2025</div>
                         </div>
                     </div>
@@ -1684,30 +1684,30 @@
 
             <div class="action-buttons">
                 <button onclick="downloadApplication()">
-                    Download Application
+                    下载申请表
                 </button>
                 <button onclick="downloadBadge()">
-                    Download Badge
+                    下载徽章
                 </button>
                 <button onclick="shareToTwitter()">
-                    Share to Twitter
+                    分享到推特
                 </button>
             </div>
 
             <div class="referral-box" id="referralBox" style="display: none;">
-                <h3>YOUR REFERRAL LINK</h3>
-                <p style="color: #FFBC0D; font-family: 'VT323', monospace; font-size: 1.3rem;">Share this link to earn points!</p>
+                <h3>我们的推荐链接</h3>
+                <p style="color: #FFBC0D; font-family: 'VT323', monospace; font-size: 1.3rem;">分享此链接即可赚取积分！</p>
                 <div class="referral-link-container">
                     <input type="text" id="referralLink" readonly />
-                    <button onclick="copyReferralLink()">COPY</button>
+                    <button onclick="copyReferralLink()">复制</button>
                 </div>
             </div>
         </div>
 
         <div class="testimonials-section">
             <div class="testimonials-header">
-                <h2>EMPLOYEE REVIEWS</h2>
-                <p>Hear from our satisfied crew members!</p>
+                <h2>员工评价</h2>
+                <p>听听我们满意的船员怎么说！</p>
             </div>
 
             <div class="testimonials-wrapper">
@@ -1721,26 +1721,26 @@
 
         <div class="leaderboard-section">
             <div class="leaderboard-header">
-                <h2>EMPLOYEE OF THE MONTH</h2>
-                <p>Top recruiters earn legendary status!</p>
+                <h2>本月最佳员工</h2>
+                <p>顶级招聘人员获得传奇地位！</p>
             </div>
 
             <div class="leaderboard-list" id="leaderboardList">
-                <p style="text-align: center; font-family: 'VT323', monospace; font-size: 1.3rem;">Loading leaderboard...</p>
+                <p style="text-align: center; font-family: 'VT323', monospace; font-size: 1.3rem;">正在加载排行榜...</p>
             </div>
         </div>
 
         <div class="employee-wall">
             <div class="wall-header">
-                <h2>EMPLOYEE WALL</h2>
-                <p>Meet our newest crew members!</p>
+                <h2>员工墙</h2>
+                <p>见见我们最新的船员！</p>
             </div>
 
             <div class="wall-search">
                 <input 
                     type="text" 
                     id="searchEmployee" 
-                    placeholder="Search employees by name..."
+                    placeholder="按姓名搜索员工..."
                 />
             </div>
 
@@ -1750,8 +1750,8 @@
 
         <div class="employee-chat">
             <div class="chat-header">
-                <h2>EMPLOYEES CHAT</h2>
-                <p>Talk with fellow crew members!</p>
+                <h2>员工聊天</h2>
+                <p>与船员们交谈！</p>
             </div>
 
             <div class="chat-box" id="chatBox">
@@ -1764,52 +1764,52 @@
                     placeholder="Type your message..."
                     maxlength="200"
                 />
-                <button onclick="sendMessage()">SEND</button>
+                <button onclick="sendMessage()">发送</button>
             </div>
         </div>
 
         <div class="earnings-divider">
-            <div class="earnings-title">TODAY'S EARNINGS REPORT</div>
+            <div class="earnings-title">今日收益报告</div>
             
             <div class="earnings-stats">
                 <div class="earnings-stat">
-                    <div class="earnings-stat-label">APPLICATIONS</div>
+                    <div class="earnings-stat-label">应用</div>
                     <div class="earnings-stat-value" id="applicationsCount">0</div>
                 </div>
                 <div class="earnings-stat">
-                    <div class="earnings-stat-label">EMPLOYEES HIRED</div>
+                    <div class="earnings-stat-label">雇用员工</div>
                     <div class="earnings-stat-value" id="employeesCount">0</div>
                 </div>
                 <div class="earnings-stat">
-                    <div class="earnings-stat-label">TRENCHOORS ESCAPED</div>
+                    <div class="earnings-stat-label">奴隶逃跑</div>
                     <div class="earnings-stat-value" id="trenchoorsCount">0</div>
                 </div>
                 <div class="earnings-stat">
-                    <div class="earnings-stat-label">ACTIVE CREW</div>
+                    <div class="earnings-stat-label">现役船员</div>
                     <div class="earnings-stat-value" id="activeCrewCount">0</div>
                 </div>
             </div>
 
             <div class="earnings-message">
-                <h3>THE TRENCHES ARE DEAD</h3>
+                <h3>战壕已死</h3>
                 <p>
-                    Stop staring at red candles and start flipping burgers. McDonald's is hiring TODAY and we're the greatest employer in the game. 
-                    Your degen skills? We want them. Chart reading? Perfect for monitoring fry timers. Diamond hands? Great for holding hot trays. 
-                    Late night trading sessions? We've got the night shift covered. Join the crew and put your hard-earned skills to work where they actually matter. 
-                    Benefits include: stable income, free meals, and no more watching your portfolio bleed. Apply now and leave the trenches behind forever.
+                    别再盯着红蜡烛了，开始翻汉堡吧！麦当劳今天开始招聘，我们是业内最棒的雇主。
+你的“退化”技能？我们想要。图表阅读？非常适合监控炸薯条计时器。钻石手？非常适合端着热托盘。
+深夜交易？我们负责夜班。加入我们，把你辛苦学来的技能用到真正重要的地方。
+福利包括：稳定收入、免费餐食，以及不再眼睁睁看着投资组合亏损。立即申请，永远告别战壕。
                 </p>
             </div>
         </div>
 
         <div class="mcnomics-section">
             <div class="mcnomics-header">
-                <h2>McNOMICS</h2>
-                <p>Track the value of your employment!</p>
+                <h2>麦当劳经济学</h2>
+                <p>追踪您的就业价值！</p>
             </div>
 
             <div class="chart-container">
                 <iframe 
-                    src="https://birdeye.so/tv-widget/3C1mdCajhqN1PfUrJb6NQ2ZpTjUWzrFPftLvvvYVpump?chain=solana&viewMode=pair&chartInterval=1&chartType=Candle&chartTimezone=Europe%2FLondon&chartLeftToolbar=show&theme=dark&cssCustomProperties=--tv-color-platform-background%3A%23ffc72c&cssCustomProperties=--tv-color-pane-background%3A%23ffc72c&chartOverrides=paneProperties.backgroundGradientStartColor%3Argba%2848%2C+48%2C+48%2C+1%29&chartOverrides=paneProperties.backgroundType%3Asolid" 
+                    src="https://birdeye.so/tv-widget/negro?chain=bsc&viewMode=pair&chartInterval=1&chartType=Candle&chartTimezone=Europe%2FLondon&chartLeftToolbar=show&theme=dark&cssCustomProperties=--tv-color-platform-background%3A%23ffc72c&cssCustomProperties=--tv-color-pane-background%3A%23ffc72c&chartOverrides=paneProperties.backgroundGradientStartColor%3Argba%2848%2C+48%2C+48%2C+1%29&chartOverrides=paneProperties.backgroundType%3Asolid" 
                     frameborder="0" 
                     allowfullscreen>
                 </iframe>
@@ -1825,14 +1825,14 @@
 
     <footer>
         <div class="footer-content">
-            <p>🍔 LEAVING THE TRENCHES? JOIN THE CREW! 🟟</p>
+            <p>🍔 离开战壕？加入团队！ 🟟</p>
             <div class="footer-links">
                 <a href="https://twitter.com/mcdonaldsdotfun" target="_blank">TWITTER</a>
-                <a href="https://pump.fun/coin/2Y8FSD8MQRtVXpFmNBcCMznmMsHYWVzRcQsij3jBpump" target="_blank">PUMP.FUN</a>
+                <a href="https://four.meme" target="_blank">Four.meme</a>
                 <a href="#home">HOME</a>
             </div>
             <div class="footer-bottom">
-                <p>Copyright © 2025 Mcdonalds.fun. All rights reserved.</p>
+                <p>版权所有 © 2025 保留所有权利。</p>
             </div>
         </div>
     </footer>
@@ -1841,7 +1841,7 @@
     <div class="pfp-modal" id="pfpModal">
         <div class="pfp-modal-content">
             <div class="pfp-modal-header">
-                <h2>CREATE YOUR MCDONALD'S PFP</h2>
+                <h2>创建您的麦当劳个人资料图片</h2>
                 <div class="pfp-close" onclick="closePfpModal()">✕</div>
             </div>
             <div class="pfp-modal-body">
@@ -1849,17 +1849,17 @@
                     <div class="pfp-upload-btn">
                         <input type="file" id="pfpUpload" accept="image/*" onchange="handlePfpUpload(event)">
                         <label for="pfpUpload" class="pfp-upload-label">
-                            UPLOAD YOUR PFP
+                            上传您的
                         </label>
                     </div>
                     <p style="font-family: 'VT323', monospace; font-size: 1.2rem; margin-top: 15px; color: #000;">
-                        Upload an image to get started!
+                        上传图片即可开始！
                     </p>
                 </div>
 
                 <div id="loadingSection" class="pfp-loading" style="display: none;">
                     <div class="spinner"></div>
-                    <p>Removing background...</p>
+                    <p>正在删除背景...</p>
                 </div>
 
                 <div id="editorSection" style="display: none;">
@@ -1869,23 +1869,23 @@
                     </div>
 
                     <div class="pfp-controls">
-                        <h3>CHOOSE BACKGROUND</h3>
+                        <h3>选择背景</h3>
                         <div class="pfp-backgrounds" id="backgroundOptions">
                         </div>
                     </div>
 
                     <div class="pfp-controls">
-                        <h3>CUSTOMIZE LAYERS</h3>
+                        <h3>自定义图层</h3>
                         <div class="pfp-layer-controls">
-    <button class="pfp-layer-btn active" onclick="toggleLayer('hat')">TOGGLE HAT</button>
-    <button class="pfp-layer-btn active" onclick="toggleLayer('shirt')">TOGGLE SHIRT</button>
-    <button class="pfp-layer-btn" onclick="flipHat()">FLIP HAT</button>
-    <button class="pfp-layer-btn" onclick="resetLayers()">RESET ALL</button>
+    <button class="pfp-layer-btn active" onclick="toggleLayer('hat')">带扣帽子</button>
+    <button class="pfp-layer-btn active" onclick="toggleLayer('shirt')">牛角扣衬衫</button>
+    <button class="pfp-layer-btn" onclick="flipHat()">翻盖帽</button>
+    <button class="pfp-layer-btn" onclick="resetLayers()">全部重置</button>
 </div>
                     </div>
 
                     <button class="pfp-download-btn" onclick="downloadPfp()">
-                        DOWNLOAD PFP
+                        下载
                     </button>
                 </div>
             </div>
@@ -1921,12 +1921,12 @@
         const chatInput = document.getElementById('chatInput');
 
         const taglines = [
-            "From trenches to success, one burger at a time!",
-            "We're not just hiring, we're saving lives!",
-            "Your bags are heavy, but our trays are heavier!",
-            "Diamond hands? Try holding a McFlurry machine!",
-            "Chart watching skills transfer to fry timers!",
-            "Leave the volatility, embrace the stability!"
+            "从一线员工到成功，一次做好一个汉堡！",
+            "我们不只是在招聘，我们还在拯救生命！",
+            "你们的行李很重，但我们的托盘更重！",
+            "钻石手？试试拿着麦旋风机",
+            "图表观察技巧也能应用到炸薯条计时器上！",
+            "告别波动，拥抱稳定！"
         ];
         
         let taglineIndex = 0;
@@ -1958,16 +1958,16 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
     }
 });
         const testimonialQuotes = [
-            "Best decision of my life. Went from watching charts 24/7 to actually making consistent money.",
-            "Finally left the trenches. My mental health has never been better and I can actually afford rent.",
-            "I used to ape into rugs, now I clean them. McDonald's saved me. 10/10 would recommend.",
-            "The ice cream machine is more reliable than my old portfolio. Should've joined sooner.",
-            "Went from diamond hands to holding a spatula. Best career change I ever made.",
-            "From trading shitcoins to serving Big Macs. At least the job security is real.",
-            "No more rug pulls, just french fries. Living the dream tbh.",
-            "I make more flipping burgers than I ever made flipping NFTs. No cap.",
-            "The only thing pumping now is the McFlurry machine. And I'm okay with that.",
-            "Left the degen life behind. Now I'm a professional burger architect."
+            "这是我人生中最好的决定。从每天24小时关注行情图表到真正稳定赚钱。",
+            "终于离开了战壕。我的精神状态从未如此好过，而且我实际上可以负担得起房租了。",
+            "我以前沉迷于地毯，现在我清洗它们。麦当劳拯救了我。10/10 推荐。",
+            "冰淇淋机比我以前的投资组合更可靠。我应该早点加入。",
+            "从钻石手变成了拿着锅铲。这是我做过的最好的职业转变。",
+            "从交易垃圾币到卖巨无霸。至少工作保障是真的。",
+            "再也不用拉地毯了，只要炸薯条就行了。说实话，这就是梦想。",
+            "我翻转汉堡赚的钱比翻转 NFT 赚的钱还多。没有上限。",
+            "现在唯一能赚钱的就是麦旋风机器了。我对此很满意。",
+            "告别堕落的生活。现在我是一名职业汉堡师。”建筑师。"
         ];
 
         displayEmployees();
@@ -1995,7 +1995,7 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
                             </div>
                         </div>
                         <div class="testimonial-text">
-                            Apply now and be the first employee featured in our testimonials! Leave the trenches behind and join the crew.
+                            立即申请，成为我们推荐信中提到的第一位员工！告别战壕，加入我们吧！
                         </div>
                     </div>
                 `.repeat(3);
