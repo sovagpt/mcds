@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>麦当劳.乐趣</title>
+    <title>McDonalds.fun</title>
     <link rel="icon" type="image/png" href="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddc26ee35cb8a9c45de446_f03c194bd4d181b%20(1).png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <audio id="bgMusic" loop>
@@ -1226,6 +1226,7 @@
             font-size: 0.7rem;
         }
 
+        /* PFP Modal Styles - Must be BEFORE media queries */
         .pfp-modal {
             display: none;
             position: fixed;
@@ -1471,6 +1472,7 @@
             margin-top: 20px;
         }
 
+        /* Mobile Responsive Styles */
         @media (max-width: 768px) {
             .logo {
                 font-size: 28px;
@@ -1571,13 +1573,13 @@
 </div>
         <div class="header-main">
             <div class="header-main-content">
-               <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddc26ee35cb8a9c45de446_f03c194bd4d181b%20(1).png" alt="麦当劳" class="logo-img" style="height: 50px; width: auto;">
+               <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/68ddc26ee35cb8a9c45de446_f03c194bd4d181b%20(1).png" alt="McDonald's" class="logo-img" style="height: 50px; width: auto;">
                 <nav>
                     <ul class="nav-menu">
-                        <li><a href="#home">首页</a></li>
-                        <li><a href="https://x.com/mcdonaldssol" target="_blank">推特</a></li>
-                        <li><a href="https://four.meme" target="_blank">four.meme</a></li>
-                        <li><a href="#" onclick="openPfpModal(); return false;">麦当劳头像</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="https://x.com/mcdonaldssol" target="_blank">Twitter</a></li>
+                        <li><a href="https://pump.fun/coin/3C1mdCajhqN1PfUrJb6NQ2ZpTjUWzrFPftLvvvYVpump" target="_blank">Pump.fun</a></li>
+                        <li><a href="#" onclick="openPfpModal(); return false;">McDonald's PFP</a></li>
                     </ul>
                 </nav>
             </div>
@@ -1585,9 +1587,9 @@
     </header>
 
     <div class="hero">
-        <h1>麦当劳.乐趣</h1>
-        <div class="hero-tagline" id="heroTagline">加载中...</div>
-        <div class="hero-subtitle">▼ 输入推特/X账号开始您的申请 ▼</div>
+        <h1>McDONALDS.FUN</h1>
+        <div class="hero-tagline" id="heroTagline">Loading...</div>
+        <div class="hero-subtitle">▼ ENTER TWITTER/X @ TO START YOUR APPLICATION BELOW ▼</div>
     </div>
 
     <div class="container">
@@ -1597,11 +1599,11 @@
                     <input 
                         type="text" 
                         id="username" 
-                        placeholder="输入推特账号（例如：elonmusk）"
+                        placeholder="Enter Twitter @ (e.g., elonmusk)"
                         required
                     />
                     <button type="submit" id="submitBtn">
-                        立即申请
+                        Apply Now
                     </button>
                 </div>
             </form>
@@ -1609,51 +1611,51 @@
 
         <div id="loading" class="loading" style="display: none;">
             <div class="spinner"></div>
-            <p>正在审核您的资质...</p>
+            <p>Reviewing your qualifications...</p>
         </div>
 
         <div id="results" class="results">
             <div class="application-wrapper">
                 <div id="applicationCard" class="application">
                     <div class="app-title">
-                        <h3>就业申请表</h3>
+                        <h3>Employment Application</h3>
                     </div>
 
                     <div class="app-header">
-                        <img id="appPfp" src="" alt="头像" class="pfp" />
+                        <img id="appPfp" src="" alt="Profile" class="pfp" />
                         <div class="user-info">
-                            <h2 id="appName">姓名</h2>
-                            <p id="appBio">简介</p>
+                            <h2 id="appName">Name</h2>
+                            <p id="appBio">Bio</p>
                         </div>
                     </div>
 
                     <div class="form-section">
-                        <label>申请职位：</label>
-                        <div class="value" id="position">员工</div>
+                        <label>Position Applied For:</label>
+                        <div class="value" id="position">Crew Member</div>
                     </div>
 
                     <div class="form-section">
-                        <label>为什么想在麦当劳工作？</label>
+                        <label>Why do you want to work at McDonald's?</label>
                         <div class="value" id="whyMcdonalds"></div>
                     </div>
 
                     <div class="form-section">
-                        <label>以往经验：</label>
+                        <label>Previous Experience:</label>
                         <div class="value" id="experience"></div>
                     </div>
 
                     <div class="form-section">
-                        <label>特殊技能：</label>
+                        <label>Special Skills:</label>
                         <div class="value" id="skills"></div>
                     </div>
 
                     <div class="form-section">
-                        <label>可上岗时间：</label>
-                        <div class="value" id="startDate">立即</div>
+                        <label>Available to Start:</label>
+                        <div class="value" id="startDate">Immediately</div>
                     </div>
 
                     <div class="form-section">
-                        <label>经理备注：</label>
+                        <label>Manager's Additional Comments:</label>
                         <div class="value" id="comments"></div>
                     </div>
                 </div>
@@ -1662,18 +1664,18 @@
             <div id="badgeContainer" class="badge-container">
                 <div id="badgeCard" class="badge">
                     <div class="badge-header">
-                        <h4>官方员工证</h4>
+                        <h4>Official Employee Badge</h4>
                     </div>
-                    <img id="badgePfp" src="" alt="员工" class="badge-pfp" />
-                    <h3 id="badgeName">姓名</h3>
-                    <div class="title">员工</div>
+                    <img id="badgePfp" src="" alt="Employee" class="badge-pfp" />
+                    <h3 id="badgeName">Name</h3>
+                    <div class="title">CREW MEMBER</div>
                     <div class="badge-details">
                         <div class="badge-detail">
-                            <div class="badge-detail-label">员工编号</div>
+                            <div class="badge-detail-label">Employee ID</div>
                             <div class="badge-detail-value" id="employeeId">#000000</div>
                         </div>
                         <div class="badge-detail">
-                            <div class="badge-detail-label">入职时间</div>
+                            <div class="badge-detail-label">Member Since</div>
                             <div class="badge-detail-value" id="since">2025</div>
                         </div>
                     </div>
@@ -1682,30 +1684,30 @@
 
             <div class="action-buttons">
                 <button onclick="downloadApplication()">
-                    下载申请表
+                    Download Application
                 </button>
                 <button onclick="downloadBadge()">
-                    下载员工证
+                    Download Badge
                 </button>
                 <button onclick="shareToTwitter()">
-                    分享到推特
+                    Share to Twitter
                 </button>
             </div>
 
             <div class="referral-box" id="referralBox" style="display: none;">
-                <h3>您的推荐链接</h3>
-                <p style="color: #FFBC0D; font-family: 'VT323', monospace; font-size: 1.3rem;">分享此链接赚取积分！</p>
+                <h3>YOUR REFERRAL LINK</h3>
+                <p style="color: #FFBC0D; font-family: 'VT323', monospace; font-size: 1.3rem;">Share this link to earn points!</p>
                 <div class="referral-link-container">
                     <input type="text" id="referralLink" readonly />
-                    <button onclick="copyReferralLink()">复制</button>
+                    <button onclick="copyReferralLink()">COPY</button>
                 </div>
             </div>
         </div>
 
         <div class="testimonials-section">
             <div class="testimonials-header">
-                <h2>员工评价</h2>
-                <p>听听我们满意的员工怎么说！</p>
+                <h2>EMPLOYEE REVIEWS</h2>
+                <p>Hear from our satisfied crew members!</p>
             </div>
 
             <div class="testimonials-wrapper">
@@ -1719,26 +1721,26 @@
 
         <div class="leaderboard-section">
             <div class="leaderboard-header">
-                <h2>本月最佳员工</h2>
-                <p>顶级招聘者获得传奇地位！</p>
+                <h2>EMPLOYEE OF THE MONTH</h2>
+                <p>Top recruiters earn legendary status!</p>
             </div>
 
             <div class="leaderboard-list" id="leaderboardList">
-                <p style="text-align: center; font-family: 'VT323', monospace; font-size: 1.3rem;">加载排行榜...</p>
+                <p style="text-align: center; font-family: 'VT323', monospace; font-size: 1.3rem;">Loading leaderboard...</p>
             </div>
         </div>
 
         <div class="employee-wall">
             <div class="wall-header">
-                <h2>员工墙</h2>
-                <p>认识我们最新的员工！</p>
+                <h2>EMPLOYEE WALL</h2>
+                <p>Meet our newest crew members!</p>
             </div>
 
             <div class="wall-search">
                 <input 
                     type="text" 
                     id="searchEmployee" 
-                    placeholder="按姓名搜索员工..."
+                    placeholder="Search employees by name..."
                 />
             </div>
 
@@ -1748,8 +1750,8 @@
 
         <div class="employee-chat">
             <div class="chat-header">
-                <h2>员工聊天室</h2>
-                <p>与同事们交流！</p>
+                <h2>EMPLOYEES CHAT</h2>
+                <p>Talk with fellow crew members!</p>
             </div>
 
             <div class="chat-box" id="chatBox">
@@ -1759,55 +1761,55 @@
                 <input 
                     type="text" 
                     id="chatInput" 
-                    placeholder="输入您的消息..."
+                    placeholder="Type your message..."
                     maxlength="200"
                 />
-                <button onclick="sendMessage()">发送</button>
+                <button onclick="sendMessage()">SEND</button>
             </div>
         </div>
 
         <div class="earnings-divider">
-            <div class="earnings-title">今日收益报告</div>
+            <div class="earnings-title">TODAY'S EARNINGS REPORT</div>
             
             <div class="earnings-stats">
                 <div class="earnings-stat">
-                    <div class="earnings-stat-label">申请数</div>
+                    <div class="earnings-stat-label">APPLICATIONS</div>
                     <div class="earnings-stat-value" id="applicationsCount">0</div>
                 </div>
                 <div class="earnings-stat">
-                    <div class="earnings-stat-label">已雇员工</div>
+                    <div class="earnings-stat-label">EMPLOYEES HIRED</div>
                     <div class="earnings-stat-value" id="employeesCount">0</div>
                 </div>
                 <div class="earnings-stat">
-                    <div class="earnings-stat-label">逃离苦海</div>
+                    <div class="earnings-stat-label">TRENCHOORS ESCAPED</div>
                     <div class="earnings-stat-value" id="trenchoorsCount">0</div>
                 </div>
                 <div class="earnings-stat">
-                    <div class="earnings-stat-label">活跃员工</div>
+                    <div class="earnings-stat-label">ACTIVE CREW</div>
                     <div class="earnings-stat-value" id="activeCrewCount">0</div>
                 </div>
             </div>
 
             <div class="earnings-message">
-                <h3>打工时代已死</h3>
+                <h3>THE TRENCHES ARE DEAD</h3>
                 <p>
-                    别再盯着红色K线了，开始翻汉堡吧。麦当劳今天正在招聘，我们是业界最好的雇主。
-                    你的投机技能？我们需要。看图表？非常适合监控薯条定时器。钻石手？太适合拿热托盘了。
-                    深夜交易？我们有夜班。加入团队，让你来之不易的技能发挥真正的作用。
-                    福利包括：稳定收入、免费餐食，再也不用看着投资组合流血了。立即申请，永远告别打工苦海。
+                    Stop staring at red candles and start flipping burgers. McDonald's is hiring TODAY and we're the greatest employer in the game. 
+                    Your degen skills? We want them. Chart reading? Perfect for monitoring fry timers. Diamond hands? Great for holding hot trays. 
+                    Late night trading sessions? We've got the night shift covered. Join the crew and put your hard-earned skills to work where they actually matter. 
+                    Benefits include: stable income, free meals, and no more watching your portfolio bleed. Apply now and leave the trenches behind forever.
                 </p>
             </div>
         </div>
 
         <div class="mcnomics-section">
             <div class="mcnomics-header">
-                <h2>麦当劳经济学</h2>
-                <p>追踪您的就业价值！</p>
+                <h2>McNOMICS</h2>
+                <p>Track the value of your employment!</p>
             </div>
 
             <div class="chart-container">
                 <iframe 
-                    src="https://birdeye.so/tv-widget/nigga?chain=bsc&viewMode=pair&chartInterval=1&chartType=Candle&chartTimezone=Europe%2FLondon&chartLeftToolbar=show&theme=dark&cssCustomProperties=--tv-color-platform-background%3A%23ffc72c&cssCustomProperties=--tv-color-pane-background%3A%23ffc72c&chartOverrides=paneProperties.backgroundGradientStartColor%3Argba%2848%2C+48%2C+48%2C+1%29&chartOverrides=paneProperties.backgroundType%3Asolid" 
+                    src="https://birdeye.so/tv-widget/3C1mdCajhqN1PfUrJb6NQ2ZpTjUWzrFPftLvvvYVpump?chain=solana&viewMode=pair&chartInterval=1&chartType=Candle&chartTimezone=Europe%2FLondon&chartLeftToolbar=show&theme=dark&cssCustomProperties=--tv-color-platform-background%3A%23ffc72c&cssCustomProperties=--tv-color-pane-background%3A%23ffc72c&chartOverrides=paneProperties.backgroundGradientStartColor%3Argba%2848%2C+48%2C+48%2C+1%29&chartOverrides=paneProperties.backgroundType%3Asolid" 
                     frameborder="0" 
                     allowfullscreen>
                 </iframe>
@@ -1823,22 +1825,23 @@
 
     <footer>
         <div class="footer-content">
-            <p>🍔 告别打工？加入团队！🟟</p>
+            <p>🍔 LEAVING THE TRENCHES? JOIN THE CREW! 🟟</p>
             <div class="footer-links">
-                <a href="https://twitter.com/mcdonaldsdotfun" target="_blank">推特</a>
+                <a href="https://twitter.com/mcdonaldsdotfun" target="_blank">TWITTER</a>
                 <a href="https://pump.fun/coin/2Y8FSD8MQRtVXpFmNBcCMznmMsHYWVzRcQsij3jBpump" target="_blank">PUMP.FUN</a>
-                <a href="#home">首页</a>
+                <a href="#home">HOME</a>
             </div>
             <div class="footer-bottom">
-                <p>版权所有 © 2025 麦当劳.乐趣。保留所有权利。</p>
+                <p>Copyright © 2025 Mcdonalds.fun. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
+    <!-- PFP Creator Modal -->
     <div class="pfp-modal" id="pfpModal">
         <div class="pfp-modal-content">
             <div class="pfp-modal-header">
-                <h2>制作您的麦当劳头像</h2>
+                <h2>CREATE YOUR MCDONALD'S PFP</h2>
                 <div class="pfp-close" onclick="closePfpModal()">✕</div>
             </div>
             <div class="pfp-modal-body">
@@ -1846,17 +1849,17 @@
                     <div class="pfp-upload-btn">
                         <input type="file" id="pfpUpload" accept="image/*" onchange="handlePfpUpload(event)">
                         <label for="pfpUpload" class="pfp-upload-label">
-                            上传您的头像
+                            UPLOAD YOUR PFP
                         </label>
                     </div>
                     <p style="font-family: 'VT323', monospace; font-size: 1.2rem; margin-top: 15px; color: #000;">
-                        上传图片开始制作！
+                        Upload an image to get started!
                     </p>
                 </div>
 
                 <div id="loadingSection" class="pfp-loading" style="display: none;">
                     <div class="spinner"></div>
-                    <p>正在去除背景...</p>
+                    <p>Removing background...</p>
                 </div>
 
                 <div id="editorSection" style="display: none;">
@@ -1866,23 +1869,23 @@
                     </div>
 
                     <div class="pfp-controls">
-                        <h3>选择背景</h3>
+                        <h3>CHOOSE BACKGROUND</h3>
                         <div class="pfp-backgrounds" id="backgroundOptions">
                         </div>
                     </div>
 
                     <div class="pfp-controls">
-                        <h3>自定义图层</h3>
+                        <h3>CUSTOMIZE LAYERS</h3>
                         <div class="pfp-layer-controls">
-    <button class="pfp-layer-btn active" onclick="toggleLayer('hat')">切换帽子</button>
-    <button class="pfp-layer-btn active" onclick="toggleLayer('shirt')">切换衬衫</button>
-    <button class="pfp-layer-btn" onclick="flipHat()">翻转帽子</button>
-    <button class="pfp-layer-btn" onclick="resetLayers()">重置全部</button>
+    <button class="pfp-layer-btn active" onclick="toggleLayer('hat')">TOGGLE HAT</button>
+    <button class="pfp-layer-btn active" onclick="toggleLayer('shirt')">TOGGLE SHIRT</button>
+    <button class="pfp-layer-btn" onclick="flipHat()">FLIP HAT</button>
+    <button class="pfp-layer-btn" onclick="resetLayers()">RESET ALL</button>
 </div>
                     </div>
 
                     <button class="pfp-download-btn" onclick="downloadPfp()">
-                        下载头像
+                        DOWNLOAD PFP
                     </button>
                 </div>
             </div>
@@ -1918,12 +1921,12 @@
         const chatInput = document.getElementById('chatInput');
 
         const taglines = [
-            "从打工到成功，一个汉堡一个脚印！",
-            "我们不仅在招聘，我们在拯救生命！",
-            "你的包很重，但我们的托盘更重！",
-            "钻石手？试试拿麦旋风机器！",
-            "看图表的技能可以转移到薯条定时器！",
-            "告别波动，拥抱稳定！"
+            "From trenches to success, one burger at a time!",
+            "We're not just hiring, we're saving lives!",
+            "Your bags are heavy, but our trays are heavier!",
+            "Diamond hands? Try holding a McFlurry machine!",
+            "Chart watching skills transfer to fry timers!",
+            "Leave the volatility, embrace the stability!"
         ];
         
         let taglineIndex = 0;
@@ -1943,6 +1946,7 @@
 
         let employees = [];
 
+// Load employees from Firebase
 employeesRef.limitToLast(50).on('child_added', (snapshot) => {
     const employee = snapshot.val();
     employee.firebaseKey = snapshot.key;
@@ -1954,16 +1958,16 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
     }
 });
         const testimonialQuotes = [
-            "我这辈子做的最好的决定。从全天候看图表到真正赚到稳定的钱。",
-            "终于离开了打工的苦海。我的心理健康从未如此好，而且我真的付得起房租了。",
-            "我以前投机亏钱，现在清理它们。麦当劳救了我。10/10推荐。",
-            "冰淇淋机比我以前的投资组合更可靠。早该加入了。",
-            "从钻石手到拿着铲子。我做过的最好的职业改变。",
-            "从交易垃圾币到端巨无霸。至少工作保障是真实的。",
-            "不再有跑路，只有薯条。活在梦想中。",
-            "翻汉堡比翻NFT赚得多。不开玩笑。",
-            "现在唯一在飙升的就是麦旋风机器。我对此很满意。",
-            "离开了投机生活。现在我是专业的汉堡建筑师。"
+            "Best decision of my life. Went from watching charts 24/7 to actually making consistent money.",
+            "Finally left the trenches. My mental health has never been better and I can actually afford rent.",
+            "I used to ape into rugs, now I clean them. McDonald's saved me. 10/10 would recommend.",
+            "The ice cream machine is more reliable than my old portfolio. Should've joined sooner.",
+            "Went from diamond hands to holding a spatula. Best career change I ever made.",
+            "From trading shitcoins to serving Big Macs. At least the job security is real.",
+            "No more rug pulls, just french fries. Living the dream tbh.",
+            "I make more flipping burgers than I ever made flipping NFTs. No cap.",
+            "The only thing pumping now is the McFlurry machine. And I'm okay with that.",
+            "Left the degen life behind. Now I'm a professional burger architect."
         ];
 
         displayEmployees();
@@ -1984,14 +1988,14 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
                 track.innerHTML = `
                     <div class="testimonial-card">
                         <div class="testimonial-header">
-                            <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🍔%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="员工" />
+                            <img src="data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Crect fill='%23DA291C' width='60' height='60'/%3E%3Ctext x='30' y='40' font-size='30' text-anchor='middle' fill='%23FFBC0D' font-family='Arial'%3E🍔%3C/text%3E%3C/svg%3E" class="testimonial-img" alt="Employee" />
                             <div class="testimonial-info">
-                                <h4>成为第一个</h4>
-                                <p>未来员工</p>
+                                <h4>BE THE FIRST</h4>
+                                <p>Future Employee</p>
                             </div>
                         </div>
                         <div class="testimonial-text">
-                            立即申请，成为我们评价中的第一位员工！告别打工苦海，加入团队。
+                            Apply now and be the first employee featured in our testimonials! Leave the trenches behind and join the crew.
                         </div>
                     </div>
                 `.repeat(3);
@@ -2026,16 +2030,16 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
                     displayLeaderboard(data.leaderboard || []);
                 })
                 .catch(err => {
-                    console.error('加载排行榜失败:', err);
+                    console.error('Failed to load leaderboard:', err);
                     document.getElementById('leaderboardList').innerHTML = 
-                        '<p style="text-align: center; font-family: \'VT323\', monospace; font-size: 1.3rem;">还没有招聘者。成为第一个！</p>';
+                        '<p style="text-align: center; font-family: \'VT323\', monospace; font-size: 1.3rem;">No recruiters yet. Be the first!</p>';
                 });
         }
 
         function displayLeaderboard(leaderboard) {
             const list = document.getElementById('leaderboardList');
             if (leaderboard.length === 0) {
-                list.innerHTML = '<p style="text-align: center; font-family: \'VT323\', monospace; font-size: 1.3rem;">还没有招聘者。成为第一个！</p>';
+                list.innerHTML = '<p style="text-align: center; font-family: \'VT323\', monospace; font-size: 1.3rem;">No recruiters yet. Be the first!</p>';
                 return;
             }
 
@@ -2043,7 +2047,7 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
                 <div class="leaderboard-item ${index < 3 ? 'top-3' : ''}">
                     <div class="leaderboard-rank">#${index + 1}</div>
                     <div class="leaderboard-name">${escapeHtml(user.name)}</div>
-                    <div class="leaderboard-score">${user.referrals} 推荐</div>
+                    <div class="leaderboard-score">${user.referrals} REFS</div>
                 </div>
             `).join('');
         }
@@ -2063,7 +2067,7 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
                     <img src="${employee.pfpUrl}" style="width: 120px; height: 120px; border: 6px solid #000; object-fit: cover; margin-bottom: 15px;" />
                     <h2 style="font-family: 'Press Start 2P', monospace; color: #DA291C; font-size: 1.3rem; margin-bottom: 10px;">${escapeHtml(employee.name)}</h2>
                     <p style="font-family: 'VT323', monospace; font-size: 1.3rem; color: #666;">${escapeHtml(employee.position)}</p>
-                    <p style="font-family: 'VT323', monospace; font-size: 1.1rem; color: #999; margin-top: 5px;">员工 #${employee.employeeId}</p>
+                    <p style="font-family: 'VT323', monospace; font-size: 1.1rem; color: #999; margin-top: 5px;">Employee #${employee.employeeId}</p>
                 </div>
             `;
 
@@ -2122,7 +2126,7 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
             const messageDiv = document.createElement('div');
             messageDiv.className = 'chat-message';
             
-            const time = new Date(message.timestamp).toLocaleTimeString('zh-CN', {
+            const time = new Date(message.timestamp).toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit'
             });
@@ -2206,7 +2210,7 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
                     body: JSON.stringify({ username })
                 });
 
-                if (!response.ok) throw new Error('生成申请失败');
+                if (!response.ok) throw new Error('Failed to generate application');
 
                 const data = await response.json();
                 
@@ -2246,8 +2250,8 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
                 }, 500);
 
             } catch (error) {
-                console.error('错误:', error);
-                alert('生成申请失败。请重试。');
+                console.error('Error:', error);
+                alert('Failed to generate application. Please try again.');
                 loading.style.display = 'none';
             } finally {
                 submitBtn.disabled = false;
@@ -2270,7 +2274,7 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
                 
                 localStorage.setItem('mcdonalds_referral_code', data.referralCode);
             } catch (error) {
-                console.error('生成推荐链接失败:', error);
+                console.error('Failed to generate referral link:', error);
             }
         }
 
@@ -2278,13 +2282,14 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
             const input = document.getElementById('referralLink');
             input.select();
             document.execCommand('copy');
-            alert('推荐链接已复制！分享它来赚取积分！');
+            alert('Referral link copied! Share it to earn points!');
         }
 
         function addEmployee(employee) {
     const exists = employees.find(e => e.employeeId === employee.employeeId);
     if (!exists) {
         employeesRef.push(employee);
+        // The Firebase listener will automatically update the display
     }
 }
 
@@ -2303,7 +2308,7 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
             `).join('');
 
             if (filtered.length === 0) {
-                employeeGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #666;">未找到员工。成为第一个申请的！</p>';
+                employeeGrid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; color: #666;">No employees found. Be the first to apply!</p>';
             }
         }
 
@@ -2319,7 +2324,7 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
             });
             
             const link = document.createElement('a');
-            link.download = '麦当劳申请表.png';
+            link.download = 'mcdonalds-application.png';
             link.href = canvas.toDataURL();
             link.click();
         }
@@ -2332,13 +2337,13 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
             });
             
             const link = document.createElement('a');
-            link.download = '麦当劳员工证.png';
+            link.download = 'mcdonalds-badge.png';
             link.href = canvas.toDataURL();
             link.click();
         }
 
         function shareToTwitter() {
-            const text = encodeURIComponent("我正在离开打工苦海，为麦当劳.乐趣工作 - 今天就生成您的！");
+            const text = encodeURIComponent("I'm leaving the trenches and working for mcdonalds.fun - generate yours today!");
             const url = encodeURIComponent('https://mcdonalds.fun');
             window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
         }
@@ -2362,6 +2367,7 @@ employeesRef.limitToLast(50).on('child_added', (snapshot) => {
             }
         }
 
+        // PFP Creator
 const REMOVEBG_API_KEY = 'j2UGSY9jXh4nAe1g7XaeNqEo';
 
 const backgrounds = [
@@ -2447,7 +2453,7 @@ async function handlePfpUpload(event) {
             body: formData
         });
 
-        if (!response.ok) throw new Error('去除背景失败');
+        if (!response.ok) throw new Error('Background removal failed');
 
         const blob = await response.blob();
         const imageUrl = URL.createObjectURL(blob);
@@ -2457,8 +2463,8 @@ async function handlePfpUpload(event) {
 
         initializeCanvas(imageUrl);
     } catch (error) {
-        console.error('错误:', error);
-        alert('去除背景失败。请重试。');
+        console.error('Error:', error);
+        alert('Failed to remove background. Please try again.');
         document.getElementById('loadingSection').style.display = 'none';
         document.getElementById('uploadSection').style.display = 'block';
     }
@@ -2589,7 +2595,7 @@ function toggleLayer(layerName) {
     });
 }
 
-function flipHat() {
+        function flipHat() {
     const hat = pfpLayers.hat;
     if (!hat) return;
     
@@ -2609,13 +2615,13 @@ function resetLayers() {
         pfpLayers.photo.style.height = '300px';
     }
     if (pfpLayers.shirt) {
-        pfpLayers.shirt.style.left = '100px';
-        pfpLayers.shirt.style.top = '220px';
-        pfpLayers.shirt.style.width = '200px';
-        pfpLayers.shirt.style.height = '200px';
-        pfpLayers.shirt.style.display = 'block';
-        layerStates.shirt = true;
-    }
+    pfpLayers.shirt.style.left = '100px';
+    pfpLayers.shirt.style.top = '220px';
+    pfpLayers.shirt.style.width = '200px';
+    pfpLayers.shirt.style.height = '200px';
+    pfpLayers.shirt.style.display = 'block';
+    layerStates.shirt = true;
+}
     if (pfpLayers.hat) {
         pfpLayers.hat.style.left = '120px';
         pfpLayers.hat.style.top = '0px';
@@ -2634,6 +2640,7 @@ async function downloadPfp() {
     const canvasContainer = document.getElementById('canvasContainer');
     const pfpCanvas = document.getElementById('pfpCanvas');
     
+    // Get the actual visible dimensions
     const visibleWidth = pfpCanvas.offsetWidth;
     const visibleHeight = pfpCanvas.offsetHeight;
     
@@ -2642,6 +2649,7 @@ async function downloadPfp() {
     canvas.width = visibleWidth;
     canvas.height = visibleHeight;
     
+    // Draw background
     const bgStyle = pfpCanvas.style.background;
     const bgImage = new Image();
     bgImage.crossOrigin = 'anonymous';
@@ -2657,6 +2665,7 @@ async function downloadPfp() {
         ctx.fillRect(0, 0, visibleWidth, visibleHeight);
     }
     
+    // Draw layers in order - use exact positions as they appear
     const layerOrder = ['photo', 'shirt', 'hat'];
     
     for (const layerName of layerOrder) {
@@ -2669,8 +2678,10 @@ async function downloadPfp() {
         const width = parseInt(layer.style.width);
         const height = parseInt(layer.style.height);
         
+        // Save context for potential transform
         ctx.save();
         
+        // Handle flipped hat
         if (layerName === 'hat' && layer.style.transform.includes('scaleX(-1)')) {
             ctx.translate(x + width, y);
             ctx.scale(-1, 1);
@@ -2685,23 +2696,25 @@ async function downloadPfp() {
     canvas.toBlob((blob) => {
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
-        link.download = '麦当劳头像.png';
+        link.download = 'mcdonalds-pfp.png';
         link.href = url;
         link.click();
         URL.revokeObjectURL(url);
     });
 }
 
+        // Background music handler
 let musicStarted = false;
 const bgMusic = document.getElementById('bgMusic');
-bgMusic.volume = 0.5;
+bgMusic.volume = 0.5; // Set default volume to 50%
 
 function startMusic() {
     if (!musicStarted) {
         bgMusic.play().catch(err => {
-            console.log('音频播放失败:', err);
+            console.log('Audio play failed:', err);
         });
         musicStarted = true;
+        // Remove listeners after music starts
         document.removeEventListener('click', startMusic);
         document.removeEventListener('touchstart', startMusic);
         document.removeEventListener('keydown', startMusic);
@@ -2723,6 +2736,7 @@ function changeVolume(value) {
     bgMusic.volume = value / 100;
 }
 
+// Add listeners for first user interaction
 document.addEventListener('click', startMusic);
 document.addEventListener('touchstart', startMusic);
 document.addEventListener('keydown', startMusic);
