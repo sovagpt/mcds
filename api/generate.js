@@ -1,5 +1,5 @@
 // /api/generate.js
-// Vercel Serverless Function - Chinese Version
+// Vercel Serverless Function - Updated
 
 const Anthropic = require('@anthropic-ai/sdk');
 
@@ -103,34 +103,34 @@ If no profile image URL is found, respond with exactly "NONE".`
     }
 
     // Step 2.5: If URL extraction failed, crop PFP directly from screenshot
-    if (!profileImageUrl && screenshotBase64) {
-      console.log('URL extraction failed, cropping PFP from screenshot...');
-      
-      try {
-        const sharp = require('sharp');
-        const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
-        
-        // Move significantly up and left to capture the profile picture
-        const croppedBuffer = await sharp(screenshotBuffer)
-          .extract({ 
-            left: 192, 
-            top: 205, 
-            width: 88,
-            height: 88
-          })
-          .resize(140, 140)
-          .toBuffer();
-        
-        const croppedBase64 = croppedBuffer.toString('base64');
-        profileImageUrl = `data:image/png;base64,${croppedBase64}`;
-        console.log('Successfully cropped PFP from screenshot');
-      } catch (e) {
-        console.log('Screenshot cropping failed:', e.message);
-        console.error(e);
-      }
-    }
+if (!profileImageUrl && screenshotBase64) {
+  console.log('URL extraction failed, cropping PFP from screenshot...');
+  
+  try {
+    const sharp = require('sharp');
+    const screenshotBuffer = Buffer.from(screenshotBase64, 'base64');
+    
+    // Move significantly up and left to capture the profile picture
+    const croppedBuffer = await sharp(screenshotBuffer)
+  .extract({ 
+    left: 192, 
+    top: 205, 
+    width: 88,  // Smaller = more zoom
+    height: 88  // Smaller = more zoom
+  })
+  .resize(140, 140)  // This stretches the 100x100 to 140x140
+  .toBuffer();
+    
+    const croppedBase64 = croppedBuffer.toString('base64');
+    profileImageUrl = `data:image/png;base64,${croppedBase64}`;
+    console.log('Successfully cropped PFP from screenshot');
+  } catch (e) {
+    console.log('Screenshot cropping failed:', e.message);
+    console.error(e);
+  }
+}
 
-    // Step 2.6: Direct image fetching fallback
+    // Step 2.6: Direct image fetching fallback (from your old code)
     if (!profileImageUrl) {
       console.log('Trying direct image fetching...');
       
@@ -166,7 +166,7 @@ If no profile image URL is found, respond with exactly "NONE".`
       }
     }
 
-    // Step 3: Use Anthropic to analyze and generate responses IN CHINESE
+    // Step 3: Use Anthropic to analyze and generate responses
     const message = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1024,
@@ -184,23 +184,23 @@ If no profile image URL is found, respond with exactly "NONE".`
             },
             {
               type: 'text',
-              text: `这是推特用户 @${cleanUsername} 的个人资料截图。请为他们创建一份幽默的麦当劳求职申请。幽默应该是巧妙和观察性的，而不仅仅是加密货币术语。如果可见的话，请查看他们的实际推文、兴趣和个性。
+              text: `This is a screenshot of a Twitter profile for @${cleanUsername}. Create a humorous McDonald's job application for them. The humor should be clever and observational, not just crypto buzzwords. Look at their actual tweets, interests, and personality if visible.
 
-如果这是一个错误页面，请使用用户名并创建一些有趣但实际的内容。
+If this is an error page, use the username and create something funny but grounded.
 
-请仅用中文回复一个JSON对象（不要用markdown格式），包含以下字段：
+Respond with ONLY a JSON object (no markdown) with these fields:
 {
-  "name": "他们的显示名称（或 @${cleanUsername}）",
-  "bio": "个人资料中的简短简介或编造一个（最多50个中文字符）",
-  "position": "基于他们个人资料的具体有趣的麦当劳职位（例如：'深夜麦旋风机器操作员'、'得来速高级协调员'、'冰淇淋机危机管理员'）",
-  "whyMcdonalds": "1-2句话。要具体和巧妙，如果可以看到的话，引用他们的实际兴趣或活动。不要只说通用的加密货币内容。让它感觉个性化和有趣。用中文表达。",
-  "experience": "1-2句话关于相关的'以往经验' - 将其与他们实际发布的内容联系起来。要有创意和具体，而非通用。用中文表达。",
-  "skills": "基于他们个人资料的4-5个具体、有趣的技能。避免通用术语。例如：'能在200条未读Discord通知的压力下工作'，而不是'多任务处理'。用中文表达。",
-  "startDate": "创意回答，如'立即'、'在我的推特休息之后'、'一旦群聊停止通知'等。用中文表达。",
-  "comments": "1-2句话。招聘经理冷静、机智的观察。要巧妙，不要刻薄。如果可以的话，引用一些具体的东西。用中文表达。"
+  "name": "their display name (or @${cleanUsername})",
+  "bio": "short bio from profile or make one (max 100 chars)",
+  "position": "a specific funny McDonald's position based on their profile (e.g., 'Overnight McFlurry Machine Operator', 'Senior Drive-Thru Coordinator', 'Ice Cream Machine Crisis Manager')",
+  "whyMcdonalds": "1-2 sentences. Be specific and clever, reference their actual interests or activity if you can see it. Don't just say generic crypto stuff. Make it feel personal and funny.",
+  "experience": "1-2 sentences about relevant 'previous experience' - tie it to what they actually post about. Be creative and specific, not generic.",
+  "skills": "4-5 specific, funny skills based on their profile. Avoid generic buzzwords. Think: 'Can operate under pressure of 200 unread Discord notifications', not 'multitasking'",
+  "startDate": "creative answer like 'Immediately', 'After my Twitter break', 'Once the group chat stops pinging', etc",
+  "comments": "1-2 sentences. The hiring manager's dry, witty observation. Be clever, not mean. Reference something specific if you can."
 }
 
-重要提示：通过具体性和巧妙性来表达幽默，而不是通过列举术语或泛泛而谈。如果可见的话，阅读他们的实际个人资料并引用关于他们的真实内容。所有回复必须用中文。`
+IMPORTANT: Be funny through specificity and cleverness, not through listing buzzwords or being generic. Read their actual profile if visible and reference real things about them.`
             }
           ],
         },
@@ -222,16 +222,16 @@ If no profile image URL is found, respond with exactly "NONE".`
     } catch (e) {
       console.error('Failed to parse AI response:', aiResponse);
       
-      // If AI couldn't parse the profile, create a generic funny application in Chinese
+      // If AI couldn't parse the profile, create a generic funny application
       applicationData = {
         name: `@${cleanUsername}`,
-        bio: '加密货币交易员转行快餐专业人士',
-        position: '薯条厨师',
-        whyMcdonalds: '图表下跌了，所以我不得不转行。至少油炸锅总是热的。',
-        experience: '在监控波动资产和在压力下快速决策方面有丰富的经验。熟悉夜班工作。',
-        skills: '多任务处理、客户服务、处理高压情况、优雅地接受失败',
-        startDate: '立即',
-        comments: '申请人似乎急于离开之前的工作。显示出潜力。'
+        bio: 'Crypto trader turned fast food professional',
+        position: 'Fry Cook',
+        whyMcdonalds: 'The charts went down, so I had to pivot. At least the fryers are always hot.',
+        experience: 'Extensive experience monitoring volatile assets and making quick decisions under pressure. Familiar with working the night shift.',
+        skills: 'Multitasking, customer service, dealing with high-stress situations, accepting defeat gracefully',
+        startDate: 'Immediately',
+        comments: 'Applicant seems eager to leave their previous line of work. Shows promise.'
       };
     }
 
@@ -243,13 +243,13 @@ If no profile image URL is found, respond with exactly "NONE".`
       screenshot: screenshotDataUrl, // Full screenshot for debugging
       profileImageUrl: profileImageUrl, // Extracted profile image URL
       name: applicationData.name || cleanUsername,
-      bio: applicationData.bio || '推特用户',
-      position: applicationData.position || '员工',
-      whyMcdonalds: applicationData.whyMcdonalds || '寻找稳定的职业道路。',
-      experience: applicationData.experience || '各种数字领域的经验。',
-      skills: applicationData.skills || '客户服务、多任务处理、食品准备',
-      startDate: applicationData.startDate || '立即',
-      comments: applicationData.comments || '显示出巨大的潜力。',
+      bio: applicationData.bio || 'Twitter User',
+      position: applicationData.position || 'Crew Member',
+      whyMcdonalds: applicationData.whyMcdonalds || 'Looking for a stable career path.',
+      experience: applicationData.experience || 'Various digital ventures.',
+      skills: applicationData.skills || 'Customer service, multitasking, food preparation',
+      startDate: applicationData.startDate || 'Immediately',
+      comments: applicationData.comments || 'Shows great potential.',
       employeeId: employeeId
     });
 
@@ -261,3 +261,19 @@ If no profile image URL is found, respond with exactly "NONE".`
     });
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
