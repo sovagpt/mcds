@@ -113,10 +113,10 @@ if (!profileImageUrl && screenshotBase64) {
     // Move significantly up and left to capture the profile picture
     const croppedBuffer = await sharp(screenshotBuffer)
   .extract({ 
-    left: 187, 
-    top: 190, 
-    width: 90,  // Smaller = more zoom
-    height: 90  // Smaller = more zoom
+    left: 192, 
+    top: 205, 
+    width: 88,  // Smaller = more zoom
+    height: 88  // Smaller = more zoom
   })
   .resize(140, 140)  // This stretches the 100x100 to 140x140
   .toBuffer();
@@ -261,18 +261,4 @@ IMPORTANT: Be funny through specificity and cleverness, not through listing buzz
     });
   }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
